@@ -1,0 +1,12 @@
+node_modules
+.next
+.env
+.env.local
+*.log
+coverage
+
+CLAUDE.md
+AGENTS.md
+
+CLAUDE.md
+AGENTS.md

@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-maroon-950: #3d0606;
+  --color-maroon-900: #520909;
+  --color-maroon-800: #6b0f0f;
+  --color-maroon-700: #861616;
+  --color-maroon-100: #f6e4e4;
+  --color-maroon-50: #fbf2f2;
+  --color-gold-400: #e5b53a;
+  --color-gold-500: #d4a017;
+  --font-serif: Georgia, "Times New Roman", serif;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-serif text-slate-900;
+  }
+}
+
+/* Shared component classes (Tailwind v4 @utility so they can be reused with @apply). */
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-maroon-800 text-white hover:bg-maroon-700;
+}
+@utility btn-secondary {
+  @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-50;
+}
+@utility btn-danger {
+  @apply btn bg-red-700 text-white hover:bg-red-600;
+}
+@utility btn-link {
+  @apply text-sm font-semibold text-maroon-800 hover:underline disabled:opacity-50;
+}
+@utility label {
+  @apply mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500;
+}
+@utility input {
+  @apply block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-maroon-800 focus:outline-none focus:ring-1 focus:ring-maroon-800 disabled:bg-slate-100;
+}
+@utility card {
+  @apply rounded-xl border border-slate-200 bg-white shadow-sm;
+}
+@utility badge {
+  @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+}
+@utility badge-active {
+  @apply badge bg-emerald-50 text-emerald-700;
+}
+@utility badge-inactive {
+  @apply badge bg-slate-100 text-slate-500;
+}
+@utility badge-role {
+  @apply badge bg-maroon-50 text-maroon-800;
+}
+@utility th {
+  @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white;
+}
+@utility td {
+  @apply px-4 py-3 text-sm text-slate-700;
+}
+
+/* Public home hero: layered maroon and gold glow, CSS only (no image files). */
+@utility hero-bg {
+  background-color: #520909;
+  background-image:
+    radial-gradient(60rem 28rem at 15% 105%, rgb(212 160 23 / 0.55), transparent 60%),
+    radial-gradient(50rem 24rem at 90% 0%, rgb(229 181 58 / 0.35), transparent 55%),
+    linear-gradient(135deg, #3d0606 0%, #6b0f0f 55%, #861616 100%);
+}
