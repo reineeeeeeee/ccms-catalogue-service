@@ -9,6 +9,8 @@ export const EMPTY_SERVICE_FORM = {
   classification: 'SIMPLE',
   transaction_type: 'G2C',
   processing_steps: '',
+  fees: '',
+  who_may_avail: '',
   duration_value: '',
   duration_unit: 'WORKING_DAYS',
   effective_from: '',
@@ -24,6 +26,8 @@ export function serviceToForm(service) {
     classification: service.classification,
     transaction_type: service.transaction_type,
     processing_steps: service.processing_steps ?? '',
+    fees: service.fees ?? '',
+    who_may_avail: service.who_may_avail ?? '',
   };
 }
 
@@ -36,6 +40,8 @@ export function formToBody(form, withStandard) {
     classification: form.classification,
     transaction_type: form.transaction_type,
     processing_steps: form.processing_steps.trim() === '' ? null : form.processing_steps,
+    fees: form.fees.trim() === '' ? null : form.fees,
+    who_may_avail: form.who_may_avail.trim() === '' ? null : form.who_may_avail,
   };
   if (withStandard) {
     body.standard = {
@@ -116,6 +122,22 @@ export default function ServiceForm({ id, form, setForm, errors, offices, isNew,
             ))}
           </select>
           <FieldError errors={errors} name="transaction_type" />
+        </div>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label className="label" htmlFor={`${id}-fees`}>
+            Fees (as published in the Charter)
+          </label>
+          <input id={`${id}-fees`} className="input" value={form.fees} onChange={set('fees')} maxLength={500} />
+          <FieldError errors={errors} name="fees" />
+        </div>
+        <div>
+          <label className="label" htmlFor={`${id}-who-may-avail`}>
+            Who may avail
+          </label>
+          <input id={`${id}-who-may-avail`} className="input" value={form.who_may_avail} onChange={set('who_may_avail')} maxLength={500} />
+          <FieldError errors={errors} name="who_may_avail" />
         </div>
       </div>
       <div>

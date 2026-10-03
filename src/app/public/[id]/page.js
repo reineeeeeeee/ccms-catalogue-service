@@ -48,6 +48,14 @@ export default function PublicServiceDetail() {
                   <dt className="label">Standard</dt>
                   <dd className="text-sm font-semibold">{service.standard_text}</dd>
                 </div>
+                <div>
+                  <dt className="label">Fees</dt>
+                  <dd className="text-sm">{service.fees ?? 'No fee information published.'}</dd>
+                </div>
+                <div>
+                  <dt className="label">Who may avail</dt>
+                  <dd className="text-sm">{service.who_may_avail ?? 'Not specified.'}</dd>
+                </div>
               </dl>
             </div>
 

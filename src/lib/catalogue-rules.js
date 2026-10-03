@@ -78,6 +78,20 @@ export function parseServiceFields(body, details = {}) {
   else if (body.processing_steps.length > 10000) details.processing_steps = 'Procedure steps must be 10,000 characters or fewer';
   else processingSteps = body.processing_steps.trim() === '' ? null : body.processing_steps;
 
+  let fees;
+  if (body.fees === undefined) fees = undefined;
+  else if (body.fees === null) fees = null;
+  else if (typeof body.fees !== 'string') details.fees = 'Fees must be text';
+  else if (body.fees.length > 500) details.fees = 'Fees must be 500 characters or fewer';
+  else fees = body.fees.trim() === '' ? null : body.fees.trim();
+
+  let whoMayAvail;
+  if (body.who_may_avail === undefined) whoMayAvail = undefined;
+  else if (body.who_may_avail === null) whoMayAvail = null;
+  else if (typeof body.who_may_avail !== 'string') details.who_may_avail = 'Who may avail must be text';
+  else if (body.who_may_avail.length > 500) details.who_may_avail = 'Who may avail must be 500 characters or fewer';
+  else whoMayAvail = body.who_may_avail.trim() === '' ? null : body.who_may_avail.trim();
+
   return {
     officeId: typeof body.office_id === 'string' ? body.office_id.trim() : '',
     serviceCode,
@@ -85,6 +99,8 @@ export function parseServiceFields(body, details = {}) {
     classification: body.classification,
     transactionType: body.transaction_type,
     processingSteps,
+    fees,
+    whoMayAvail,
   };
 }
 

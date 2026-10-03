@@ -11,6 +11,8 @@
       "service_name": "SAMPLE Service Alpha (placeholder)",
       "classification": "SIMPLE",
       "transaction_type": "G2C",
+      "fees": "None (placeholder)",
+      "who_may_avail": "SAMPLE applicants (placeholder)",
       "processing_steps": "PLACEHOLDER steps.\n1. Step one (invented).\n2. Step two (invented).",
       "standard": { "duration_value": 15, "duration_unit": "MINUTES", "effective_from": "2026-01-01", "charter_reference": "PLACEHOLDER Charter ref A" },
       "documents": [
@@ -24,6 +26,8 @@
       "service_name": "SAMPLE Service Beta (placeholder)",
       "classification": "COMPLEX",
       "transaction_type": "G2B",
+      "fees": "PLACEHOLDER fee wording",
+      "who_may_avail": "SAMPLE clients (placeholder)",
       "standard": { "duration_value": 3, "duration_unit": "WORKING_DAYS", "effective_from": "2026-01-01", "charter_reference": "PLACEHOLDER Charter ref B" },
       "documents": [{ "document_name": "SAMPLE Document 3 (placeholder)", "is_mandatory": true }]
     },
@@ -33,6 +37,8 @@
       "service_name": "SAMPLE Service Gamma (placeholder)",
       "classification": "HIGHLY_TECHNICAL",
       "transaction_type": "G2G",
+      "fees": "None (placeholder)",
+      "who_may_avail": "SAMPLE offices (placeholder)",
       "standard": { "duration_value": 1, "duration_unit": "HOURS", "effective_from": "2026-01-01", "charter_reference": "PLACEHOLDER Charter ref C" },
       "documents": []
     }

@@ -121,7 +121,7 @@ npm run seed -- --file path/to/your-charter.json    # load it
 ```
 
 The file has `offices` and `services` (each service: `office_code`, `service_code`, `service_name`, `classification`,
-`transaction_type`, optional `processing_steps`, `standard`, optional `documents`). Rows go through the same validation
+`transaction_type`, optional `processing_steps`, optional `fees`, optional `who_may_avail`, `standard`, optional `documents`). Rows go through the same validation
 and audit as the API. A duplicate (existing office code, or office + normalised service name) is reported and skipped,
 never inserted, so re-running a file adds nothing. A bad row is reported and skipped without stopping the others; the
 exit code is 1 if any row had an error. `--actor <user-uuid>` sets the audit actor.

@@ -22,7 +22,8 @@ import { insertFirstStandard, listStandardRows, toStandardDto } from './standard
 // One service row plus its office and the version in force today (Manila date).
 const SERVICE_SELECT = `
   SELECT s.service_id, s.office_id, o.office_code, o.office_name, s.service_code, s.service_name,
-         s.classification, s.transaction_type, s.measurement_type, s.processing_steps, s.is_active,
+         s.classification, s.transaction_type, s.measurement_type, s.processing_steps, s.fees,
+         s.who_may_avail, s.is_active,
          s.created_at, s.updated_at,
          cs.standard_id AS cs_standard_id, cs.version_no AS cs_version_no, cs.duration_value AS cs_duration_value,
          cs.duration_unit AS cs_duration_unit, cs.effective_from::text AS cs_effective_from,
@@ -46,6 +47,8 @@ export function toServiceDto(row) {
     transaction_type: row.transaction_type,
     measurement_type: row.measurement_type,
     processing_steps: row.processing_steps ?? null,
+    fees: row.fees ?? null,
+    who_may_avail: row.who_may_avail ?? null,
     is_active: row.is_active,
     created_at: row.created_at,
     updated_at: row.updated_at,
@@ -152,6 +155,8 @@ export async function createService(dataSource, actor, body, { ipAddress } = {})
         transactionType: fields.transactionType,
         measurementType: 'TIMELINESS',
         processingSteps: fields.processingSteps ?? null,
+        fees: fields.fees ?? null,
+        whoMayAvail: fields.whoMayAvail ?? null,
         isActive: true,
       });
       const created = await loadServiceDto(manager, serviceId);
@@ -185,6 +190,8 @@ export async function updateService(dataSource, actor, id, body, { ipAddress } =
       const serviceCode = checkCodeFormat(fields.serviceCode, office);
       const serviceNameKey = nameKey(fields.serviceName);
       const processingSteps = fields.processingSteps === undefined ? before.processing_steps : fields.processingSteps;
+      const fees = fields.fees === undefined ? before.fees : fields.fees;
+      const whoMayAvail = fields.whoMayAvail === undefined ? before.who_may_avail : fields.whoMayAvail;
 
       const unchanged =
         office.office_id === before.office_id &&
@@ -192,7 +199,9 @@ export async function updateService(dataSource, actor, id, body, { ipAddress } =
         fields.serviceName === before.service_name &&
         fields.classification === before.classification &&
         fields.transactionType === before.transaction_type &&
-        processingSteps === before.processing_steps;
+        processingSteps === before.processing_steps &&
+        fees === before.fees &&
+        whoMayAvail === before.who_may_avail;
       if (unchanged) return before;
 
       await assertUnique(manager, { officeId: office.office_id, serviceCode, serviceNameKey }, id);
@@ -206,6 +215,8 @@ export async function updateService(dataSource, actor, id, body, { ipAddress } =
           classification: fields.classification,
           transactionType: fields.transactionType,
           processingSteps,
+          fees,
+          whoMayAvail,
         },
       );
       const after = await loadServiceDto(manager, id);

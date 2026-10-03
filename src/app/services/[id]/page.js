@@ -225,6 +225,14 @@ function ServiceDetail({ user, id }) {
             <dd className="text-sm font-semibold">{current ? standardText(current.duration_value, current.duration_unit) : 'None in force'}</dd>
             {current ? <dd className="text-xs text-slate-500">{current.charter_reference}</dd> : null}
           </div>
+          <div>
+            <dt className="label">Fees</dt>
+            <dd className="text-sm">{service.fees ?? 'Not specified'}</dd>
+          </div>
+          <div>
+            <dt className="label">Who may avail</dt>
+            <dd className="text-sm">{service.who_may_avail ?? 'Not specified'}</dd>
+          </div>
         </dl>
       </div>
 

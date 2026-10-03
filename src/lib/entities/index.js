@@ -32,6 +32,9 @@ export const Service = new EntitySchema({
     transactionType: { name: 'transaction_type', type: 'text' },
     measurementType: { name: 'measurement_type', type: 'text', default: 'TIMELINESS' },
     processingSteps: { name: 'processing_steps', type: 'text', nullable: true },
+    // CC007/CC008 (BR-SRV-001, FR-SRV-001): Charter display-only reference fields.
+    fees: { name: 'fees', type: 'text', nullable: true },
+    whoMayAvail: { name: 'who_may_avail', type: 'text', nullable: true },
     isActive: { name: 'is_active', type: 'boolean', default: true },
     createdAt: { name: 'created_at', type: 'timestamptz', createDate: true },
     updatedAt: { name: 'updated_at', type: 'timestamptz', updateDate: true },

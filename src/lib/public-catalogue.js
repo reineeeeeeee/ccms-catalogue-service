@@ -64,7 +64,8 @@ export async function listPublicServices(dataSource, params) {
 export async function getPublicService(dataSource, id) {
   const rows = isUuid(id)
     ? await dataSource.query(
-        `SELECT s.service_id, s.service_name, o.office_name, s.classification, s.processing_steps, st.duration_value, st.duration_unit
+        `SELECT s.service_id, s.service_name, o.office_name, s.classification, s.processing_steps, s.fees,
+                s.who_may_avail, st.duration_value, st.duration_unit
          ${PUBLIC_FROM} AND s.service_id = $2`,
         [manilaToday(), id],
       )
@@ -77,6 +78,16 @@ export async function getPublicService(dataSource, id) {
   }));
   const { service_id, service_name, office_name, classification, standard_text } = toPublicSummary(rows[0]);
   return {
-    service: { service_id, service_name, office_name, classification, standard_text, processing_steps: rows[0].processing_steps ?? null, documents },
+    service: {
+      service_id,
+      service_name,
+      office_name,
+      classification,
+      standard_text,
+      processing_steps: rows[0].processing_steps ?? null,
+      fees: rows[0].fees ?? null,
+      who_may_avail: rows[0].who_may_avail ?? null,
+      documents,
+    },
   };
 }

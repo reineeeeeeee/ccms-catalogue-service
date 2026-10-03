@@ -133,7 +133,13 @@ describe('CC007 add service with first standard', () => {
 
   it('AC1: Super Admin adds a service; it is active with version 1 in force from the chosen date', async () => {
     const from = addDays(today(), -10);
-    const { response, service } = await createService({ service_name: 'Transcript of Records', service_code: 'REG-TOR-001', standard: validStandard({ effective_from: from, duration_value: 3, duration_unit: 'WORKING_DAYS' }) });
+    const { response, service } = await createService({
+      service_name: 'Transcript of Records',
+      service_code: 'REG-TOR-001',
+      fees: '  None  ',
+      who_may_avail: '  PUP Students  ',
+      standard: validStandard({ effective_from: from, duration_value: 3, duration_unit: 'WORKING_DAYS' }),
+    });
     assert.equal(response.status, 201);
     assert.equal(service.is_active, true);
     assert.equal(service.measurement_type, 'TIMELINESS');
@@ -144,6 +150,11 @@ describe('CC007 add service with first standard', () => {
     assert.equal(service.current_standard.duration_value, 3);
     assert.equal(service.current_standard.duration_unit, 'WORKING_DAYS');
     assert.equal(service.current_standard.charter_reference, 'Charter p. 1');
+    assert.equal(service.fees, 'None');
+    assert.equal(service.who_may_avail, 'PUP Students');
+    const saved = await detail(service.service_id);
+    assert.equal(saved.body.service.fees, 'None');
+    assert.equal(saved.body.service.who_may_avail, 'PUP Students');
   });
 
   it('a first standard that starts in the future is saved but not yet the current standard', async () => {
@@ -220,6 +231,12 @@ describe('CC007 add service with first standard', () => {
     }
     const fraction = await createService({ standard: validStandard({ duration_value: 1.5 }) });
     assert.ok(fraction.body.error.details['standard.duration_value']);
+    const badReferenceFields = await createService({ fees: 50, who_may_avail: false });
+    assert.ok(badReferenceFields.body.error.details.fees);
+    assert.ok(badReferenceFields.body.error.details.who_may_avail);
+    const longReferenceFields = await createService({ fees: 'x'.repeat(501), who_may_avail: 'x'.repeat(501) });
+    assert.ok(longReferenceFields.body.error.details.fees);
+    assert.ok(longReferenceFields.body.error.details.who_may_avail);
   });
 
   it('normalises whitespace in the saved name and upper-cases the code', async () => {
@@ -273,21 +290,34 @@ describe('CC008 edit and deactivate a service', () => {
     classification: s.classification,
     transaction_type: s.transaction_type,
     processing_steps: s.processing_steps,
+    fees: s.fees,
+    who_may_avail: s.who_may_avail,
     ...over,
   });
 
-  it('AC1: an edited classification is saved with a before/after audit entry; the standard is untouched', async () => {
-    const service = await makeService();
-    const { status, body } = await edit(service.service_id, editBody(service, { classification: 'COMPLEX', transaction_type: 'G2B' }));
+  it('AC1: edited fields are saved with a before/after audit entry; the standard is untouched', async () => {
+    const service = await makeService({ fees: 'None', who_may_avail: 'Students' });
+    const { status, body } = await edit(
+      service.service_id,
+      editBody(service, { classification: 'COMPLEX', transaction_type: 'G2B', fees: 'PHP 50 per page', who_may_avail: 'Students and alumni' }),
+    );
     assert.equal(status, 200);
     assert.equal(body.service.classification, 'COMPLEX');
     assert.equal(body.service.transaction_type, 'G2B');
+    assert.equal(body.service.fees, 'PHP 50 per page');
+    assert.equal(body.service.who_may_avail, 'Students and alumni');
     assert.equal(body.service.current_standard.standard_id, service.current_standard.standard_id);
     const [entry] = await audits('SERVICE_UPDATED', service.service_id);
     assert.equal(entry.before_value.classification, 'SIMPLE');
     assert.equal(entry.after_value.classification, 'COMPLEX');
+    assert.equal(entry.before_value.fees, 'None');
+    assert.equal(entry.after_value.fees, 'PHP 50 per page');
+    assert.equal(entry.before_value.who_may_avail, 'Students');
+    assert.equal(entry.after_value.who_may_avail, 'Students and alumni');
     assert.equal(entry.office_id, registrar.office_id);
     assert.equal(entry.entity_type, 'Service');
+    assert.equal((await edit(service.service_id, editBody(body.service))).status, 200);
+    assert.equal((await audits('SERVICE_UPDATED', service.service_id)).length, 1, 're-submitting the same values is not audited');
   });
 
   it('can change name, code and office, with the CC007 rules re-checked', async () => {
@@ -704,12 +734,14 @@ describe('CC012 internal catalogue browse', () => {
   });
 
   it('AC3: the service detail shows the current standard, checklist and procedure steps', async () => {
-    const service = await makeService({ service_name: 'Browse Detail', processing_steps: 'Step list' });
+    const service = await makeService({ service_name: 'Browse Detail', processing_steps: 'Step list', fees: 'None', who_may_avail: 'PUP Students' });
     await addDoc(service.service_id, { document_name: 'Form A', is_mandatory: true, notes: 'two copies' });
     const { status, body } = await detail(service.service_id, tokens.officeStaffA);
     assert.equal(status, 200);
     assert.equal(body.service.current_standard.duration_unit, 'MINUTES');
     assert.equal(body.service.processing_steps, 'Step list');
+    assert.equal(body.service.fees, 'None');
+    assert.equal(body.service.who_may_avail, 'PUP Students');
     assert.equal(body.standards.length, 1);
     assert.deepEqual(Object.keys(body.documents[0]).sort(), ['document_id', 'document_name', 'is_mandatory', 'notes', 'service_id']);
     assert.equal(body.documents[0].notes, 'two copies');
@@ -750,7 +782,12 @@ describe('CC013 public service browse (no login)', () => {
     await makeService({ service_name: 'Public Future Only', standard: validStandard({ effective_from: addDays(today(), 3) }) });
     const gone = await makeService({ service_name: 'Public Gone' });
     await deactivateService(req('PATCH', `/services/${gone.service_id}/deactivate`, { token: SA() }), ctx(gone.service_id));
-    detailService = await makeService({ service_name: 'Public Detail', processing_steps: 'Do this, then that.' });
+    detailService = await makeService({
+      service_name: 'Public Detail',
+      processing_steps: 'Do this, then that.',
+      fees: 'PHP 50 per page',
+      who_may_avail: 'PUP Students',
+    });
     await addDoc(detailService.service_id, { document_name: 'Mandatory Form', is_mandatory: true });
     await addDoc(detailService.service_id, { document_name: 'Optional Photo', is_mandatory: false, notes: 'if available' });
   });
@@ -791,6 +828,8 @@ describe('CC013 public service browse (no login)', () => {
     const { status, body } = await callJson(publicDetail, req('GET', `/public/services/${detailService.service_id}`), ctx(detailService.service_id));
     assert.equal(status, 200);
     assert.equal(body.service.processing_steps, 'Do this, then that.');
+    assert.equal(body.service.fees, 'PHP 50 per page');
+    assert.equal(body.service.who_may_avail, 'PUP Students');
     assert.equal(body.service.standard_text, '7 minutes');
     assert.equal(body.service.documents.length, 2);
     assert.deepEqual(body.service.documents[0], { document_name: 'Mandatory Form', is_mandatory: true, notes: null });
@@ -817,7 +856,7 @@ describe('CC013 public service browse (no login)', () => {
     for (const item of listed.body.items) {
       assert.deepEqual(Object.keys(item).sort(), ['classification', 'duration_unit', 'duration_value', 'office_name', 'service_id', 'service_name', 'standard_text']);
     }
-    assert.deepEqual(Object.keys(one.body.service).sort(), ['classification', 'documents', 'office_name', 'processing_steps', 'service_id', 'service_name', 'standard_text']);
+    assert.deepEqual(Object.keys(one.body.service).sort(), ['classification', 'documents', 'fees', 'office_name', 'processing_steps', 'service_id', 'service_name', 'standard_text', 'who_may_avail']);
     assert.deepEqual(Object.keys(one.body.service.documents[0]).sort(), ['document_name', 'is_mandatory', 'notes']);
     const text = JSON.stringify([listed.body, one.body]);
     for (const banned of ['office_id', 'office_code', 'service_code', 'is_active', 'created_at', 'updated_at', 'standard_id', 'document_id', 'charter_reference', 'version_no', 'effective_', 'measurement_type', 'transaction_type', registrar.office_id, 'REG-']) {
