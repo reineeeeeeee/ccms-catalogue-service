@@ -1,0 +1,122 @@
+{
+    "_README":  "Campus Accounting Office, extracted from the PUP Citizen\u0027s Charter 2025 Edition (External Services, printed pp. 578-585). effective_from 2025-01-01 is an ASSUMPTION (edition year start); replace if the Charter prints an effective date. Each service lists all Charter transaction types in transaction_types. Standards carry duration_days, duration_hours and duration_minutes exactly as printed. Each service also carries service_scope. See CCMS_SEEDING_INSTRUCTIONS_10062026.md section 5.4. Review before importing.",
+    "offices":  [
+                    {
+                        "office_code":  "CAMP-ACCT",
+                        "office_name":  "Campus Accounting Office"
+                    }
+                ],
+    "services":  [
+                     {
+                         "office_code":  "CAMP-ACCT",
+                         "service_code":  "CAMP-ACCT-CLR-001",
+                         "service_name":  "Application of General Clearance",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None. See other fees below. Formula / Schedule of Fees: SIS List of Fees - Depends on the result of the SIS data",
+                         "who_may_avail":  "All graduating applicants and students who will transfer outside of PUP",
+                         "processing_steps":  "Step 1. Submit accomplished General Clearance Form at the Student Services Section Sign on the \u0027Received\u0027 column on the logbook Location: Campus Office of the Student Services, Cashier\u0027s Office, Accounting Section\r\n  1.1. Check if General Clearance Form is properly accomplished [Responsible: Office of the Student Services Staff, Accounting Section]\r\n  1.2. Check Student\u0027s account in his/her SIS [Responsible: Office of the Student Services Staff, Accounting Section]\r\n  1.3. If there are no balances found, please proceed to Step 1.4 but If a balance appears, he/she must go to the Cashier\u0027s Office to settle his/her outstanding balance and then go back to the Student Services Section for verification of payment made. If there are no balances found, please proceed to Step 1.4 [Responsible: Cashier\u0027s Office]\r\n  1.4. Sign the General Clearance Form if there are no balances [Responsible: Office of the Student Services, Staff, Accounting Section]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  8,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 579"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Accomplished General Clearance Form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campus PUP Registrar\u0027s Office \u0027Receiving Section\u0027 or PUP Website. Remarks: PUP Registrar\u0027s Office \u0027Receiving Section\u0027 or PUP Website \u0027www.pup.edu.ph\u0027"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ACCT",
+                         "service_code":  "CAMP-ACCT-FIN-001",
+                         "service_name":  "Processing of Offsetting",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "All students who are currently enrolled.",
+                         "processing_steps":  "Step 1. Present PUP ID\u0027s and/or Registration Card at the Student Services Section and Sign on the \u0027Received\u0027 column on the logbook Location: Section Staff, Accounting Department Campus and Main Campus Notes/Instruction: Processing Time for 1.1. 3 minutes (depends upon the internet connectivity)\r\n  1.1. Check in the SIS If the student is entitled for off-setting [Responsible: Section Staff, Accounting Department]\r\n  1.2. Make proper and valid adjustments in the students account in the SIS. if the Student is entitled for offsetting, the CDO will request for the offsetting of the student thru the email of accounting student services section with the student details or information [Responsible: Section Staff, Accounting Department; Any of requesting office / division]\r\n  1.3. Inform student that it\u0027s finished. And advise the students to check their SIS account for the updates [Responsible: Section Staff, Accounting Department; Any of requesting office / division]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  9,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 581"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "PUP Issued IDs (any of the following: Student ID, Registration Card, Alumni ID)",
+                                               "is_mandatory":  true,
+                                               "notes":  "Printed in the Charter as: 1. PUP Issued IDs. Any of the following: a. Student ID b. Registration Card c. Alumni ID"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ACCT",
+                         "service_code":  "CAMP-ACCT-FIN-002",
+                         "service_name":  "Processing of Refunds",
+                         "classification":  "HIGHLY_TECHNICAL",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "All students who are assessed to have an overpayment in their account.",
+                         "processing_steps":  "Step 1. Submit all requirements in the Student Services Section and wait for further instruction from the Students Services Section personnel and Sign on the \u0027Received\u0027 column on the logbook Location: Campus Student Services Section; Location of from 1.3 to 1.6 1.3 Budget Office (PUP Main Campus) 1.4 Accounting Office, Main Campus (BSO) 1.5 Accounting Office, Budget Office - Main Campus (BSO) 1.6 Fund Management Office, Releasing Section (PUP Main Campus) Notes/Instruction: 1.3 Processing TIme 3 Days (Under normal conditions via courier)\r\n  1.1. Check if all documents are complete and remind the client if its proper and complete [Responsible: Student Services Section Staff]\r\n  1.2. Process the request (Disbursement Voucher) [Responsible: Student Services Section Staff, Accounting Section]\r\n  1.3. Submit Disbursement Voucher for transmittal to the Budget Office, thru OVPC,Main Campus [Responsible: Budget Office, PUP Main Campus]\r\n  1.4. Processing of the refund [Responsible: Accounting Office staff, Main Campus (BSO)]\r\n  1.5. Follow up the status and/or availability of the check [Responsible: Campus Director and/or CDO/Liaison Officer Budget Office and OVPC]\r\n  1.6. Pick up check from the Main Campus [Responsible: Campus Director and/or CDO/Liaison Officer Fund Management Office, Releasing Section]\r\nStep 2. Present two (2) valid ID\u0027s and/or Letter of Authorization if person in the check is not available and Sign on the \u0027Received\u0027 column on the logbook Location: Campus Cashiers Office\r\n  2. Release the check [Responsible: Cashiers Office]",
+                         "standard":  {
+                                          "duration_days":  8,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  12,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 583"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Letter of Request",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Statement of Account",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: PUP - Campus Accounting Section"
+                                           },
+                                           {
+                                               "document_name":  "Official Receipt",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: PUP - Main Campus - Fund Management Office"
+                                           },
+                                           {
+                                               "document_name":  "PUP Issued IDs (any of the following: Student ID, Registration Card, Alumni ID)",
+                                               "is_mandatory":  true,
+                                               "notes":  "Printed in the Charter as: 4. PUP Issued IDs. Any of the following: a. Student ID b. Registration Card c. Alumni ID"
+                                           },
+                                           {
+                                               "document_name":  "Requestor is not the student, immediate family member: Authorization Letter",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement (A.a.1). (1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Requestor is not the student, immediate family member: Any valid government issued ID",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement (A.a.2). Any valid government issued ID. Driver\u0027s License Card/Temporary Driver\u0027s License (LTO O.R. must be presented together with old Driver\u0027s License; O.R. alone is not allowed)/Student Driver\u0027s Permit; Passport; SSS I.D. Card; GSIS I.D. (UMID) Card; Voter\u0027s I.D. Card /Voter\u0027s Certification; BIR/Taxpayer\u0027s I.D. Card (ATM type/TIN card type with picture); PhilHealth I.D. Card (must have the bearer\u0027s name, clear picture, signature and PhilHealth number); Company/Office I.D. Card; Police Clearance/Police Clearance Certificate (with picture); Postal I.D. Card; Barangay I.D. Card; NBI Clearance; Seaman\u0027s Book; HDMF Transaction I.D. Card; PWD I.D. Card; Senior Citizen\u0027s I.D. Card; Philippine Identification (PhilID) Card. Remarks: Identification Card must not be expired."
+                                           },
+                                           {
+                                               "document_name":  "Requestor is not the student, not immediate family: Special Power of Attorney (SPA)",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement (A.b.1). (1) Original Copy. Where to secure: Applicant / Client"
+                                           }
+                                       ]
+                     }
+                 ]
+}

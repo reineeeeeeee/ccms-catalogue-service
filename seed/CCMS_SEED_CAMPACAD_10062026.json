@@ -1,0 +1,336 @@
+{
+    "_README":  "Campus Academic Office, extracted from the PUP Citizen\u0027s Charter 2025 Edition (External Services, printed pp. 549-576). 10 services. effective_from 2025-01-01 is an ASSUMPTION (edition year start); replace if the Charter prints an effective date. Each service lists all Charter transaction types in transaction_types. Standards carry duration_days, duration_hours and duration_minutes exactly as printed. See CCMS_SEEDING_INSTRUCTIONS_10062026.md section 5.2. Review before importing. Each service also carries service_scope (INTERNAL or EXTERNAL, from the Charter section it was printed in); see CCMS_SEEDING_INSTRUCTIONS_10062026.md section 7.",
+    "offices":  [
+                    {
+                        "office_code":  "CAMP-ACAD",
+                        "office_name":  "Campus Academic Office"
+                    }
+                ],
+    "services":  [
+                     {
+                         "office_code":  "CAMP-ACAD",
+                         "service_code":  "CAMP-ACAD-ENR-001",
+                         "service_name":  "Processing of Application for Change of Enrollment (Adding of Subject)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 30",
+                         "who_may_avail":  "Regular and Irregular Students",
+                         "processing_steps":  "Step 1. Go to the Director/Head of Academic Program for signature and tagging of subject Location: Director/Head of Academic Program Offices\r\n  1.1. Accept, evaluate, and sign the ACE form (Adding of Subjects). [Responsible: Director/Head of Academic Program]\r\n  1.2. Tag the subject(s) indicated in the ACE Form (Adding of Subjects). [Responsible: Director/Head of Academic Program]\r\nStep 2. Proceed to Cashier\u0027s Office to pay the assessed fee (for students not covered by R.A. 10931) Location: CDO Cashier/Accounting Office\r\n  2. Accept payment and issue official receipt [Responsible: Cashier]\r\nStep 3. Submit the Original Copy of ACE Form (Adding of Subjects) to the Director/Head of Academic Program Location: Receiving Staff / Director / Head of Academic Program Offices\r\n  3.1. Accept the fully accomplished ACE form [Responsible: Receiving Staff/Director/Head of Academic Program]\r\n  3.2. Submit to Registrar\u0027s Office [Responsible: Receiving Staff Registrar\u0027s Office]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  17,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 550"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Accomplished and printed copy of ACE Form (Adding of Subject)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy And (2) Photo Copy. Where to secure: Polytechnic University of the Philippines - https://sites.google.com/view/pup-citizencharter/downloadable-forms. Remarks: An accomplished and printed copy of the ACE Form (Adding of Subject) is downloadable from https://sites.google.com/view/pup-citizencharter/downloadable-forms"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ACAD",
+                         "service_code":  "CAMP-ACAD-ENR-002",
+                         "service_name":  "Processing of Application for Change of Enrollment (Change of Schedule/Subject)",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 30",
+                         "who_may_avail":  "Regular and Irregular Students",
+                         "processing_steps":  "Step 1. Go to the Faculty member(s) assigned to the subject(s) to be enrolled for release and acceptance to the class Location: Faculty Member/s Assigned Room(s) based on Teaching Assignment or Faculty Room\r\n  1. Accept and sign the ACE Form (Change of Schedule/Subject) [Responsible: Faculty Member/s Assigned Room/s based on Teaching Assignment or Faculty Room; Campus Academic Office]\r\nStep 2. Go to the Director/Head of Academic Program for signature and tagging Location: Campus Director/Head of Academic Programs Office\r\n  2.1. Accept, evaluate, and sign the ACE form (Change of Schedule/Subject) [Responsible: Campus Director/Head of Academic Programs; Campus Academic Office]\r\n  2.2. Tag the subject(s) indicated in the ACE Form (Change of Schedule/Subject) [Responsible: Campus Director/Head of Academic Programs; Campus Academic Office]\r\nStep 3. Proceed to Cashier\u0027s Office to pay the assessed fee (for students not covered by R.A. 10931) Location: Collecting Officer / Cashier\r\n  3. Accept payment and issue official receipt [Responsible: Collecting Officer / Cashier Office; Campus Academic Office]\r\nStep 4. Submit the Original Copy of ACE Form (Change of schedule/subject) to the Director/Head of Academic Program Location: Receiving Staff / Campus Director/Head of Academic Programs Notes/Instruction: Receiving Staff / Registrars Office\r\n  4.1. Accept the fully accomplished ACEform [Responsible: Receiving Staff / Campus Director / Head of Academic Program ; Campus Academic Office]\r\n  4.2. Submit ACE form to the Registrar\u0027s Office [Responsible: Receiving Staff / Registrars Officer; Campus Academic Office]",
+                         "standard":  {
+                                          "duration_days":  2,
+                                          "duration_hours":  5,
+                                          "duration_minutes":  30,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 553"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Accomplished and printed copy of ACE Form(Change of Schedule/Subject) downloadable from www.pup.edu.ph (Sample: 3 copies)",
+                                               "is_mandatory":  true,
+                                               "notes":  "Where to secure: www.pup.edu.ph"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ACAD",
+                         "service_code":  "CAMP-ACAD-GRD-001",
+                         "service_name":  "Processing of Application for Correction of Grade Entry, Late Reporting of Grades and Removal of Incomplete Mark",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 30",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Proceed to the cashier\u0027s office to pay the assessed fee. Location: Cashier\u0027s Office / Accounting Office\r\n  1. Accept payment and issue an official receipt. [Responsible: Collecting and Disbursing Officer/ Cashier]\r\nStep 2. Submit the filled-out Completion Form and official receipt to the Professor for completion of the grades for the subject. Location: Assigned Room(s) based on Teaching Assignment or Faculty Room / Receiving Officer Registrar\u0027s Office / Receiving Staff /Director/Head of Academic\r\n  2.1. Evaluate the requirement(s), compute and give grade to the student [Responsible: Faculty Members]\r\n  2.2. Receive the accomplished completion form, class record, andstudent\u0027s requirement(s), with a notarized affidavit for Change of grade (for correction of entry/late reporting of grade) [Responsible: Faculty Member/s Assigned Room/s based on Teaching Assignment or Faculty Room]\r\n  2.3. Sign the Completion Form [Responsible: Receiving Officer Registrar]\r\n  2.4. Log and forward all the requirements to the Registrar\u0027s Office [Responsible: Receiving Staff / Director/ Head of Academic]\r\n  2.5. Sign the Completion Form and tag the accomplished gradeto SIS [Responsible: Receiving Staff / Director/ Head of Academic]\r\n  2.6. Return one (1) copy of the completion form for the copy of the student [Responsible: Receiving Staff / Director/ Head of Academic]",
+                         "standard":  {
+                                          "duration_days":  2,
+                                          "duration_hours":  5,
+                                          "duration_minutes":  30,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 555"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Completion Form (3 original copies)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(3) Original Copy. Where to secure: Polytechnic University of the Philippines - http://www.pup.edu.ph/downloads/students/"
+                                           },
+                                           {
+                                               "document_name":  "Copy of Class Record",
+                                               "is_mandatory":  true,
+                                               "notes":  "(3) Original Copy. Where to secure: Polytechnic University of the Philippines - Assigned professor"
+                                           },
+                                           {
+                                               "document_name":  "Notarized affidavit for change of grade of professor (for correction of entry/late reporting of grade)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(3) Original Copy. Where to secure: Polytechnic University of the Philippines - Notary Public"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ACAD",
+                         "service_code":  "CAMP-ACAD-ENR-003",
+                         "service_name":  "Processing of Application for Cross-Enrollment",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Submit application letter for cross-enrollment Location: Director/ Head of Academic Program Offices\r\n  1.1. Evaluate letter provided by the student [Responsible: Director/ Head of Academic Program]\r\n  1.2. Approve/deny request for cross-enrollment [Responsible: Director/ Head of Academic Program]\r\n  1.3. If approved, recommend cross-enrollment and advise student to proceed to the Registrar\u0027s Office [Responsible: Director/ Head of Academic Program]\r\nStep 2. Present recommendation to the campus registrar Location: Campus Registrar Office\r\n  2.1. Approve cross-enrollment [Responsible: Campus Registrar]\r\n  2.2. Issue permit to cross-enroll [Responsible: Campus Registrar]\r\n  2.3. Advise student to process the permit to the University where student intends to cross-enroll [Responsible: Campus Registrar]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  9,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 558"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Application Letter for Cross-Enrollment",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy And (2) Photo Copy. Where to secure: Polytechnic University of the Philippines - Client or https://sites.google.com/view/pup-citizencharter/downloadable-forms"
+                                           },
+                                           {
+                                               "document_name":  "Permit to cross-enroll",
+                                               "is_mandatory":  true,
+                                               "notes":  "(3) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of the University/Campus Registrar"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ACAD",
+                         "service_code":  "CAMP-ACAD-ENR-004",
+                         "service_name":  "Processing of Application for Overload of Subjects",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Submit all requirements for evaluation and approval. Location: Director/Head of Academic Program Office\r\n  1.1. Check requirements presented [Responsible: Director/ Head of Academic Program]\r\n  1.2. Verify correctness of documents by checking the SIS grade file of the student [Responsible: Director / Head of Academic Program]\r\n  1.3. Upon evaluation, recommend the request for approval of the Director [Responsible: Director / Head of Academic Program]\r\nStep 2. Present the overload request form for approval of the Director Location: Campus Director\u0027s Office\r\n  2. Approve/deny the request [Responsible: Campus Director]\r\nStep 3. Present the approved overload form to the Director/Head of Academic Program for adding of units to the student SIS account Location: Director/Head of Academic Program Offices\r\n  3.1. Add corresponding units in the student account through SIS Academic Management System [Responsible: Director/ Head of Academic Program]\r\n  3.2. Advise student to proceed to Application for Change of Enrollment Process (Adding of Subject/s) [Responsible: Director/ Head of Academic Program]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  6,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 560"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Request Letter for Overload",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Client"
+                                           },
+                                           {
+                                               "document_name":  "SIS Generated Curriculum Profile",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Client\u0027s SIS Account"
+                                           },
+                                           {
+                                               "document_name":  "Fully-accomplished Request for Overload Form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(3) Original Copy. Where to secure: Polytechnic University of the Philippines - Respective Campuses"
+                                           },
+                                           {
+                                               "document_name":  "Fully-accomplished ACE form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(3) Original Copy. Where to secure: Polytechnic University of the Philippines - https://www.pup.edu.ph/downloads/students/"
+                                           },
+                                           {
+                                               "document_name":  "Certificate of Registration for the current semester",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Admissions Office"
+                                           },
+                                           {
+                                               "document_name":  "SIS Generated Curriculum Profile (listed again as item 6 in the Charter)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Same wording as item 2 in the Charter checklist; renamed only because a service cannot have two documents with the same name. Where to secure: Polytechnic University of the Philippines - Student SIS account"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ACAD",
+                         "service_code":  "CAMP-ACAD-SHF-001",
+                         "service_name":  "Processing of Application for Shifting",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 150",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Pay the amount for securing certified copy of grades Location: Cashier\u0027s Office and Accounting Office\r\n  1. Collect payment to student [Responsible: Collecting and Disbursement Officer Cashier]\r\nStep 2. Proceed to the Admissions Office and present official receipt Location: Admission and Registration Office\r\n  2.1. Print the copy of grades [Responsible: Administrative Staff / Head of Admission and Registration Office]\r\n  2.2. Certify the copy of grades [Responsible: Administrative Staff / Head of Admission and Registration Office]\r\nStep 3. Present the fully-accomplished shifting form and certified copy of grades for evaluation and approval Location: Director/ Head of Academic Program Offices\r\n  3.1. Check the fully-accomplished shifting form [Responsible: Director/ Head of Academic Program]\r\n  3.2. Evaluate certified copy of grades [Responsible: Director/ Head of Academic Program]\r\n  3.3. Interview and assess student\u0027s capability and skills [Responsible: Director/ Head of Academic Program]\r\n  3.4. Accept student in the program and sign the acceptance portion of the shifting form [Responsible: Director/ Head of Academic Program]\r\nStep 4. Return the fully accomplished shifting form to the Director/Head of Academic Program. Location: Director/Head of Academic Program Office\r\n  4.1. Sign the release portion of the shifting form [Responsible: Director/ Head of Academic Program]\r\n  4.2. Advise student to proceed to the Director\u0027s Office for final approval of release from the current program [Responsible: Director/ Head of Academic Program]\r\nStep 5. Present the fully-accomplished shifting form for final approval of release from the current program Location: Director / Head of Academic Program Offices\r\n  5.1. Sign the approval portion of the shifting form [Responsible: Director/ Head of Academic Program]\r\n  5.2. Advise student to proceed to the Registrar\u0027s Office for transfer of credentials from current program to shifting program and enrolment of subjects process [Responsible: Director/ Head of Academic Program]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  25,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 563"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Certified Copy of Grades",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy And (2) Photo Copy. Where to secure: Polytechnic University of the Philippines - Admissions Office"
+                                           },
+                                           {
+                                               "document_name":  "Fully-accomplished Shifting Form (Sample: 3 copies)",
+                                               "is_mandatory":  true,
+                                               "notes":  "Sub requirement of item 1, printed in the Charter as 1.A. and 1.A.1. Where to secure: Polytechnic University of the Philippines Campuses - Respective Colleagues / Campus"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ACAD",
+                         "service_code":  "CAMP-ACAD-ENR-005",
+                         "service_name":  "Processing of Manual Enrollment",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Regular and Irregular Students",
+                         "processing_steps":  "Step 1. Go to the Faculty member(s) assigned to the subject(s) to be enrolled for acceptance to the class Location: Assigned Room(s) based on Teaching Assignment\r\n  1. Accept and sign the R0 form [Responsible: Faculty Member/s Assigned Room/s based on Teaching Assignment]\r\nStep 2. Go to the Director/Head of Academic Program for signature and tagging Location: Director/Head of Academic Program Offices\r\n  2.1. Accept, evaluate, and sign the R0 form. [Responsible: Director/Head of Academic Program]\r\n  2.2. Tag the subject(s) indicated in the R0 Form. [Responsible: Director/Head of Academic Program]\r\nStep 3. Proceed to Cashier\u0027s Office to pay the assessed fee (for students not covered by R.A. 10931) Location: Cashier\u0027s Office / Accounting Office\r\n  3. Accept payment and issue official receipt [Responsible: Collecting and Disbursement Officer / Cashier]",
+                         "standard":  {
+                                          "duration_days":  2,
+                                          "duration_hours":  5,
+                                          "duration_minutes":  0,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 566"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Manual Enrollment",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy And (2) Photo Copy. Where to secure: Polytechnic University of the Philippines - Respective Campus offices"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ACAD",
+                         "service_code":  "CAMP-ACAD-PET-001",
+                         "service_name":  "Processing of Online Petition of Subject",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Request for petition of subject online Location: Director/Head of Academic Program/Assistant to the VP for Campuses Second Floor, South Wing Administrative Building/Administrative Staff/ICT Offices\r\n  1.1. Review petitioned subject [Responsible: Director/ Head of Academic Program / Assistant to the VP for Campuses / Administrative Staff / ICT Office]\r\n  1.2. Endorse petition to the OVPC [Responsible: Director/ Head of Academic Program / Assistant to the VP for Campuses / Administrative Staff / ICT Office]\r\n  1.3. Evaluate the petition and approve as necessary [Responsible: Director/ Head of Academic Program / Assistant to the VP for Campuses / Administrative Staff / ICT Office]\r\n  1.4. Forward the approved petition to the ICTO [Responsible: Director/ Head of Academic Program / Assistant to the VP for Campuses / Administrative Staff / ICT Office]\r\n  1.5. Create section offering of the approved petitioned subject [Responsible: Director/ Head of Academic Program / Assistant to the VP for Campuses / Administrative Staff / ICT Office]\r\nStep 2. Enroll the petitioned subject during online registration or during the adjustment period Location: Director/ Head of Academic Program Offices\r\n  2. Tag students through SIS Academic Management System [Responsible: Director/ Head of Academic Program]",
+                         "standard":  {
+                                          "duration_days":  1,
+                                          "duration_hours":  1,
+                                          "duration_minutes":  40,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 569"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Online petition of subject",
+                                               "is_mandatory":  true,
+                                               "notes":  "(3) Original Copy. Where to secure: Polytechnic University of the Philippines - https://apps.pup.edu.ph/sisstudent/Login"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ACAD",
+                         "service_code":  "CAMP-ACAD-PET-002",
+                         "service_name":  "Processing of Online Request for Tutorial of Subject",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Request for tutorial of subject online Location: Director/ Head of Academic Program Offices / Assistant to the VP for Campuses, Second Floor, South Wing Administrative Building / Administrative Staff and ICT Office\r\n  1.1. Review request for tutorial of subject [Responsible: Director/ Head of Academic Program]\r\n  1.2. Endorse request to the OVPC [Responsible: Director/ Head of Academic Program]\r\n  1.3. Evaluate the request for tutorial and approve as necessary [Responsible: Assistant to the VP for Campuses / Administrative Staff]\r\n  1.4. Forward the approved request to the ICTO [Responsible: Assistant to the VP for Campuses / Administrative Staff]\r\n  1.5. Create section offering of the tutorial subject [Responsible: Assistant to the VP for Campuses / Administrative Staff]\r\nStep 2. Enroll the petition subject during online registration or during the adjustment period Location: Director/ Head of Academic Program Offices\r\n  2. Tag students through SIS Academic Management System [Responsible: Director/ Head of Academic Program]",
+                         "standard":  {
+                                          "duration_days":  1,
+                                          "duration_hours":  1,
+                                          "duration_minutes":  40,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 572"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Online petition of tutorial subject",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy And (2) Photo Copy. Where to secure: Polytechnic University of the Philippines - https://apps.pup.edu.ph/sisstudent/Login"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ACAD",
+                         "service_code":  "CAMP-ACAD-GRD-002",
+                         "service_name":  "Processing of Request for Certification (Grades, Bonafide Student, General Weighted Average)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students and Alumni",
+                         "processing_steps":  "Step 1. Submit accomplished request form Location: Receiving Staff Registrar\u0027s Office/Student Services Office\r\n  1.1. Accept request form [Responsible: Receiving Staff Registrar]\r\n  1.2. Log request in the logbook [Responsible: Receiving Staff Registrar]\r\n  1.3. Issue claim stub to the client [Responsible: Receiving Staff Registrar]\r\nStep 2. Present claim stub Location: Receiving Staff Registrar\u0027s Office; Director / Head of Academic Program Offices; Administrative Staff Registrar\u0027s Office\r\n  2.1. Submit request to the Registrar [Responsible: Receiving Staff Registrar]\r\n  2.2. Process requested document [Responsible: Receiving Staff Registrar\u0027s Office]\r\n  2.3. Forward document to the Director/Head of Academic Program for signature [Responsible: Administrative Staff / Director/ Head of Academic Program]\r\n  2.4. Issue requested document [Responsible: Administrative Staff Registrar]\r\nStep 3. Acknowledge receipt of the document Location: Registrar\u0027s Office\r\n  3. Give logbook for the client to sign [Responsible: Administrative Staff]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  35,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 575"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Accomplished request form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy And (2) Photo Copy. Where to secure: Polytechnic University of the Philippines - Respective Campus offices"
+                                           },
+                                           {
+                                               "document_name":  "Identification Card (ID)",
+                                               "is_mandatory":  true,
+                                               "notes":  "Printed in the Charter as \"2. 2. Identification Card (ID)\". (1) Original Copy. Remarks: Provided by the requestor or authorized representative. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Authorization letter and Identification card (ID)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy And (2) Photo Copy. Remarks: When representative: authorization letter and identification card (ID) if the claimant is not the owner of the document. Where to secure: Applicant / Client"
+                                           }
+                                       ]
+                     }
+                 ]
+}

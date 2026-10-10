@@ -2,7 +2,7 @@ import { Errors, fromManila, isValidManilaDate, toManilaDate } from 'ccms-shared
 
 export const CLASSIFICATIONS = ['SIMPLE', 'COMPLEX', 'HIGHLY_TECHNICAL'];
 export const TRANSACTION_TYPES = ['G2C', 'G2G', 'G2B'];
-export const DURATION_UNITS = ['MINUTES', 'HOURS', 'WORKING_DAYS'];
+export const SERVICE_SCOPES = ['INTERNAL', 'EXTERNAL'];
 
 export const OFFICE_INACTIVE = 'Office not found or inactive';
 export const NAME_TAKEN = 'This office already has a service with this name';
@@ -10,16 +10,17 @@ export const CODE_TAKEN = 'Service code already exists';
 export const PAST_STANDARD = 'A new standard cannot start in the past';
 export const STANDARD_DATE_TAKEN = 'A standard version already starts on this date';
 
-const UNIT_LABELS = {
-  MINUTES: ['minute', 'minutes'],
-  HOURS: ['hour', 'hours'],
-  WORKING_DAYS: ['working day', 'working days'],
-};
-
-/** "7 minutes", "4 hours", "3 working days" (singular for 1). */
-export function standardText(durationValue, durationUnit) {
-  const [one, many] = UNIT_LABELS[durationUnit] ?? [durationUnit, durationUnit];
-  return `${durationValue} ${durationValue === 1 ? one : many}`;
+/** "7 minutes", "4 hours", "2 working days, 5 hours, 30 minutes" (singular for 1). */
+export function standardText(durationDays, durationHours, durationMinutes) {
+  const parts = [
+    [durationDays, 'working day', 'working days'],
+    [durationHours, 'hour', 'hours'],
+    [durationMinutes, 'minute', 'minutes'],
+  ];
+  return parts
+    .filter(([value]) => value > 0)
+    .map(([value, one, many]) => `${value} ${value === 1 ? one : many}`)
+    .join(', ');
 }
 
 /** Today's calendar date in Manila, 'YYYY-MM-DD'. */
@@ -58,16 +59,26 @@ export function parseServiceFields(body, details = {}) {
   const serviceName = collapseSpaces(str(body.service_name));
   if (!serviceCode) details.service_code = 'Service code is required';
   if (!serviceName) details.service_name = 'Service name is required';
-  else if (serviceName.length < 3 || serviceName.length > 100) {
-    details.service_name = 'Service name must be 3 to 100 characters';
+  else if (serviceName.length < 3 || serviceName.length > 200) {
+    details.service_name = 'Service name must be 3 to 200 characters';
   } else if (/[<>"`]/.test(serviceName)) {
     details.service_name = 'Service name cannot contain < > " or ` characters';
   }
   if (!CLASSIFICATIONS.includes(body.classification)) {
     details.classification = `Classification must be one of ${CLASSIFICATIONS.join(', ')}`;
   }
-  if (!TRANSACTION_TYPES.includes(body.transaction_type)) {
-    details.transaction_type = `Transaction type must be one of ${TRANSACTION_TYPES.join(', ')}`;
+  if (!SERVICE_SCOPES.includes(body.service_scope)) {
+    details.service_scope = `Service scope must be one of ${SERVICE_SCOPES.join(', ')}`;
+  }
+  let transactionTypes = [];
+  if (!Array.isArray(body.transaction_types) || body.transaction_types.length === 0) {
+    details.transaction_types = 'At least one transaction type is required';
+  } else if (body.transaction_types.some((type) => !TRANSACTION_TYPES.includes(type))) {
+    details.transaction_types = `Each transaction type must be one of ${TRANSACTION_TYPES.join(', ')}`;
+  } else if (new Set(body.transaction_types).size !== body.transaction_types.length) {
+    details.transaction_types = 'Transaction types must not contain duplicates';
+  } else {
+    transactionTypes = [...body.transaction_types];
   }
   if (typeof body.office_id !== 'string' || !body.office_id.trim()) details.office_id = 'Office is required';
 
@@ -97,7 +108,8 @@ export function parseServiceFields(body, details = {}) {
     serviceCode,
     serviceName,
     classification: body.classification,
-    transactionType: body.transaction_type,
+    serviceScope: body.service_scope,
+    transactionTypes,
     processingSteps,
     fees,
     whoMayAvail,
@@ -105,17 +117,23 @@ export function parseServiceFields(body, details = {}) {
 }
 
 /**
- * duration_value (whole number >= 1), duration_unit, effective_from (Manila date), charter_reference.
+ * Three non-negative whole-number duration parts, at least one positive, plus effective_from and charter_reference.
  * `prefix` names nested fields in the error details (e.g. "standard.").
  */
 export function parseStandardFields(body, details = {}, prefix = '') {
-  const value = body.duration_value;
-  const numeric = typeof value === 'number' ? value : typeof value === 'string' && /^\d+$/.test(value.trim()) ? Number(value) : NaN;
-  if (!Number.isInteger(numeric) || numeric < 1 || numeric > 1000000) {
-    details[`${prefix}duration_value`] = 'Duration must be a whole number of 1 or more';
-  }
-  if (!DURATION_UNITS.includes(body.duration_unit)) {
-    details[`${prefix}duration_unit`] = `Unit must be one of ${DURATION_UNITS.join(', ')}`;
+  const readPart = (name) => {
+    const value = body[name];
+    const numeric = typeof value === 'number' ? value : typeof value === 'string' && /^\d+$/.test(value.trim()) ? Number(value) : NaN;
+    if (!Number.isInteger(numeric) || numeric < 0 || numeric > 1000000) {
+      details[`${prefix}${name}`] = 'Duration part must be a whole number of 0 or more';
+    }
+    return numeric;
+  };
+  const durationDays = readPart('duration_days');
+  const durationHours = readPart('duration_hours');
+  const durationMinutes = readPart('duration_minutes');
+  if ([durationDays, durationHours, durationMinutes].every((value) => Number.isInteger(value) && value === 0)) {
+    details[`${prefix}duration`] = 'At least one duration part must be greater than 0';
   }
   const effectiveFrom = str(body.effective_from).trim();
   if (!effectiveFrom) details[`${prefix}effective_from`] = 'Effective from date is required';
@@ -123,7 +141,7 @@ export function parseStandardFields(body, details = {}, prefix = '') {
   const charterReference = collapseSpaces(str(body.charter_reference));
   if (!charterReference) details[`${prefix}charter_reference`] = 'Charter reference is required';
   else if (charterReference.length > 200) details[`${prefix}charter_reference`] = 'Charter reference must be 200 characters or fewer';
-  return { durationValue: numeric, durationUnit: body.duration_unit, effectiveFrom, charterReference };
+  return { durationDays, durationHours, durationMinutes, effectiveFrom, charterReference };
 }
 
 export function throwIfInvalid(details) {

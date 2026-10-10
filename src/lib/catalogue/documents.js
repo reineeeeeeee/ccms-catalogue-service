@@ -5,8 +5,8 @@ import { RequiredDocument } from '../entities/index.js';
 import { kickOutbox } from '../outbox.js';
 
 export const DOCUMENT_NAME_TAKEN = 'This service already has a document with this name';
-const MAX_NAME = 150; // team-set
-const MAX_NOTES = 500;
+const MAX_NAME = 250; // team-set
+const MAX_NOTES = 1000;
 
 export function toDocumentDto(row) {
   return {

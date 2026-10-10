@@ -71,6 +71,10 @@ Tables are created from the entities in `src/lib/entities/` when the service fir
 (no migration files). On Vercel every cold start would re-check the schema, so after the first deploy you may set
 `DB_SYNCHRONIZE=false` and run `npm run db:sync` yourself whenever the entities change.
 
+When upgrading a database created before the three-part duration and multiple-transaction-type model, `npm run db:sync`
+preserves and converts those old values before synchronizing the schema. Existing service scope must be classified manually as
+`INTERNAL` or `EXTERNAL`; the command stops with a count of unclassified rows because scope cannot be inferred from transaction type.
+
 ## Environment
 
 | Variable | Meaning |
@@ -98,7 +102,7 @@ Every write records an audit event (with `office_id`) in the same transaction.
 
 | Endpoint | Notes |
 | --- | --- |
-| `GET /services?office_id&classification&status&search&page&page_size` | Non-Super-Admin roles always see active services only; Office Head / Office Staff are forced to their own `office_id` (search, paging and `total` count only that office); asking for another office is `403` |
+| `GET /services?office_id&classification&service_scope&status&search&page&page_size` | `service_scope` is `INTERNAL` or `EXTERNAL`. Non-Super-Admin roles always see active services only; Office Head / Office Staff are forced to their own `office_id` (search, paging and `total` count only that office); asking for another office is `403` |
 | `POST /services` | Service plus first standard in one transaction; `measurement_type` is always `TIMELINESS` |
 | `GET /services/:id` | `{ service, standards, documents }`; inactive is 404 for non-Super-Admin; another office's service is `403` for Office Head / Office Staff |
 | `PUT /services/:id`, `PATCH /services/:id/deactivate`, `PATCH /services/:id/reactivate` | Services are never deleted |
@@ -134,8 +138,15 @@ npm run seed -- --file seed/sample.json --dry-run   # validate and report only, 
 npm run seed -- --file path/to/your-charter.json    # load it
 ```
 
+The reviewed 2025 Charter datasets are also included in `seed/` for `CAMP-ADMIN`, `CAMP-ACAD`, `CAMP-OSAS` and
+`CAMP-ACCT`. Always run each with `--dry-run` first, then run the real import with
+`--actor <responsible-super-admin-account-id>`. `CAMP-OSAS-CRD-005` remains deliberately absent pending confirmation
+of the conflicting printed processing totals.
+
 The file has `offices` and `services` (each service: `office_code`, `service_code`, `service_name`, `classification`,
-`transaction_type`, optional `processing_steps`, optional `fees`, optional `who_may_avail`, `standard`, optional `documents`). Rows go through the same validation
+`service_scope`, `transaction_types`, optional `processing_steps`, optional `fees`, optional `who_may_avail`, `standard`, optional `documents`).
+`service_scope` is `INTERNAL` or `EXTERNAL`; `transaction_types` is a non-empty list containing `G2C`, `G2G` and/or `G2B` without duplicates.
+The `standard` stores `duration_days`, `duration_hours` and `duration_minutes` as non-negative whole numbers, with at least one part greater than zero. Rows go through the same validation
 and audit as the API. A duplicate (existing office code, or office + normalised service name) is reported and skipped,
 never inserted, so re-running a file adds nothing. A bad row is reported and skipped without stopping the others; the
 exit code is 1 if any row had an error. `--actor <user-uuid>` sets the audit actor.

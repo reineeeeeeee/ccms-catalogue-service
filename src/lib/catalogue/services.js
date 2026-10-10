@@ -5,6 +5,7 @@ import {
   CODE_TAKEN,
   NAME_TAKEN,
   OFFICE_INACTIVE,
+  SERVICE_SCOPES,
   likePattern,
   manilaToday,
   nameKey,
@@ -22,11 +23,12 @@ import { insertFirstStandard, listStandardRows, toStandardDto } from './standard
 // One service row plus its office and the version in force today (Manila date).
 const SERVICE_SELECT = `
   SELECT s.service_id, s.office_id, o.office_code, o.office_name, s.service_code, s.service_name,
-         s.classification, s.transaction_type, s.measurement_type, s.processing_steps, s.fees,
+         s.classification, s.service_scope, s.transaction_types, s.measurement_type, s.processing_steps, s.fees,
          s.who_may_avail, s.is_active,
          s.created_at, s.updated_at,
-         cs.standard_id AS cs_standard_id, cs.version_no AS cs_version_no, cs.duration_value AS cs_duration_value,
-         cs.duration_unit AS cs_duration_unit, cs.effective_from::text AS cs_effective_from,
+         cs.standard_id AS cs_standard_id, cs.version_no AS cs_version_no,
+         cs.duration_days AS cs_duration_days, cs.duration_hours AS cs_duration_hours,
+         cs.duration_minutes AS cs_duration_minutes, cs.effective_from::text AS cs_effective_from,
          cs.effective_to::text AS cs_effective_to, cs.charter_reference AS cs_charter_reference
     FROM services s
     JOIN offices o ON o.office_id = s.office_id
@@ -44,7 +46,8 @@ export function toServiceDto(row) {
     service_code: row.service_code,
     service_name: row.service_name,
     classification: row.classification,
-    transaction_type: row.transaction_type,
+    service_scope: row.service_scope,
+    transaction_types: row.transaction_types,
     measurement_type: row.measurement_type,
     processing_steps: row.processing_steps ?? null,
     fees: row.fees ?? null,
@@ -56,8 +59,9 @@ export function toServiceDto(row) {
       ? {
           standard_id: row.cs_standard_id,
           version_no: row.cs_version_no,
-          duration_value: row.cs_duration_value,
-          duration_unit: row.cs_duration_unit,
+          duration_days: row.cs_duration_days,
+          duration_hours: row.cs_duration_hours,
+          duration_minutes: row.cs_duration_minutes,
           effective_from: row.cs_effective_from,
           effective_to: row.cs_effective_to ?? null,
           charter_reference: row.cs_charter_reference,
@@ -152,7 +156,8 @@ export async function createService(dataSource, actor, body, { ipAddress } = {})
         serviceName: fields.serviceName,
         serviceNameKey,
         classification: fields.classification,
-        transactionType: fields.transactionType,
+        serviceScope: fields.serviceScope,
+        transactionTypes: fields.transactionTypes,
         measurementType: 'TIMELINESS',
         processingSteps: fields.processingSteps ?? null,
         fees: fields.fees ?? null,
@@ -198,7 +203,9 @@ export async function updateService(dataSource, actor, id, body, { ipAddress } =
         serviceCode === before.service_code &&
         fields.serviceName === before.service_name &&
         fields.classification === before.classification &&
-        fields.transactionType === before.transaction_type &&
+        fields.serviceScope === before.service_scope &&
+        fields.transactionTypes.length === before.transaction_types.length &&
+        fields.transactionTypes.every((type, index) => type === before.transaction_types[index]) &&
         processingSteps === before.processing_steps &&
         fees === before.fees &&
         whoMayAvail === before.who_may_avail;
@@ -213,7 +220,8 @@ export async function updateService(dataSource, actor, id, body, { ipAddress } =
           serviceName: fields.serviceName,
           serviceNameKey,
           classification: fields.classification,
-          transactionType: fields.transactionType,
+          serviceScope: fields.serviceScope,
+          transactionTypes: fields.transactionTypes,
           processingSteps,
           fees,
           whoMayAvail,
@@ -255,11 +263,15 @@ export async function listServices(dataSource, user, params) {
   const details = {};
   const officeId = params.get('office_id');
   const classification = params.get('classification');
+  const serviceScope = params.get('service_scope');
   const status = params.get('status') || 'active';
   const search = params.get('search')?.trim();
   if (officeId && !isUuid(officeId)) details.office_id = 'office_id must be a valid id';
   if (classification && !CLASSIFICATIONS.includes(classification)) {
     details.classification = `Classification must be one of ${CLASSIFICATIONS.join(', ')}`;
+  }
+  if (serviceScope && !SERVICE_SCOPES.includes(serviceScope)) {
+    details.service_scope = `Service scope must be one of ${SERVICE_SCOPES.join(', ')}`;
   }
   if (!['active', 'inactive', 'all'].includes(status)) details.status = 'Status must be active, inactive or all';
   throwIfInvalid(details);
@@ -282,6 +294,7 @@ export async function listServices(dataSource, user, params) {
   if (effectiveStatus === 'inactive') where.push('s.is_active = false');
   if (scopedOfficeId) add('s.office_id = ?::uuid', scopedOfficeId);
   if (classification) add('s.classification = ?', classification);
+  if (serviceScope) add('s.service_scope = ?', serviceScope);
   if (search) add('(s.service_name ILIKE ? OR s.service_code ILIKE ? OR o.office_name ILIKE ?)', likePattern(search));
   const whereSql = where.length ? ` WHERE ${where.join(' AND ')}` : '';
 

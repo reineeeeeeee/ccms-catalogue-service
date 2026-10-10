@@ -1,0 +1,941 @@
+{
+    "_README":  "Campus Student Affairs and Services Office, extracted from the PUP Citizen\u0027s Charter 2025 Edition (External Services, printed pp. 663-733). effective_from 2025-01-01 is an ASSUMPTION (edition year start); replace if the Charter prints an effective date. Each service lists all Charter transaction types in transaction_types. Standards carry duration_days, duration_hours and duration_minutes exactly as printed. See CCMS_SEEDING_INSTRUCTIONS_10062026.md section 5.3. Review before importing. Each service also carries service_scope (INTERNAL or EXTERNAL, from the Charter section it was printed in); see CCMS_SEEDING_INSTRUCTIONS_10062026.md section 7.",
+    "offices":  [
+                    {
+                        "office_code":  "CAMP-OSAS",
+                        "office_name":  "Campus Student Affairs and Services Office"
+                    }
+                ],
+    "services":  [
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-ACT-001",
+                         "service_name":  "Permission to Conduct an Activity",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Present letter of request to the Office of Student Affairs and Services. The letter should be addressed to the Head of Student Affairs and Services duly noted by the organization Adviser Location: Campus Student Services and Affairs Office\r\n  1. Receive and check the letter [Responsible: Staff/ Head of Student Affairs and Services; Campus Student Services and Affairs Office]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  7,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 680"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Current Registration Card or Identification Card (for currently enrolled student); Alumni ID or TOR with picture (for graduate)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of Student Affairs and Services. Remarks: The form can be secured from the Office of Student Affairs and Services"
+                                           },
+                                           {
+                                               "document_name":  "Form PUP-RPCA-5-OFSS-003",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of Student Affairs and Services. Remarks: The form can be secured from the Office of Student Affairs and Services"
+                                           },
+                                           {
+                                               "document_name":  "Letter of Request",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of Student Affairs and Services"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-ADM-001",
+                         "service_name":  "Processing for Re-Admission (Returning Students)",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 300",
+                         "who_may_avail":  "PUP Returning Students (Returnee)",
+                         "processing_steps":  "Step 1. Go to Admission Services and fill out the application for re-admission. 1.1 Secure clearance from accounting Office 1.2 Secure clearance from Campus Medical Clinic Location: Polytechnic University of the Philippines\r\n  1.1. Give Logbook and affix signature [Responsible: Admission Services Staff]\r\n  1.2. Accept the filled out application for re-admission for verification and attach all pertinent documents needed for re-admission [Responsible: Head of Admission and Registration Admission\u0027s Office]\r\nStep 2. Proceed to the Cashier\u0027s Office to pay the amount Location: Polytechnic University of the Philippines\r\n  2. Accept payment and issues official receipt. [Responsible: Cash Receipts Officer Cashier\u0027s Office]\r\nStep 3. For S.I.S. students, proceed totheAdmissionandRegistration Office to re-activate your account. Location: Polytechnic University of the Philippines\r\n  3. Bring the proof of payment and clients copy of the application form. [Responsible: Head of Admission and Registration Admission\u0027s Office]\r\nStep 4. Request Informative Copy of Grades (If you stopped for one (1) semester); Transcript of Records (TOR) if you stopped for two (2) or more years from the date of your last enrollment in P.U.P. Location: Polytechnic University of the Philippines\r\n  4.1. Process request and issue advisory and updates whenever necessary [Responsible: Admission Services Staff]\r\n  4.2. Notify the client when document is ready for release. [Responsible: Head of Admission and Registration Admission\u0027s Office]\r\nStep 5. roceed to the Head of Academic Programs for academic evaluation and approval for re-admission. Location: Polytechnic University of the Philippines\r\n  5. Evaluate the student academic records and signs the re-admission form with recommendation [Responsible: HeadofAcademicPrograms]\r\nStep 6. Go back to Admission Services and submit two (2) sets of re-admission forms and attachments: Original and duplicate copy with 2\"x2\" colored photo with white background and nametag. Location: Polytechnic University of the Philippines\r\n  6.1. Accept re-admission form and required documents and start initial assessment and verification of completeness. [Responsible: Admission Services Staff HeadofAdmissionand Registration Admission\u0027s Office]\r\n  6.2. If documents are in complete, indicate in the clients copy lacking form for immediate compliance and advise the date of release. [Responsible: Head of Admission and Registration]\r\nStep 7. Claim the re-admission certificate and attachments on prescribed schedule. Location: Polytechnic University of the Philippines\r\n  7. Issue certificate of re-admission and sign in the logbook and evaluate the service rendered [Responsible: Head of Admission and Registration]\r\nStep 8. Proceed to the HeadofAcademicProgramsfor enrollment Location: Polytechnic University of the Philippines\r\n  8. Issue certificate [Responsible: Head of Academic Programs]",
+                         "standard":  {
+                                          "duration_days":  2,
+                                          "duration_hours":  6,
+                                          "duration_minutes":  41,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 682"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Accomplished re-admission form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Admission Services"
+                                           },
+                                           {
+                                               "document_name":  "Informative Copy of Grades/Transcript of Records",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - PUP website. Remarks: To be uploaded in the ODRS"
+                                           },
+                                           {
+                                               "document_name":  "Curriculum Sheet",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Head of Academic Programs"
+                                           },
+                                           {
+                                               "document_name":  "Latest Certificate of Registration",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Head of Admission and Registration"
+                                           },
+                                           {
+                                               "document_name":  "Colored picture, 2 inch x 2 inch, with white background with applicants name on the photo (Sample: 2 pcs)",
+                                               "is_mandatory":  true,
+                                               "notes":  "Printed in the Charter as 2\" x 2\"colored picture; the inch marks are not allowed in a document name. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Official Receipt for re-admission",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Cashier\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "Medical Clearance",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - PUP/Government Clinic. Remarks: Any of the folowing: PUP Medical Clinic/ GovernmentMedicalClinic"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-ADM-002",
+                         "service_name":  "Processing of Course Accreditation Service (for Transferees)",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 12",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Accomplished Application for Accreditation of Courses Form of subject together with the required documents Location: Polytechnic University of the Philippines Notes/Instruction: P12.00 per unit for transferees from another University/College\r\n  1. Give logbook and affix signature. 1.2 Approve and sign Accreditation of Course. [Responsible: Head of Academic Programs Academic Office; Any of requesting office / division]\r\nStep 2. Submit the checked and verified Accreditation Form Location: Polytechnic University of the Philippines\r\n  2. Give logbook and affix signature. Accept Accreditation Form for signature of the Campus Registrar [Responsible: Head of Admission and Registration Admission\u0027s Office; Any of requesting office / division]\r\nStep 3. For transferees from another University/ Branch, proceed to the Cashier\u0027s Office Location: Polytechnic University of the Philippines Notes/Instruction: Php 12 per unit for transferees from another University/College\r\n  3.1. Accept Accreditation Form and assess payment [Responsible: Cashier-Cashier\u0027s Office; Any of requesting office / division]\r\n  3.2. Accept payment and issue official receipt [Responsible: Cashier Cashier\u0027s Office; Any of requesting office / division]\r\nStep 4. Present accomplished Accreditation Form with complete requirements to the Admission and Registration Office Location: Polytechnic University of the Philippines\r\n  4. Check completeness and validate Accreditation Form 4.2 If complete, advise the student to comeback the following day If not complete, returns the form to the student for compliance [Responsible: Admission Services Staff; Head of Admission and Registration - Admission\u0027s Office; Campus Student Services and Affairs Office]\r\nStep 5. Submit original copy to Office of Admission Services and photocopy to OVPC for tagging. (End of transaction) Location: Polytechnic University of the Philippines\r\n  5. Accept the duly signed Accreditation Form 5.2 Give logbook and sign and evaluate service rendered [Responsible: OVPC staff; Any of requesting office / division]",
+                         "standard":  {
+                                          "duration_days":  1,
+                                          "duration_hours":  3,
+                                          "duration_minutes":  58,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 686"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Transferees from another university/college: Accomplished Course Accreditation Form",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement. (1) Original Copy. Where to secure: Polytechnic University of the Philippines - PUP Website. Remarks: To be downloaded from the PUP Website"
+                                           },
+                                           {
+                                               "document_name":  "Transferees from another university/college: Curriculum Sheet upon Admission to PUP",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement. (1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Transferees from another university/college: Certified Copy of TOR with Remarks \u0027Copy for PUP\u0027",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement. (1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Transferees from another university/college: Subject Description taken from other school /university",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement. (1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Transferees from another university/college: Proof of Payment",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement. (Sample: 12 per unit Php). Where to secure: Polytechnic University of the Philippines - Cashier\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "Transferees from branch and campus to PUP Main: Accomplished Accreditation Form",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement. (1) Original Copy. Where to secure: Polytechnic University of the Philippines - PUP Website. Remarks: To be downloaded from the PUP Website"
+                                           },
+                                           {
+                                               "document_name":  "Transferees from branch and campus to PUP Main: Curriculum Sheet upon Admission to PUP",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement. (1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Transferees from branch and campus to PUP Main: Certified Copy of TOR with Remarks \u0027Copy for PUP\u0027",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement. (1) Original Copy. Where to secure: Applicant / Client"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-ADM-003",
+                         "service_name":  "Processing of Request for Course Accreditation Service- Senior High School to Bridge Course",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Accomplish Application for Accreditation of Courses Form of subject together with the required documents Location: Polytechnic University of the Philippines\r\n  1. Give logbook and affix signature. Approve and sign Accreditation of Course. [Responsible: Head of Admission and Registration Office]\r\nStep 2. Present accomplished Accreditation Form with complete requirements to Admission and Registration Office Location: Polytechnic University of the Philippines\r\n  2. Checks completeness of the presented Accreditation Form. 2.2 If complete, signs the Accreditation Form. 2.3 If not complete, returns the form to the student for compliance. [Responsible: Head of Admission and Registration Admission\u0027s Office]\r\nStep 3. Present accomplished Accreditation Form to Admission and Registration Office Location: Polytechnic University of the Philippines\r\n  3. Accept and tags the duly signed Accreditation Form. 3.2 Give logbook and sign and evaluate service rendered. [Responsible: Head of Admission and Registration Admission\u0027s Office]\r\nStep 4. Submit the signed Accreditation Form to the Head of Student Services Location: Polytechnic University of the Philippines\r\n  4. Give logbook and affix signature. 4.2 Accept Accreditation Form for signature of the Campus Registrar. [Responsible: Head of Admission and Registration Admission\u0027s Office]",
+                         "standard":  {
+                                          "duration_days":  1,
+                                          "duration_hours":  5,
+                                          "duration_minutes":  42,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 703"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Accomplished Course Accreditation Form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - PUP Website. Remarks: To be downloaded from the PUP Website"
+                                           },
+                                           {
+                                               "document_name":  "Curriculum Sheet used upon admission Curriculum Sheet used upon admission",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Informative copy of grades for PUP SHS graduates",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Form 138 or 137 for graduates from other Senior High School",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-ADM-004",
+                         "service_name":  "Processing of Request for Leave of Absence",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "PUP Students",
+                         "processing_steps":  "Step 1. Submit Request letter addressed to the Campus Registrar stating the reason for his/her leave noted Head of Academic Programs/Director Location: Polytechnic University of the Philippines\r\n  1. Give Logbook and Affix Signature Receive and sign the letter of intent by the Head of Academic Program/Director [Responsible: Head of Academic Programs/ Director]\r\nStep 2. Process ACE form to withdraw the subjects if officially enrolled during the semester. Location: Polytechnic University of the Philippines\r\n  2. Accept ACE Form and affix signature to corresponding subject [Responsible: Assigned Faculty]\r\nStep 3. Submit request letter noted by Head of Academic Program/Director to the Campus Registrar for signature and ACE Form for Currently enrolled Location: Polytechnic University of the Philippines\r\n  3. Gives Logbook and Affix Signature Accept request letter for signature of the Campus Registrar and endorses to the Office of Admission Services [Responsible: Head of Admission and Registration Admission\u0027s Office]\r\nStep 4. Submit photocopy the approved letter signed by the Campus Registrar Location: Polytechnic University of the Philippines\r\n  4. Receive and tag the request for Leave of Absence in the SIS Module [Responsible: Head of Admission and Registration Admission\u0027s Office]",
+                         "standard":  {
+                                          "duration_days":  2,
+                                          "duration_hours":  6,
+                                          "duration_minutes":  29,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 729"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Letter of intent address to the Campus Registrar",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Documents as proof such as Medical Certificate, Employment Order",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Application for Change of Enrollment (ACE) if the student is currently enrolled",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-CNS-001",
+                         "service_name":  "Consultation Service",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Proceed to the front desk staff and present required document Location: Office of counseling and Psychological Services\r\n  1. Verify documents presented [Responsible: Guidance Counselor; Any of requesting office / division]\r\nStep 2. 5.Sign in the client Log Book Location: Office of counseling and Psychological Services\r\n  2. Give the Log Book to the client [Responsible: Guidance Counselor; Any of requesting office / division]\r\nStep 3. Accomplish Appointment Slip Location: Office of counseling and Psychological Services\r\n  3.1. Give Appointment Slip to be accomplished [Responsible: Guidance Counselor; Any of requesting office / division]\r\n  3.2. Advise and assist the client to the assigned counselor [Responsible: Guidance Counselor; Any of requesting office / division]\r\nStep 4. Undergo Background Verification Location: Office of counseling and Psychological Services\r\n  4. Gather information to have a background knowledge about the client and the topic or area to be consulted [Responsible: Guidance Counselor; Any of requesting office / division]\r\nStep 5. Collect information necessary for the topic or area to be consulted Location: Office of counseling and Psychological Services\r\n  5. Provide information [Responsible: Guidance Counselor; Campus Student Services and Affairs Office]\r\nStep 6. Secure an appointment slip Location: Office of counseling and Psychological Services\r\n  6. For services such as test validation and research provide another schedule to complete the service [Responsible: Guidance Counselor; Any of requesting office / division]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  28,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 670"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Identification card/Registration certificate",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of the Student Services/Office of Admission\u0027s Services"
+                                           },
+                                           {
+                                               "document_name":  "Letter of Request noted by the Faculty in charged/Chair/Dean",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Department/College"
+                                           },
+                                           {
+                                               "document_name":  "Appointment Slip",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of Counseling and Psychological Services-Front desk"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-CNS-002",
+                         "service_name":  "Counseling Service",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. 1.Proceed to the front desk staff and present required document to schedule for a counseling session. Location: Office of Counseling and Psychological Services\r\n  1. Verify documents presented [Responsible: Guidance Counselor; Any of requesting office / division]\r\nStep 2. Sign in the client Log Book Location: Office of Counseling and Psychological Services\r\n  2. Give the Log Book to the client [Responsible: Guidance Counselor; Any of requesting office / division]\r\nStep 3. AccomplishPersonal Data Sheet Location: Office of Counseling and Psychological Services\r\n  3. Give Personal data Sheet to be accomplished [Responsible: Guidance Counselor; Campus Student Services and Affairs Office]\r\nStep 4. Undergo Initial Assessment Location: Office of Counseling and Psychological Services\r\n  4.1. Interview and gather information for client\u0027s areas of concern [Responsible: Guidance Counselor; Campus Student Services and Affairs Office]\r\n  4.2. Provide and discuss about counseling procedures [Responsible: Guidance Counselor; Campus Student Services and Affairs Office]\r\nStep 5. Secure an appointment slip Location: Office of Counseling and Psychological Services\r\n  5. 5.For client needing more than one sessions, provide another session [Responsible: Guidance Counselor; Campus Student Services and Affairs Office]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  44,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 673"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Identification card/Registration certificate",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of the Student Services/ Office of Admission\u0027s Services"
+                                           },
+                                           {
+                                               "document_name":  "Referral Slip",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of counseling and Psychological Services-Front desk"
+                                           },
+                                           {
+                                               "document_name":  "Call Slip",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Diiferent Colleges and department"
+                                           },
+                                           {
+                                               "document_name":  "Appointment Slip",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of Counseling and Psychological Services"
+                                           },
+                                           {
+                                               "document_name":  "Personal data sheet",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of Counseling and Psychological Services"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-CRD-001",
+                         "service_name":  "Processing of Request for Academic Verification Service",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2B"
+                                               ],
+                         "fees":  "PHP 200 USD 10. Processing Fee (Local Verification): PHP 200; Processing Fee (Outside the country): USD 10",
+                         "who_may_avail":  "Companies, Government agencies",
+                         "processing_steps":  "Step 1. Submit letter request duly signed by the authorized company officer in charge with required documents for verification for Walk-in, or email for on-line verification Location: Polytechnic University of the Philippines- Admissions and Registration Office\r\n  1. Give logbook and affix signature. 1.2 Accept request and required documents and start initial assessment and verification of completeness for walk-in. Acknowledge request for online verification 1.3 If documents are complete Return the receiving copy of letter of request If not complete, advice the client to comply with the lacking requirements otherwise the application will not be processed. [Responsible: Head of Admission and Registration; Campus Student Services and Affairs Office]\r\nStep 2. Follow-up request for any updates. Location: Polytechnic University of the Philippines - Admission and Registration Office\r\n  2. Processes request and issues advisory and updates whenever necessary and notify the client when document is ready for release. If the verification is processed, informs the client to pay verification fee. [Responsible: Admission and Registration Head; Campus Student Services and Affairs Office]\r\nStep 3. Proceed to the Cashier\u0027s Office for payment of fees for walk in verification. Submit scanned copy of payment made thru bank if outside the country Location: Polytechnic University of the Philippines Notes/Instruction: Php 200.00 for local verification USD 10.00 for outside the country\r\n  3. Accepts payment of verification [Responsible: Cashier\u0027s Office; Any of requesting office / division]\r\nStep 4. Pick up the verification results/documents for walk in Location: Polytechnic University of the Philippines Notes/Instruction: Check online the emailes verification results\r\n  4. Issues verification results Give logbook and sign and evaluate service rendered. Send thru email the verification result [Responsible: Head of Admission and Registration; Campus Student Services and Affairs Office]",
+                         "standard":  {
+                                          "duration_days":  1,
+                                          "duration_hours":  8,
+                                          "duration_minutes":  34,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 689"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Walk-in verification, letter of request with letter head: Photocopy of TOR, Diploma or credentials submitted",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement (A.a.1). (1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Walk-in verification, letter of request with letter head: Authorization letter signed by the student/graduate",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement (A.a.2). (1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Walk-in verification, letter of request with letter head: Proof of payment",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement (A.a.3). (1) Original Copy. Where to secure: Polytechnic University of the Philippines - Cashier\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "Walk-in verification, letter of request with letter head: Authorization letter signed by the student/graduate (listed again as A.a.4)",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement (A.a.4). Same wording as A.a.2; renamed only because a service cannot have two documents with the same name. (1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "On-line verification: Letter of request with letter head",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement (A.b.1). (1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "On-line verification: TOR, Diploma or credentials submitted",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement (A.b.2). (1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "On-line verification: Scanned proof of payment for verification outside the country",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement (A.b.3). (Sample: Processing Fee: PHP 200 For outside the Country: USD 10 Php/ USD). Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "On-line verification: Authorization letter signed by the student/graduate",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement (A.b.4). (1) Original Copy. Where to secure: Applicant / Client"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-CRD-002",
+                         "service_name":  "Processing of Request for Credentials Service (Certificates of Attendance, Graduation, Medium of Instruction, General Weighted Average, Non Issuance of Special Order and Certified True Copy",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 150",
+                         "who_may_avail":  "PUP Paranaque Students and alumni",
+                         "processing_steps":  "Step 1. Pay the amount indicated in the payment voucher to the Cashier\u0027s Office Location: Polytechnic University of the Philippines Notes/Instruction: Fee of Php 150.00 per Certificate\r\n  1. Accept payment and issues official receipt. [Responsible: Registrar\u0027s Office Personnel]\r\nStep 2. Present proof of payment and submit the application at the Admission and Registration Office Location: Polytechnic University of the Philippines\r\n  2. Request client to sign the logbook. 2.2 Accept application and required documents and start initial assessment and verification of completeness. 2.3 If documents are complete: 2.3.1 Indicate in the client copy of the application form the tentative date of release of requested Certification. 2.3.2 Return the proof of payment and client copy of the application form. 2.3.3 If not complete, advice the client to comply with the lacking requirements otherwise the application will not be processed. [Responsible: Registrar\u0027s Office Personnel]\r\nStep 3. Check email or follow up for any update or advisory from the Registrar\u0027s Office Location: Polytechnic University of the Philippines\r\n  3. Process request and issues advisory and updates whenever necessary. 3.2 Notify the client when document is ready for release. [Responsible: Registrar\u0027s Office Personnel]\r\nStep 4. Present clients copy of application form together with authorization letter and ID, if claimant is immediate family member or Special Power of Attorney (SPA), if claimant is other than immediate family member. Location: Polytechnic University of the Philippines\r\n  4. Verify the documents presented. 4.2 issue the requested certification/s. [Responsible: Registrar\u0027s Office Personnel]\r\nStep 5. Acknowledge receipt of the requested certification/s Location: Polytechnic University of the Philippines\r\n  5. Request client to sign the logbook and evaluate the service rendered. [Responsible: Registrar\u0027s Office Personnel]",
+                         "standard":  {
+                                          "duration_days":  3,
+                                          "duration_hours":  3,
+                                          "duration_minutes":  43,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 706"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Student\u0027s Request Letter",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Registrar\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "General Clearance showing the client is cleared of all accountabilities",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Registrar\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "2 inch x 2 inch picture in Formal Attire",
+                                               "is_mandatory":  true,
+                                               "notes":  "Printed in the Charter with inch marks (2 x 2 in quotation marks), which the system does not allow in a document name. (Sample: 2 pcs). Where to secure: Polytechnic University of the Philippines - PUP Website. Remarks: To be uploaded by the Client in the ODRS"
+                                           },
+                                           {
+                                               "document_name":  "Official receipt for documentary stamp",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Cashier\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "Proof of payment",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - FMO. Remarks: Proceed to the Cash Receipts Section, FMO"
+                                           },
+                                           {
+                                               "document_name":  "Long Brown Envelope",
+                                               "is_mandatory":  true,
+                                               "notes":  "(Sample: 1 pc). Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "7.When claiming documents: 8.Authorization letter and ID if claimant is immediate family member Special Power of Attorney (SPA) if the claimant is other than the immediate family.",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-CRD-003",
+                         "service_name":  "Processing of Request for Credentials Service (Certification, Authentication, Verification ) CAV/APOSTILE",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None. See other fees below. Possible Fees: for DFA : 920; for Special Certification : 150; for CHED : 620; for PRC : 470",
+                         "who_may_avail":  "PUP Students and alumni",
+                         "processing_steps":  "Step 1. 1.Pay the amount indicated in the payment voucher through the Cashier\u0027s Office Location: Polytechnic University of the Philippines\r\n  1. Accept payment and issues official receipt. [Responsible: Cashier\u0027s office personnel]\r\nStep 2. Present proof of payment and submit the application at the Admission and Registration Office Location: Polytechnic University of the Philippines\r\n  2. Request client to sign the logbook. 2.2 Accept application and required documents and start initial assessment and verification of completeness. 2.3 If documents are complete: 2.3.1 Indicate in the client copy of the application form the tentative date of release of requested CAV. 2.3.2 Return the proof of payment and client copy of the application form. 2.3.3 If not complete, advice the client to comply with the lacking requirements otherwise the application will not be processed. [Responsible: Registrar\u0027s Office Personnel]\r\nStep 3. Present clients copy of application form together with authorization letter and ID, if claimant is immediate family member or Special Power of Attorney (SPA), if claimant is other than immediate family member. Location: Polytechnic University of the Philippines\r\n  3. verify the documents presented. 3.2 issues the requested CAV. [Responsible: Registrar\u0027s Office Personnel]\r\nStep 4. Acknowledge receipt of the requested certification/s Location: Polytechnic University of the Philippines\r\n  4. Request the client to sign the logbook and evaluate the service rendered. [Responsible: Registrar\u0027s Office Personnel]",
+                         "standard":  {
+                                          "duration_days":  2,
+                                          "duration_hours":  7,
+                                          "duration_minutes":  10,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 710"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Student\u0027s Request Letter",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Registrar\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "General Clearance showing the client is cleared of all accountabilities",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Registrar\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "Letter request addressed to CHED Regional Director (for CAV-CHED request only)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "2 inch x 2 inch picture in Formal Attire",
+                                               "is_mandatory":  true,
+                                               "notes":  "Printed in the Charter with inch marks (2 x 2 in quotation marks), which the system does not allow in a document name. (Sample: 2 pcs). Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Documentary stamp",
+                                               "is_mandatory":  true,
+                                               "notes":  "(Sample: 1 pc). Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Proof of payment",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Cashier\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "Long Brown Envelope",
+                                               "is_mandatory":  true,
+                                               "notes":  "(Sample: 1 pc). Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "16.When claiming documents: a.Authorization letter and ID if claimant is immediate family member Special Power of Attorney (SPA) if the claimant is other than the immediate family.",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client. Remarks: To be submitted by the representative of the client"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-CRD-004",
+                         "service_name":  "Processing of Request for Credentials Service (Course/Subject Description)",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 150",
+                         "who_may_avail":  "Students and alumni",
+                         "processing_steps":  "Step 1. ay the amount indicated in the payment voucher to the Cashier\u0027s Office Location: Polytechnic University of the Philippines\r\n  1. Accept payment and issues official receipt. [Responsible: Campus Cashier\u0027s Office]\r\nStep 2. Present proof of payment and submit the application at the Admission and Registration Office Location: Polytechnic University of the Philippines\r\n  2. Request client to sign the logbook 2.2 Accept application and required documents and start initial assessment and verification of completeness. 2.3 If documents are complete: 2.3.1Indicate in the clients copy of the application form the tentative date of release of requested course/subject description. 2.3.2 Return the proof of payment and clients copy of the application form. 2.3.3 If not complete, advice the client to comply with the lacking requirements otherwise the application will not be processed. [Responsible: Head of Registrar Office]\r\nStep 3. Check email or ODRS accounts for any update or advisory from Head of Admission and Registration Location: Polytechnic University of the Philippines\r\n  3. Process request and issues advisory and updates whenever necessary 3.1Notify the client when document is ready for release. [Responsible: Registrar\u0027s Staff]\r\nStep 4. Present clients copy of application form together with authorization letter and ID, if claimant is immediate family member or Special Power of Attorney (SPA), if claimant is other than immediate family member. Location: Polytechnic Univdersity of the Philippines\r\n  4. Verify the documents presented 4.1 Issue the requested course/subject descriptions [Responsible: Registrar\u0027s Office personnel]\r\nStep 5. Acknowledge receipt of the requested certification/s Location: Polytechnic University of the Philippines\r\n  5. Request client to sign the logbook and evaluate the service rendered. [Responsible: Registrar\u0027s Office Personnel]",
+                         "standard":  {
+                                          "duration_days":  3,
+                                          "duration_hours":  3,
+                                          "duration_minutes":  43,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 714"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Student\u0027s Request Letter",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campus Registrar Office"
+                                           },
+                                           {
+                                               "document_name":  "General Clearance showing the client is cleared of all accountabilities",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campus Registrar\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "2 (two) pcs. 2 inch x 2 inch picture in Formal Attire",
+                                               "is_mandatory":  true,
+                                               "notes":  "Printed in the Charter with inch marks (2 x 2 in quotation marks), which the system does not allow in a document name. (1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campus Registrar\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "Documentary stamp",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Proof of payment",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campus Cashier\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "1 (one) Long Brown Envelope",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "When claiming documents: Authorization letter and ID if claimant is immediate family member. Special Power of Attorney (SPA) if the claimant is other than the immediate family.",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-CRD-006",
+                         "service_name":  "Processing of Request for Informative Copy of Grades",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 180",
+                         "who_may_avail":  "PUP Students",
+                         "processing_steps":  "Step 1. Submit Request letter with required documents addressed to the Head of Admission and Registration Location: Polyechnic University of the Philippines\r\n  1. Give Logbook and Affix Signature Receive and sign the letter [Responsible: Head of Admission and Registration Office]\r\nStep 2. Pay the amount to the Cashier\u0027s Office Location: Polytechnic University of the Philippinea\r\n  2. accept payment and issue official receipts [Responsible: Cashier\u0027s Office Staff]\r\nStep 3. Submit request letter with required documents and proof of payments at the Admission and Registration Office Location: Polytechnic University of the Philippines\r\n  3. Accept and process the requested Informative Copy of Grades Forward the printed Informative Copy of Grades to the Office of the Campus Registrar for CTC [Responsible: Head of Admission and Registration Office]\r\nStep 4. Acknowledge receipt of requested credential. Location: Polytechnic University of the Philippines\r\n  4. Affixes signature and dry seal and issues the Informative copy Gives logbook and sign and evaluate the service rendered [Responsible: Head of Admission and Registration Office]",
+                         "standard":  {
+                                          "duration_days":  1,
+                                          "duration_hours":  1,
+                                          "duration_minutes":  18,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 726"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Letter of request stating the purpose of the request",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Proof of payment",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Cashier\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "PUP School Identification Card",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Authorization letter if to be claimed by a representative",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-CRD-007",
+                         "service_name":  "Request for Certificate of Good Moral Character",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 150",
+                         "who_may_avail":  "PUP Paranaque Students",
+                         "processing_steps":  "Step 1. Secure and fill-out the application form accordingly (Form PUP- ACGM-5-OFSS-0007) Location: Polytechnic University of the Philippines\r\n  1. Check the form [Responsible: Students/Alumni]\r\nStep 2. Pay appropriate fee at the Cashier\u0027s Office Location: Polytechnic University of the Philippines\r\n  2. Receive the payment and issue official receipt [Responsible: Collection Officer Cashier\u0027s Office]\r\nStep 3. Proceed to the Head of Student Affairs and Services for the processing and issuance of the certificate Location: Polytechnic University of the Philippines\r\n  3. Print and issue the certificate of good moral character [Responsible: Head of Student Affairs and Services]\r\nStep 4. Sign in the logbook provided for the purpose Location: Polytechnic University of the Philippines\r\n  4. Require the student/alumni to sign in the logbook [Responsible: Head of Students Affairs and Services]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  12,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 732"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Registration Card or Identification Card (for currently enrolled student); Alumni ID or TOR with picture (for graduate)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of the Students Affairs and Services. Remarks: The form can be secured from the Office of Student Affairs and Services"
+                                           },
+                                           {
+                                               "document_name":  "Form PUP-ACGM-5-OFSS-0007",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of the Students Affairs and Services. Remarks: The form can be secured from the Office of Student Affairs and Services"
+                                           },
+                                           {
+                                               "document_name":  "Proof of Payment",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-GRD-001",
+                         "service_name":  "Processing of Request for Application for Graduation SIS and Non-SIS",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 150. See other fees below. Possible Fees: Graduation Fee : 600; Non-Engineering : 350; Engineering : 450; Diploma : 200; Certificate of Registration : 150; Document : 90",
+                         "who_may_avail":  "Graduating Students",
+                         "processing_steps":  "Step 1. Pay the amount indicated in the payment voucher through the Cashier\u0027s Office Location: Polytechnic University of the Philippines Notes/Instruction: P150.00 (if not covered by RA 10931)\r\n  1. Accept payment and issues official receipt. [Responsible: Cashier\u0027s Office Staff]\r\nStep 2. Submit two copies of accomplished and printed Application for Graduation thru SIS (AFG) . Submit two (2) copies of AFG form at the receiving window for non-SIS Location: Polytechnic University of the Philippines\r\n  2. Give Logbook and affix signature 2.2 Accept application for graduation by the receiving window 2.3 Endorses the AFG to the Records Room for retrieval of student records 2.4 Distribute the student records to the Records Analyst in charge of program for checking and validation [Responsible: Head of Admission and Registration Office]\r\nStep 3. Check SIS Account for any update or advisory from Head of Student Services Location: Polytechnic University of the Philippines\r\n  3. Process request and issues advisory and updates whenever necessary If complete, forwards records to evaluator for first evaluation. If not complete, informs the applicant thru SIS Account. [Responsible: Head of Admission Office ;]\r\nStep 4. Monitor the SIS account for advisory from the evaluator Location: Polytechnic University of the Philippines\r\n  4. Evaluate all courses as prescribed by the approved curriculum and checks completeness of documents in the student envelope If approved, print the Certificate of Candidacy (COC) and the computer-generated general Clearance Form [Responsible: Head of Admission and Registration Office]\r\nStep 5. Proceed to the Fund Management Office (Cashiers Office) for payment of fees Location: Polytechnic University of the Philippines\r\n  5. Receive payment of fees for those not covered by RA 10931 [Responsible: Cashier\u0027s Office Personnel]",
+                         "standard":  {
+                                          "duration_days":  2,
+                                          "duration_hours":  2,
+                                          "duration_minutes":  33,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 692"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Accomplished and printed copy of the Application for Graduation thru SIS Account",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Accomplished copy of the Application for Graduation for Non-SIS",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client. Remarks: Proof of payment, if not covered by RA 10931 covered otherwise known as Universal Access to Quality Tertiary Act of 2017"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-GRD-002",
+                         "service_name":  "Processing of Request for Correction of Entry of Grade, Completion of Incomplete Grade, Late Reporting of Grade",
+                         "classification":  "COMPLEX",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 30",
+                         "who_may_avail":  "Currently Enrolled Students",
+                         "processing_steps":  "Step 1. Pay the amount for correction of Grade at the Cashier\u0027s Office Location: Polytechnic University of the Philippines\r\n  1. Accept payment and issues official receipt. [Responsible: Cashier\u0027s Office Staff]\r\nStep 2. Submit accomplished Completion Form and required documents to the Professor for the completion of incomplete subject Location: Polytechnic University of the Philippines\r\n  2. Accept application and required documents and gives grade [Responsible: PUP Assigned Professor ;]\r\nStep 3. Proceed to the Program Head of Academic Programs for the signature and approval Location: Polytechnic University of the Philippines\r\n  3. Give logbook and affix signature. 3.2 Affix the signature of the Assigned Professor once validates the authenticity of the entry. 3.3 Record in the logbook the duly signed completion form and submits one copy to the Office of the Campus Registrar and a receiving copy for the Admission Office. [Responsible: Head of Admission and Registration Office]\r\nStep 4. Check the SIS account if grade is already tagged Location: Polytechnic University of the Philippines\r\n  4. Accept the completion form with required documents. 4.2 Forward to the Campus Registrar for signature. 4.3 Log the duly signed completion form and forwards the same to the assigned Records Analyst for tagging. [Responsible: Head of Admission and Registration Office]",
+                         "standard":  {
+                                          "duration_days":  5,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  59,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 696"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Accomplished Completion Form 3 (three) copies",
+                                               "is_mandatory":  true,
+                                               "notes":  "(3) Original Copy. Where to secure: Polytechnic University of the Philippines - PUP Website. Remarks: Download to PUP website"
+                                           },
+                                           {
+                                               "document_name":  "Photocopy of Class Record of the Faculty",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Photo Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Notarized Affidavit for the Change of Grades signed by the Professor",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Proof of payment",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Cashier\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "Official Logbook",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campuses"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-GRD-003",
+                         "service_name":  "Processing of Request for Correction of Name in Conformity with the Philippines Statistics Authority Certificate of Live Birth and/or Correction of Name in the School Records",
+                         "classification":  "HIGHLY_TECHNICAL",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 150",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Pay the amount for correction of name at the Cashier\u0027s Office Location: Polytechnic University of the Philippines\r\n  1. Accept payment and issue official receipt. [Responsible: Cashier\u0027s Office Staff]\r\nStep 2. Submit accomplished Application for Correction of Name and required documents to the assigned Records Analyst Location: Polytechnic University of the Philippines\r\n  2. Request client to sign the logbook 2.2 Accept application and required documents and start initial assessment and verification of completeness. 2.3 If documents are complete: 2.3.1 Indicate in the clients copy of the application form the tentative date of release of requested Certification. 2.3.2 Return the proof of payment and clients copy of the application form. 2.3.3 If not complete, advice the client to comply with the lacking requirements otherwise the application will not be processed. [Responsible: Registrar\u0027s Office Personnel]\r\nStep 3. Check email for any updates or advisory from Head of Admission and Registration Location: Polytechnic University of the Philippines\r\n  3. Process request and issue advisory and updates whenever necessary. 3.2 Notify the client when document is ready for release. [Responsible: Registrar\u0027s office Personnel]\r\nStep 4. Present clients copy of application form together with authorization letter and ID, if claimant is immediate family member or Special Power of Attorney (SPA), if claimant is other than immediate family member. Location: Polytechnic University of the Philippines\r\n  4. verify the documents presented. 4.2 issue the requested certification/s. [Responsible: Registrar\u0027s Office Personnel]\r\nStep 5. Acknowledge receipt of the requested certification/s Location: Polytechnic University of the Philippines\r\n  5. Request client to sign the logbook and evaluate the service rendered. [Responsible: Registrar\u0027s Office Personnel]",
+                         "standard":  {
+                                          "duration_days":  6,
+                                          "duration_hours":  7,
+                                          "duration_minutes":  1,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 699"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Letter address to the Campus Registrar",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Original Copy of PSA Birth Certificate",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy And (1) Photo Copy. Where to secure: Applicant / Client. Remarks: annotated if there is a petition filed"
+                                           },
+                                           {
+                                               "document_name":  "Parent Affidavit / Affidavit of Discrepancy",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Joint Affidavit of Two Disinterested Person",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy And (1) Photo Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Corrected copy of F137A/TOR (if applicable)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy And (1) Photo Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "Original copy of Transcript of Records and Diploma (if previously issued)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy And (1) Photo Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "General Clearance showing the client is cleared of all accountabilities",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of the Registrar"
+                                           },
+                                           {
+                                               "document_name":  "2 (two) pcs. 2 inch x 2 inch picture in Formal Attire",
+                                               "is_mandatory":  true,
+                                               "notes":  "Printed in the Charter with inch marks (2 x 2 in quotation marks), which the system does not allow in a document name. (1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of the Registrar"
+                                           },
+                                           {
+                                               "document_name":  "Proof of payment",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Cashier\u0027s Office"
+                                           },
+                                           {
+                                               "document_name":  "1 (one) Long Brown Envelope",
+                                               "is_mandatory":  true,
+                                               "notes":  "(Sample: one pc). Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "11.When claiming documents: 11.1Authorization letter and ID if claimant is immediate family member Special Power of Attorney (SPA) if the claimant is other than the immediate family.",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-IDC-001",
+                         "service_name":  "Application for New Identification Card",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Submit to the Office of the Student Services the filled-out form for application of new ID Location: Office of the Student affairs Services\r\n  1. Receive the form [Responsible: OSS Staff; Campus Student Services and Affairs Office]\r\nStep 2. Seek approval of the request by the Office of the Director of OSS Location: Office of the OSS\r\n  2. Approve the request [Responsible: OSS Head; Campus Student Services and Affairs Office]\r\nStep 3. Pay corresponding fee at the Cashier\u0027s Office Location: Cashier\u0027s Office Campus\r\n  3. Receive the payment and issue official receipt [Responsible: Collection Officer; Any of requesting office / division]\r\nStep 4. Proceed to the OSS for processing and issuance of ID Location: Office of the Vice President for Campuses (OVPC)\r\n  4. Process and issue the printed ID [Responsible: VPC Staff PUP Main Buidling; Any of requesting office / division]\r\nStep 5. Sign in the OSS logbook provided for the purpose Location: Office of the Student Services\r\n  5. Require the student/alumni to sign in the logbook [Responsible: OSS Staff; Campus Student Services and Affairs Office]",
+                         "standard":  {
+                                          "duration_days":  2,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  23,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 664"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Current Registration Card",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campuses"
+                                           },
+                                           {
+                                               "document_name":  "Form PUP-NRID-5-OFSS-007",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Admission Office. Remarks: Click here to view the copy of new/application of ID: https://drive.google.com/file/d/1LvhKZbFzsLnoJEvlK_tnSSy6ew5g256T/view"
+                                           },
+                                           {
+                                               "document_name":  "Proof of Payment",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Cashier\u0027s Office"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-IDC-002",
+                         "service_name":  "Application for Replacement of Lost Identification Card",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "PHP 150",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Submit to the Office of the Student Services the filled-out form for application for replacement of lost ID Location: Office of Students Assistance Services\r\n  1. Receive the form [Responsible: OSS Staff; Campus Student Services and Affairs Office]\r\nStep 2. Pay corresponding fee at the Cashier\u0027s Office Location: Cashier\u0027s Office\r\n  2. Receive the payment and issue official receipt [Responsible: Collection Officer; Any of requesting office / division]\r\nStep 3. Present to the OSS the official receipt of payment for the processing and issuance of ID Location: Office of the Vice President for Campuses (OVPC)\r\n  3. Process and issue the ID [Responsible: OVPC Staff PUP Main; Any of requesting office / division]\r\nStep 4. Sign in the OSS logbook provided for the purpose Location: Office of the Students Affairs and Services\r\n  4. Require the student to sign in the logbook [Responsible: OSS Staff; Campus Student Services and Affairs Office]",
+                         "standard":  {
+                                          "duration_days":  2,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  23,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 667"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Current Registration Card",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campuses"
+                                           },
+                                           {
+                                               "document_name":  "Application for Replacement of Lost Identification Card Form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campuses. Remarks: 1. Click here to view the copy of the form: https://drive.google.com/file/d/150ijzdHofoMcJzc6L_fChnmM-HSe8GHo/view 2. Attach with Parents/Gurdian ID or Cedula (for undergaduate students only)"
+                                           },
+                                           {
+                                               "document_name":  "Proof of Payment",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Cashier\u0027s Office"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-REC-001",
+                         "service_name":  "Issuance of Recommendation Letter",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Transferring and Graduating Students",
+                         "processing_steps":  "Step 1. Present required document Location: Campus Guidance Office or Office of the Student Affairs and Services\r\n  1. Verify documents presented and give the log book to the client [Responsible: Administrative Staff; Campus Student Services and Affairs Office]\r\nStep 2. Accomplish Exit Interview Form Location: Campus Guidance Office or Office of the Student Affairs and Services\r\n  2. 2.Give exit interview form to be accomplished [Responsible: Administrative Staff/; Campus Student Services and Affairs Office]\r\nStep 3. Undergo Background Verification Location: Campus Guidance Office or Office of the Student Affairs and Services\r\n  3. Gather information to have a background knowledge about the client [Responsible: Guidance Counselor; Campus Student Services and Affairs Office]\r\nStep 4. Issuance of the Recommendation Letter Location: Campus Guidance Office or Office of the Student Affairs and Services\r\n  4. Issue the Recommendation Letter [Responsible: Administrative Staff]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  50,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 676"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Identification card or Registration certificate",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campus Guidance Office or Office of the Student Affairs and Services. Remarks: Proceed to the Office of the Student Services or Office of the Admission\u0027s Services"
+                                           },
+                                           {
+                                               "document_name":  "Copy of Grades",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Photo Copy. Where to secure: Polytechnic University of the Philippines - Campus Guidance Office or Office of the Student Affairs and Services. Remarks: Click the PUP SIS account"
+                                           },
+                                           {
+                                               "document_name":  "Duly accomplished exit Interview Form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campus Guidance Office or Office of the Student Affairs and Services. Remarks: Procees to the Office of the Student\u0027s Services or Office of Admission Services"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-OSAS",
+                         "service_code":  "CAMP-OSAS-REC-002",
+                         "service_name":  "Issuance of Student/Alumni Referral and Recommendation",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Student/Alumni",
+                         "processing_steps":  "Step 1. Approach Receiving Clerk for verification of documents Location: Campus Student Services and Affairs Office\r\n  1. Receive and verify documents presented and give the log book to the client [Responsible: Administrative Staff; Campus Student Services and Affairs Office]\r\nStep 2. Accomplish Exit Interview Form while waiting for the letter of recommendation / referral Location: Campus Student Services and Affairs Office\r\n  2. Give the Exit Interview Form to be accomplished by the client [Responsible: Administrative Staff; Campus Student Services and Affairs Office]\r\nStep 3. Receive and verifies Letter of Recommendation Location: Campus Student Services and Affairs Office\r\n  3. Check and issue the recommendation /referral [Responsible: Administrative Staff; Campus Student Services and Affairs Office]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  49,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 678"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Duly Accomplished Student/ Alumni Request Form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campus Office of Student Affairs and Services"
+                                           }
+                                       ]
+                     }
+                 ]
+}

@@ -102,20 +102,21 @@ export async function runSeed(dataSource, data, { dryRun = false, actor = SYSTEM
             continue;
           }
           const officeId = officeRows[0].office_id;
+          let key = null;
           if (typeof service.service_name === 'string' && service.service_name.trim()) {
-            const key = `${officeId}|${nameKey(service.service_name)}`;
+            key = `${officeId}|${nameKey(service.service_name)}`;
             const inDb = await manager.query('SELECT 1 FROM services WHERE office_id = $1 AND service_name_key = $2', [officeId, nameKey(service.service_name)]);
             if (inDb.length || seen.has(key)) {
               report('service', label, 'duplicate', 'This office already has a service with this name; skipped');
               continue;
             }
-            seen.add(key);
           }
           const result = await scope.transaction(async () => {
             const made = await createService(scope, actor, { ...service, office_id: officeId });
             for (const doc of service.documents ?? []) await addDocument(scope, actor, made.service_id, doc);
             return made;
           });
+          if (key) seen.add(key);
           created.push(result.service_id);
           report('service', label, 'created', `${(service.documents ?? []).length} document(s)`);
         } catch (err) {

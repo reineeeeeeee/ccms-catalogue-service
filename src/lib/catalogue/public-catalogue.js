@@ -40,9 +40,10 @@ function toPublicSummary(row) {
     service_name: row.service_name,
     office_name: row.office_name,
     classification: row.classification,
-    standard_text: standardText(row.duration_value, row.duration_unit),
-    duration_value: row.duration_value,
-    duration_unit: row.duration_unit,
+    standard_text: standardText(row.duration_days, row.duration_hours, row.duration_minutes),
+    duration_days: row.duration_days,
+    duration_hours: row.duration_hours,
+    duration_minutes: row.duration_minutes,
   };
 }
 
@@ -58,7 +59,8 @@ export async function listPublicServices(dataSource, params) {
   const [{ total }] = await dataSource.query(`SELECT count(*)::int AS total ${PUBLIC_FROM}${searchSql}`, values);
   values.push(pageSize, (page - 1) * pageSize);
   const rows = await dataSource.query(
-    `SELECT s.service_id, s.service_name, o.office_name, s.classification, st.duration_value, st.duration_unit
+    `SELECT s.service_id, s.service_name, o.office_name, s.classification,
+            st.duration_days, st.duration_hours, st.duration_minutes
      ${PUBLIC_FROM}${searchSql} ORDER BY lower(s.service_name), s.service_id LIMIT $${values.length - 1} OFFSET $${values.length}`,
     values,
   );
@@ -69,7 +71,7 @@ export async function getPublicService(dataSource, id) {
   const rows = isUuid(id)
     ? await dataSource.query(
         `SELECT s.service_id, s.service_name, o.office_name, s.classification, s.processing_steps, s.fees,
-                s.who_may_avail, st.duration_value, st.duration_unit
+                s.who_may_avail, st.duration_days, st.duration_hours, st.duration_minutes
          ${PUBLIC_FROM} AND s.service_id = $2`,
         [manilaToday(), id],
       )

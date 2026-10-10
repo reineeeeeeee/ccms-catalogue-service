@@ -1,0 +1,1226 @@
+{
+    "_README":  "Campus Administrative Office, extracted from the PUP Citizen\u0027s Charter 2025 Edition (Internal Services pp. 1383-1420 and External Services pp. 588-662). 36 services. effective_from 2025-01-01 is an ASSUMPTION (edition year start); replace if the Charter prints an effective date. Each service lists all Charter transaction types in transaction_types. Review before importing. Standards carry duration_days, duration_hours and duration_minutes exactly as printed. See CCMS_SEEDING_INSTRUCTIONS_10062026.md section 6. Each service also carries service_scope (INTERNAL or EXTERNAL, from the Charter section it was printed in); see CCMS_SEEDING_INSTRUCTIONS_10062026.md section 7.",
+    "offices":  [
+                    {
+                        "office_code":  "CAMP-ADMIN",
+                        "office_name":  "Campus Administrative Office"
+                    }
+                ],
+    "services":  [
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CIR-001",
+                         "service_name":  "Circulation Services",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2G"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "PUP administrative staff \u0026 Faculty",
+                         "processing_steps":  "Step 1. Sign in the Client logbook in the office receiving area Location: Administrative Office PUP campus\n  1. Give the logbook to the client [Responsible: Administrative Staff Administrative Office PUP Campus]\nStep 2. Submit letter of intent to Administrative Office* Location: Administrative Office PUP Campus Notes/Instruction: *No need for step # 2, only signing in the logbook and borrower\u0027s slip are needed\n  2.1. Accept approved letter of intent [Responsible: Administrative Staff Administrative Office PUP Campus]\n  2.2. Acknowledge receipt of letter of intent stamped with \"Received\" and accepts [Responsible: Administrative Staff Administrative Office PUP Campus]\n  2.3. Check availability of equipment based on quantity requested and scheduled date [Responsible: Administrative Staff Administrative Office PUP Campus]\n  2.4. If available- requestee will be requested to fill out the borrowers Slip [Responsible: Administrative Staff Administrative Office PUP Campus]\n  2.5. Borrower slip number/code will be given for claiming of borrowed items. [Responsible: Administrative Staff Administrative Office PUP Campus]\n  2.6. If not available requestee will be immediately informed [Responsible: Administrative Staff Administrative Office PUP Campus]\nStep 3. Return to the Administrative Office a day before the date of use and present the borrowers slip number/code. Location: Adminisrative Office, PUP Campus\n  3.1. Verify the presented borrowers slip number / code. [Responsible: Administrative staff]\n  3.2. Require the client to submit PUP ID as collateral for the borrowed items. [Responsible: Administrative staff]\n  3.3. Issue the equipment to the client [Responsible: Administrative staff]\nStep 4. After the use of the borrowed items, return to Administrative Office with a maximum of 1 day from the date of borrowing. Location: Administrative Office, PUP campus\n  4.1. Check the interns [Responsible: Administrative staff]\n  4.2. Return the ID to the requestor. [Responsible: Administrative staff]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  15,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1383"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Letter of Intent duly signed by the Campus Director",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           },
+                                           {
+                                               "document_name":  "PUP ID",
+                                               "is_mandatory":  true,
+                                               "notes":  "PUP Issued Identification card (1 photocopy, front and back)."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-DEN-001",
+                         "service_name":  "Consultation and Treatment Services for Emergency Dental Cases of Faculty and Administrative Employees (With Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Faculty, Administrative Employees",
+                         "processing_steps":  "Step 1. Goes to receiving area and states the reason for consultation or chief complaint Location: Dentist/Dental Aide,Dental Clinic PUP Campus\n  1.1. Ask for the patient\u0027s chief complaint [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]\n  1.2. Takes patient\u0027s vital signs [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]\n  1.3. Assess and evaluates the condition of the patient by oral examination and medical history [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]\n  1.4. Provide immediate treatment/intervention. [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]\n  1.5. With referral: [Responsible: Dentist/]\n  1.5.1. Refer to medical Section. 1.5.2. Explain reason for referral [Responsible: Dental Aide, Dental Clinic PUP]\n  1.5.3. Prepare referral form to nearby hospital for patient\u0027s further evaluation and management 1.5.4. Prepares emergency transport vehicle for conduction of patient. [Responsible: Campus]\nStep 2. Proceed to receiving area Location: Dentist/ Dental Aide, Dental Clinic PUP campus\n  2. Dispensing of initial dose of medicine if available with instructions. [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]\nStep 3. Fill-out and sign in the Daily Treatment Record (DTR) Location: Dentist/ Dental Aide, Dental Clinic PUP Campus\n  3. Assist patient in filling out the Daily Treatment Record. [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  13,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1386"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-DEN-002",
+                         "service_name":  "Consultation and Treatment Services for Emergency Dental Cases of Faculty and Administrative Employees (Without Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Faculty, Administrative Employees",
+                         "processing_steps":  "Step 1. Goes to receiving area and states the reason for consultation or chief complaint Location: Dentist/Dental Aide,Dental Clinic PUP Campus\n  1.1. Ask for the patient\u0027s chief complaint [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]\n  1.2. Takes patient\u0027s vital signs [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]\n  1.3. Assess and evaluates the condition of the patient by oral examination and medical history [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]\n  1.4. Provide immediate treatment/intervention. [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]\n  1.5. Without referral: Discharge instructions that include medication, activity, home advise and follow-up. [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]\nStep 2. Proceed to receiving area Location: Dentist/ Dental Aide, Dental Clinic PUP campus\n  2. Dispensing of initial dose of medicine if available with instructions. [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]\nStep 3. Fill-out and sign in the Daily Treatment Record (DTR) Location: Dentist/ Dental Aide, Dental Clinic PUP Campus\n  3. Assist patient in filling out the Daily Treatment Record. [Responsible: Dentist/Dental Aide, Dental Clinic PUP Campus]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  9,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1389"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-MED-001",
+                         "service_name":  "Consultation and Treatment Services for Emergency Medical Cases of Faculty and Administrative Employees (With Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2C",
+                                                   "G2G"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Faculty, Administrative Employees",
+                         "processing_steps":  "Step 1. Go to receiving area and state the reason for consultation or chief complaint Location: Physician/Nurse, Medi cal Clinic PUP Campus\n  1.1. Inquire of the patient\u0027s chief complaint and probes about patient inquiry or illness [Responsible: Physician/Nurse Medical Clinic PUP Campus]\n  1.2. Take patient\u0027s vital signs (Blood Pressure, Temperature, Respiratory Rate, Pulse Rate) [Responsible: Physician/Nurse Medical Clinic PUP Campus]\n  1.3. Assess and evaluates the condition of the patient by physical examination and medical history. [Responsible: Physician/Nurse Medical Clinic PUP Campus]\n  1.4. Provide immediate treatment / intervention [Responsible: Physician/Nurse Medical Clinic PUP Campus]\n  1.5. With referral: Explain the purpose of referral and prepares referral form [Responsible: Physician/Nurse Medical Clinic PUP Campus]\n  1.6. With referral: Prepare emergency transport vehicle for conduction of patient. [Responsible: Physician/Nurse Medical Clinic PUP Campus]\nStep 2. Proceed to receiving area Location: Physician/Nurse Medical Clinic PUP campus\n  2. Dispense initial dose of medicine if available with instruction. [Responsible: Physician/Nurse Medical Clinic PUP Campus]\nStep 3. Fill out and sign in the Daily Treatment Record (DTR) Location: Physician/Nurse Medical Clinic PUP campus\n  3. Assist patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse Medical Clinic PUP Campus]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  14,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1392"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-MED-002",
+                         "service_name":  "Consultation and Treatment Services for Emergency Medical Cases of Faculty and Administrative Employees (Without Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2C",
+                                                   "G2G"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Faculty, Administrative Employees",
+                         "processing_steps":  "Step 1. Go to receiving area and state the reason for consultation or chief complaint Location: Medical Clinic PUP Campus\n  1.1. Inquire of the patient\u0027s chief complaint and probes about patient inquiry or illness [Responsible: Physician/Nurse]\n  1.2. Take patient\u0027s vital signs (Blood Pressure, Temperature, Respiratory Rate, PUlSe Rate) [Responsible: Physician/Nurse]\n  1.3. Assess and evaluates the condition of the patient by physical examination and medical history. [Responsible: Physician/Nurse]\n  1.4. Provide immediate treatment / intervention [Responsible: Physician/Nurse]\n  1.5. Without referral: Provide discharge instructions that include medication, activity, home advise and follow-up [Responsible: Physician/Nurse]\n  1.6. With referral: Prepare emergency transport vehicle for conduction of patient [Responsible: Physician/Nurse]\nStep 2. Proceed to receiving area Location: Physician/Nurse Medical Clinic PUP campus\n  2. Dispense initial dose of medicine if available with instruction. [Responsible: Physician/Nurse Medical Clinic PUP Campus]\nStep 3. Fill out and sign in the Daily Treatment Record (DTR) Location: Physician/Nurse Medical Clinic PUP campus\n  3. Assist patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse Medical Clinic PUP Campus]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  14,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1395"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-DEN-003",
+                         "service_name":  "Consultation and Treatment Services for Non-Emergency Dental Cases of Faculty and Administrative Employees (For Follow-up Cases)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Faculty, Administrative Employees",
+                         "processing_steps":  "Step 1. Go to receiving area and states the reason for consultation or chief complaint Location: Dental Clinic PUP Campus\n  1.1. Ask the name of patient and date of previous consultation [Responsible: Dentist/Dental Aide]\n  1.2. Retrieve patients dental record [Responsible: Dentist/Dental Aide]\n  1.3. Instruct patient to proceed at treatment area [Responsible: Dentist/Dental Aide]\nStep 2. Proceed to Treatment area and present documents requested Location: Dental Clinic PUP campus\n  2.1. Check the document submitted and performs oral examination [Responsible: Dentist/Dental Aide]\n  2.2. Provide treatment. [Responsible: Dentist/Dental Aide]\nStep 3. Listen to home instruction, date of follow-up when necessary Location: Dental Clinic PUP Campus\n  3. Discharge instructions, date of follow-up, when necessary [Responsible: Dentist/Dental Aide]\nStep 4. Proceed to receiving area and gives prescription of medicine and/or referral slip for specialist Location: Dental Clinic PUP Campus\n  4. Medicines if available and advises home instruction, referral slip and date of follow-up [Responsible: Dentist/Dental Aide]\nStep 5. Fill out and signs the Daily Treatment Record Location: Dental Clinic PUP campus\n  5. Assist patient n filling out the Daily Treatment Record [Responsible: Dentist/Dental Aide]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  20,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1398"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Dental X-Ray result",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any government or private diagnostic center"
+                                           },
+                                           {
+                                               "document_name":  "Dental Certificate from a specialist",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: From any government or private specialist"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-DEN-004",
+                         "service_name":  "Consultation and Treatment Services for Non-Emergency Dental Cases of Faculty and Administrative Employees (New Patients)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Faculty, Administrative Employees",
+                         "processing_steps":  "Step 1. Go to receiving area and state the reason for consultation or chief complaint Location: Dental Clinic PUP Campus\n  1.1. Ask for the chief complaint [Responsible: Dentist/Dental Aide]\n  1.2. Take patient\u0027s vital sign [Responsible: Dentist/Dental Aide]\n  1.3. Instruct patient to proceed at treatment area [Responsible: Dentist/Dental Aide]\nStep 2. Provide necessary information and submits to oral examination Location: Dental Clinic PUP Campus\n  2.1. Take medical history and performs oral examination of the patient [Responsible: Dentist/Dental Aide]\n  2.2. Provide treatment [Responsible: Dentist/Dental Aide]\nStep 3. Listen to home instructions, date of follow-up Location: Dental Clinic PUP campus\n  3. Discharge instructions, date of follow-up [Responsible: Dentist/Dental Aide]\nStep 4. Proceed to receiving area and give prescription of medicine and/or referral slip Location: Dental Clinic PUP Campus\n  4. Dispensing of initial dose of medicines if available and advises home instruction, referral and date of follow-up. [Responsible: Dentist/Dental Aide]\nStep 5. Fills out and sign the Daily Treatment Record Location: Dental Clinic PUP campus\n  5. Assists patient in filling out the Daily Treatment Record [Responsible: Dentist/Dental Aide]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  18,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1401"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-MED-003",
+                         "service_name":  "Consultation and Treatment Services for Non-Emergency Medical Cases of Faculty and Administrative Employees (For Follow-up Cases)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2C",
+                                                   "G2G"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Faculty, Administrative Employees",
+                         "processing_steps":  "Step 1. Go to receiving area and state the reason for consultation or chief complaint Location: Medical Clinic PUP Campus\n  1.1. Ask the name of the patient and date of previous consultation [Responsible: Physician/Nurse]\n  1.2. Retrieve patient\u0027s medical record [Responsible: Physician/Nurse]\n  1.3. Instruct patient to proceed at consultation area. [Responsible: Physician/Nurse]\nStep 2. Proceed to consultation area and present documents requested Location: Medical Clinic PUP campus\n  2.1. Check the document and perform physical examination [Responsible: Physician/Nurse]\n  2.2. Provide treatment [Responsible: Physician/Nurse]\nStep 3. Listen to home instructions, date of follow-up when necessary Location: Medical Clinic PUP Campus\n  3. Provides discharge instructions, date of follow-up, when necessary [Responsible: Physician/Nurse]\nStep 4. Proceed to receiving area and present prescription of medicine and/or referral slip (for specialist or laboratory) as indicated Location: Medical Clinic PUP campus\n  4. Dispense initial dose of medicines if available and advise home instruction, referral and date of follow-up [Responsible: Physician/Nurse]\nStep 5. Fill out and sign the Daily Treatment Record Location: Medical Clinic PUP Campus General Remarks For New Patients: No requirements needec\n  5. Assist patient in filling out the Daily Treatment Record [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  27,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1403"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Ancillary/laboratory results",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited diagnostic laboratory center or hospital"
+                                           },
+                                           {
+                                               "document_name":  "Medical Certificate from a Specialist / recommendation",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: From any government or private specialist"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-MED-004",
+                         "service_name":  "Consultation and Treatment Services for Non-Emergency Medical Cases of Faculty and Administrative Employees (For New Patients)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2C",
+                                                   "G2G"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Faculty, Administrative Employees",
+                         "processing_steps":  "Step 1. Go to receiving area and state the reason for consultation or chief complaint. Location: Medical Clinic PUP Campus\n  1.1. Ask for the chief complaint [Responsible: Physician/Nurse]\n  1.2. Take patient\u0027s vital signs (Blood Pressure, Temperature, Respiratory Rate, Pulse Rate) [Responsible: Physician/Nurse]\n  1.3. Instructs patient to proceed at consultation area. [Responsible: Physician/Nurse]\nStep 2. Provide necessary information and submits to physical examination Location: Medical Clinic PUP Campus\n  2.1. Take medical history and performs physical examination of the patient [Responsible: Physician/Nurse]\n  2.2. Provide treatment [Responsible: Physician/Nurse]\nStep 3. Listen to home instructions; date of follow-up and specialist to consult or laboratory request if indicated / as necessary. Location: Medical Clinic PUP campus\n  3. Provide discharge instructions, date of follow-up, prepare referral slip to specialist or laboratory request if indicated or as need arises [Responsible: Physician/Nurse]\nStep 4. Proceed to receiving area and present prescription of medicine and/or referral slip (for specialist or laboratory) as indicated. Location: Medical Clinic PUP campus\n  4. Dispense initial dose of medicines if available and advises home instruction, referral and date of follow-up [Responsible: Physician/Nurse]\nStep 5. Fill out and sign the Daily Treatment Record Location: Medical Clinic PUP campus General Remarks For New Patients: No requirements needec\n  5. Assist patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  20,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1406"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-001",
+                         "service_name":  "Issuance of Annual Medical Clearance (With Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2C",
+                                                   "G2G"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Faculty, Administrative Employees",
+                         "processing_steps":  "Step 1. Proceed to receiving area and request for issuance of annual medical clearance. Location: Physician/Nurse Medical Clinic PUP campus\n  1. Ask the purpose of medical clearance. [Responsible: Physician/Nurse]\nStep 2. Present laboratory results required Location: Physician/Nurse Medical Clinic PUP campus\n  2.1. Check the requirement [Responsible: Physician/Nurse]\n  2.2. Retrieve his/her medical record [Responsible: Physician/Nurse]\n  2.3. Assist patient to consultation area. [Responsible: Physician/Nurse]\nStep 3. Proceed to consultation area and submits laboratory results Location: Physician/Nurse Medical Clinic PUP campus\n  3.1. Assess/ evaluate laboratory results upon receipt of document [Responsible: Physician/Nurse]\n  3.2. Take medical history and performs physical examination [Responsible: Physician/Nurse]\n  3.3. With referral: Explain the reason for referral and prepares referral form to clinics / hospital of choice for further evaluation and management [Responsible: Physician/Nurse]\nStep 4. Fill out and sign the Daily Treatment Record / DTR Location: Physician/Nurse Medical Clinic PUP campus\n  4. Assist client in filling out the Registration Form / DTR [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  11,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1409"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "For Regular and Temporary Faculty Designee (less than 35 years old): Laboratory results",
+                                               "is_mandatory":  false,
+                                               "notes":  "Laboratory results - Chest X-ray with 1-year validity; Pap Smear (optional), CBC, urinalysis and fecalysis with 1-month validity; other laboratory as deemed necessary. (1) Original Copy. Where to secure: Accredited laboratory facility/hospital. Remarks: Any accredited laboratory facility/hospital of choice of the client."
+                                           },
+                                           {
+                                               "document_name":  "For Regular and Temporary Faculty Designee (35 years old and above): Laboratory results",
+                                               "is_mandatory":  false,
+                                               "notes":  "Laboratory results - CBC, Urinalysis and Fecalysis with 1-month validity; Chest X-ray with 1-month validity; ECG, Blood Chemistry (FBS, Cholesterol, Triglycerides, Blood Uric Acid, Creatinine, Blood Urea Nitrogen, SGPT) with 6-month validity; Pap Smear (optional), other laboratory as deemed necessary. (1) Original Copy. Where to secure: Accredited laboratory facility/hospital. Remarks: Any accredited laboratory facility/hospital of choice of the client."
+                                           },
+                                           {
+                                               "document_name":  "For Part-time Faculty Members: Medical Certificate from attending physician",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Printed in the Charter as \u0027Medical Certificate from attending physician or\u0027, as an alternative to the next item. Where to secure: Accredited laboratory facility/hospital. Remarks: Any accredited laboratory facility/hospital of choice of the client."
+                                           },
+                                           {
+                                               "document_name":  "For Part-time Faculty Members: Laboratory results as stated above",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: Accredited laboratory facility/hospital. Remarks: Any accredited laboratory facility/hospital of choice of the client."
+                                           },
+                                           {
+                                               "document_name":  "For Administrative Employees: Chest X-ray (PA)",
+                                               "is_mandatory":  false,
+                                               "notes":  "Chest X-ray (PA) with validity of 1 year at the time of examination. (1) Original Copy. Where to secure: Accredited laboratory facility/hospital. Remarks: Any accredited laboratory facility/hospital of choice of the client."
+                                           },
+                                           {
+                                               "document_name":  "For Administrative Employees: Other laboratory as deemed necessary",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: Accredited laboratory facility/hospital. Remarks: Any accredited laboratory facility/hospital of choice of the client."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-002",
+                         "service_name":  "Issuance of Annual Medical Clearance (Without Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2C",
+                                                   "G2G"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Faculty, Administrative Employees",
+                         "processing_steps":  "Step 1. Proceed to receiving area and request for issuance of annual medical clearance. Location: Physician/Nurse Medical Clinic PUP campus\n  1. Ask the purpose of medical clearance. [Responsible: Physician/Nurse]\nStep 2. Present laboratory results required Location: Physician/Nurse Medical Clinic PUP campus\n  2.1. Check the requirement [Responsible: Physician/Nurse]\n  2.2. Retrieve his/her medical record [Responsible: Physician/Nurse]\n  2.3. Assist patient to consultation area. [Responsible: Physician/Nurse]\nStep 3. Proceed to consultation area and submits laboratory results Location: Physician/Nurse Medical Clinic PUP campus\n  3.1. Assess/ evaluate laboratory results upon receipt of document [Responsible: Physician/Nurse]\n  3.2. Take medical history and performs physical examination [Responsible: Physician/Nurse]\n  3.3. Without referral: Issuance of medical clearance for administrative employees / signing of faculty clearance form if assessment is clear. [Responsible: Physician/Nurse]\nStep 4. Fill out and sign the Daily Treatment Record / DTR Location: Physician/Nurse Medical Clinic PUP campus\n  4. Assist client in filling out the Registration Form / DTR [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  12,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1413"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "For Regular and Temporary Faculty Designee (less than 35 years old): Laboratory results",
+                                               "is_mandatory":  false,
+                                               "notes":  "Laboratory results - Chest X-ray with 1-year validity; Pap Smear (optional), CBC, urinalysis and fecalysis with 1-month validity; other laboratory as deemed necessary. (1) Original Copy. Where to secure: Accredited laboratory facility/hospital. Remarks: Any accredited laboratory facility/hospital of choice of the client."
+                                           },
+                                           {
+                                               "document_name":  "For Regular and Temporary Faculty Designee (35 years old and above): Laboratory results",
+                                               "is_mandatory":  false,
+                                               "notes":  "Laboratory results - CBC, Urinalysis and Fecalysis with 1-month validity; Chest X-ray with 1-month validity; ECG, Blood Chemistry (FBS, Cholesterol, Triglycerides, Blood Uric Acid, Creatinine, Blood Urea Nitrogen, SGPT) with 6-month validity; Pap Smear (optional), other laboratory as deemed necessary. (1) Original Copy. Where to secure: Accredited laboratory facility/hospital. Remarks: Any accredited laboratory facility/hospital of choice of the client."
+                                           },
+                                           {
+                                               "document_name":  "For Part-time Faculty Members: Medical Certificate from attending physician",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Printed in the Charter as \u0027Medical Certificate from attending physician or\u0027, as an alternative to the next item. Where to secure: Accredited laboratory facility/hospital. Remarks: Any accredited laboratory facility/hospital of choice of the client."
+                                           },
+                                           {
+                                               "document_name":  "For Part-time Faculty Members: Laboratory results as stated above",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: Accredited laboratory facility/hospital. Remarks: Any accredited laboratory facility/hospital of choice of the client."
+                                           },
+                                           {
+                                               "document_name":  "For Administrative Employees: Chest X-ray (PA)",
+                                               "is_mandatory":  false,
+                                               "notes":  "Chest X-ray (PA) with validity of 1 year at the time of examination. (1) Original Copy. Where to secure: Accredited laboratory facility/hospital. Remarks: Any accredited laboratory facility/hospital of choice of the client."
+                                           },
+                                           {
+                                               "document_name":  "For Administrative Employees: Other laboratory as deemed necessary",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: Accredited laboratory facility/hospital. Remarks: Any accredited laboratory facility/hospital of choice of the client."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-003",
+                         "service_name":  "Issuance of Dental Clearance (With Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2C",
+                                                   "G2G"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Faculty, Administrative Employees",
+                         "processing_steps":  "Step 1. Proceed to receiving area of the Dental clinic and request for dental clearance. Location: Dental Clinic PUP Branch/ Campus\n  1. Ask for the reason of visit. [Responsible: Dentist/Dental Aide]\nStep 2. Fill out the dental chart Location: Dental Clinic PUP Branch/ Campus\n  2. Assist patient in filling up the dental chart. [Responsible: Dentist/Dental Aide]\nStep 3. Proceed to treatment area and present the dental chart. Location: Dental Clinic PUP Branch/ Campus\n  3.1. Assess /Evaluate the oral status of the patient. [Responsible: Dentist]\n  3.2. Take medical history and performs oral examination. [Responsible: Dentist]\n  3.3. With referral: a. Explain reason for referral to patient before dental clearance will be issued. [Responsible: Dentist]\n  3.4. With referral: b. Prepare referral form for nearby specialist dentist. [Responsible: Dentist]\nStep 4. Fill out and sign the Daily Treatment Record Location: Dental Clinic PUP Branch/ Campus\n  4. Assist patient in filling out the Daily Treatment Record [Responsible: Dentist/Dental Aide]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  11,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1417"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-004",
+                         "service_name":  "Issuance of Dental Clearance (Without Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "INTERNAL",
+                         "transaction_types":  [
+                                                   "G2C",
+                                                   "G2G"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Faculty, Administrative Employees",
+                         "processing_steps":  "Step 1. Proceed to receiving area of the Dental clinic and request for dental clearance. Location: Dental Clinic PUP Branch/ Campus\n  1. Ask for the reason of visit. [Responsible: Dentist/Dental Aide]\nStep 2. Fill out the dental chart Location: Dental Clinic PUP Branch/ Campus\n  2. Assist patient in filling up the dental chart. [Responsible: Dentist/Dental Aide]\nStep 3. Proceed to treatment area and present the dental chart. Location: Dental Clinic PUP Branch/ Campus\n  3.1. Assess /Evaluate the oral status of the patient. [Responsible: Dentist]\n  3.2. Take medical history and performs oral examination. [Responsible: Dentist]\n  3.3. Without referral: Issuance of dental clearance. [Responsible: Dentist]\nStep 4. Fill out and sign the Daily Treatment Record Location: Dental Clinic PUP Branch/ Campus\n  4. Assist patient in filling out the Daily Treatment Record [Responsible: Dentist/Dental Aide]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  9,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 1419"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-DEN-005",
+                         "service_name":  "Consultation and Treatment Services for Emergency Dental Cases of Students (With Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Go to the receiving area and state the reason for consultation or chief complaint. Location: Dental Clinic, PUP Campus\n  1.1. Ask for the patient\u0027s chief complaint. [Responsible: Dentist/Dental Aide]\n  1.2. Take patient\u0027s vital sign. [Responsible: Dentist/Dental Aide]\n  1.3. Assess and evaluates the condition of the patient by oral examination and medical history. [Responsible: Dentist/Dental Aide]\n  1.4. Provide immediate treatment/intervention [Responsible: Dentist/Dental Aide]\nStep 2. With Referral Location: Dental Clinic, PUP Campus\n  2.1. Refer to the medical section. [Responsible: Dentist/Dental Aide]\n  2.2. Explain the reason for referral. [Responsible: Dentist/Dental Aide]\n  2.3. Prepares a referral form to a nearby hospital for the patient\u0027s further evaluation and management. [Responsible: Dentist/Dental Aide]\n  2.4. Prepare emergency transport vehicle for conduction of patient. [Responsible: Emergency Vehicle, Driver, Dental Aide]\nStep 3. Proceed to the receiving area. Location: Dental Clinic, PUP Campus\n  3. Dispense the initial dose of medicine if available with instructions. [Responsible: Dentist/Dental Aide]\nStep 4. Fill out and sign in the Daily Treatment Record (DTR) Location: Dental Clinic, PUP Campus\n  4. Assist the patient in filling out the Daily Treatment Record. [Responsible: Dentist/Dental Aide]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  16,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 588"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-DEN-006",
+                         "service_name":  "Consultation and Treatment Services for Emergency Dental Cases of Students (Without Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Go to the receiving area and state the reason for consultation or chief complaint. Location: Dental Clinic, PUP Campus\n  1.1. Ask for the patient\u0027s chief complaint. [Responsible: Dentist/Dental Aide]\n  1.2. Take patient\u0027s vital sign. [Responsible: Dentist/Dental Aide]\n  1.3. Assess and evaluates the condition of the patient by oral examination and medical history. [Responsible: Dentist/Dental Aide]\n  1.4. Provide immediate treatment/intervention [Responsible: Dentist/Dental Aide]\nStep 2. Without Referral Location: Dental Clinic, PUP Campus\n  2. Discharge instructions that include medication, activity, home advice, and follow-up. [Responsible: Dentist/Dental Aide]\nStep 3. Proceed to the receiving area. Location: Dental Clinic, PUP Campus\n  3. Dispense the initial dose of medicine if available with instructions. [Responsible: Dentist/Dental Aide]\nStep 4. Fill out and sign in the Daily Treatment Record (DTR) Location: Dental Clinic, PUP Campus\n  4. Assist the patient in filling out the Daily Treatment Record. [Responsible: Dentist/Dental Aide]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  13,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 591"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-MED-005",
+                         "service_name":  "Consultation and Treatment Services for Emergency Medical Cases of Students (With Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 2. With referral Location: Medical Clinic, PUP Campus\n  2.1. Explains the reason for referral and prepares referral form. [Responsible: Physician/Nurse]\n  2.2. Prepare emergency transport vehicle for conduction of patient. [Responsible: Physician/Nurse]\nStep 3. Proceed to the receiving area. Location: Medical Clinic, PUP Campus\n  3. Dispense the initial dose of medicine if available with instruction. [Responsible: Physician/Nurse]\nStep 4. Fill out and sign in the Daily Treatment Record (DTR) Location: Medical Clinic, PUP Campus\n  4. Assist patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]\n  1.1. Inquire of the patient\u0027s chief complaint or illness [Responsible: Physician/Nurse]\n  1.2. Take patient\u0027s vital signs (Blood Pressure, Temperature, Respiratory Rate, Pulse Rate). [Responsible: Physician/Nurse]\n  1.3. Assess and evaluate the condition of the patient by taking the medical history and performing physical examination. [Responsible: Physician/Nurse]\n  1.4. Provide immediate treatment / intervention. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  22,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 593"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-MED-006",
+                         "service_name":  "Consultation and Treatment Services for Emergency Medical Cases of Students (Without Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 2. Without referral Location: Medical Clinic, PUP Campus\n  2. Provide discharge instructions that includes home medications, advise and follow-up. [Responsible: Physician/Nurse]\nStep 3. Proceed to the receiving area. Location: Medical Clinic, PUP Campus\n  3. Dispense the initial dose of medicine if available with instruction. [Responsible: Physician/Nurse]\nStep 4. Fill out and sign in the Daily Treatment Record (DTR) Location: Medical Clinic, PUP Campus\n  4. Assist patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]\n  1.1. Inquire of the patient\u0027s chief complaint or illness [Responsible: Physician/Nurse]\n  1.2. Take patient\u0027s vital signs (Blood Pressure, Temperature, Respiratory Rate, Pulse Rate). [Responsible: Physician/Nurse]\n  1.3. Assess and evaluate the condition of the patient by taking the medical history and performing physical examination. [Responsible: Physician/Nurse]\n  1.4. Provide immediate treatment / intervention. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  18,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 596"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-DEN-007",
+                         "service_name":  "Consultation and Treatment Services for Non-Emergency Dental Cases of Students and Dependents (For Follow-up purposes)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students, Dependents",
+                         "processing_steps":  "Step 1. Go to receiving area and states the reason for consultation or chief complaint Location: Dental Clinic, PUP Campus\n  1.1. Ask the name of patient and date of previous consultation. [Responsible: Dentist/Dental Aide]\n  1.2. Retrieve patients dental record. [Responsible: Dentist/Dental Aide]\n  1.3. Instruct patient to proceed at treatment area. [Responsible: Dentist/Dental Aide]\nStep 2. Proceed to Treatment area and present documents requested. Location: Dental Clinic, PUP Campus\n  2.1. Check the document submitted and perform an oral examination. [Responsible: Dentist/Dental Aide]\n  2.2. Provide treatment. [Responsible: Dentist/Dental Aide]\nStep 3. Listen to home instruction, date of follow-up when necessary. Location: Dental Clinic, PUP Campus\n  3. Discharge instructions, date of follow-up, when necessary. [Responsible: Dentist/Dental Aide]\nStep 4. Proceed to receiving area and gives prescription of medicine and/or referral slip for specialist. Location: Dental Clinic, PUP Campus\n  4. Medicine if available and advises home instruction, referral slip and date of follow-up. [Responsible: Dentist/Dental Aide]\nStep 5. Fill out and sign the Daily Treatment Record. Location: Dental Clinic, PUP Campus\n  5. Assist the patient in filling out the Daily Treatment Record. [Responsible: Dentist/Dental Aide]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  28,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 599"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Dental X-Ray result",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: Any government or private diagnostic center."
+                                           },
+                                           {
+                                               "document_name":  "Dental Certificate from a specialist",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any government or private specialist."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-DEN-008",
+                         "service_name":  "Consultation and Treatment Services for Non-Emergency Dental Cases of Students and Dependents (For New Patients)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students, Dependents",
+                         "processing_steps":  "Step 1. Go to receiving area and states the reason for consultation or chief complaint. Location: Dental Clinic, PUP Campus\n  1.1. Ask for the chief complaint. [Responsible: Dentist/Dental Aide]\n  1.2. Take patient\u0027s vital sign [Responsible: Dentist/Dental Aide]\n  1.3. Instruct the patient to proceed at the treatment area. [Responsible: Dentist/Dental Aide]\nStep 2. Provide necessary information and submit to oral examination. Location: Dental Clinic, PUP Campus\n  2.1. Take medical history and perform an oral examination of the patient. [Responsible: Dentist/Dental Aide]\n  2.2. Provide treatment [Responsible: Dentist/Dental Aide]\nStep 3. Listen to home instructions, date of follow-up. Location: Dental Clinic, PUP Campus\n  3. Discharge instructions, date of follow-up. [Responsible: Dentist/Dental Aide]\nStep 4. proceed to receiving area and give prescription of medicine and/or referral slip. Location: Dental Clinic,East Wing GroundFloor,Sta. Mesa, Mla.\n  4. Dispense initial dose of medicines if available and advises home instruction, referral and date of follow-up. [Responsible: Dental Aide]\nStep 5. Fill out and sign the Daily Treatment Record. Location: Dental Clinic, PUP Campus\n  5. Assist patient in filling out the Daily Treatment Record. [Responsible: Dentist/Dental Aide]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  31,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 602"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-MED-007",
+                         "service_name":  "Consultation and Treatment Services for Non-Emergency Medical Cases of Students and Dependents (For Follow-up purposes)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students, Dependents",
+                         "processing_steps":  "Step 1. Go to the receiving area and state the reason for consultation or chief complaint. Location: Medical Clinic, PUP Campus\n  1.1. Ask for the name of the patient and the date of the previous consultation. [Responsible: Physician/Nurse]\n  1.2. Retrieve the patient\u0027s medical record. [Responsible: Physician/Nurse]\n  1.3. Instruct patient to proceed to consultation area. [Responsible: Physician/Nurse]\nStep 2. Proceed to the consultation area and present documents if requested. Location: Medical Clinic, PUP Campus\n  2.1. Check the document and perform a physical examination. [Responsible: Physician/Nurse]\n  2.2. Provide treatment. [Responsible: Physician/Nurse]\nStep 3. Listen to home instructions, and date of follow-up when necessary. Location: Medical Clinic, PUP Campus\n  3. Provide discharge instructions, and date of follow-up, when necessary. [Responsible: Physician/Nurse]\nStep 4. Proceed to the receiving area and give a prescription of medicine and/or referral slip (for specialist or laboratory) as indicated. Location: Medical Clinic, PUP Campus\n  4. Dispense initial dose of medicines if available and advise home instruction, referral, and date of follow-up. [Responsible: Physician/Nurse]\nStep 5. Fill out and sign the Daily Treatment Record. Location: Medical Clinic, PUP Campus\n  5. Assist the patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  28,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 605"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Laboratory results",
+                                               "is_mandatory":  false,
+                                               "notes":  "Documents if requested by the Physician. Printed as \u0027Laboratory results and/or\u0027 (together with the Medical Certificate from a Specialist). (1) Original Copy. Where to secure: Any DOH accredited diagnostic laboratory center/hospital."
+                                           },
+                                           {
+                                               "document_name":  "Medical Certificate from a Specialist",
+                                               "is_mandatory":  false,
+                                               "notes":  "Documents if requested by the Physician. (1) Original Copy. Where to secure: From any government or private specialist."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-MED-008",
+                         "service_name":  "Consultation and Treatment Services for Non-Emergency Medical Cases of Students and Dependents (For New Patients)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students, Dependents",
+                         "processing_steps":  "Step 1. Go to the receiving area and state the reason for consultation or chief complaint. Location: Medical Clinic, PUP Campus\n  1.1. Ask for the chief complaint. [Responsible: Physician/Nurse]\n  1.2. Take the patient\u0027s vital signs (Blood Pressure, Temperature, Respiratory Rate, Pulse Rate). [Responsible: Physician/Nurse]\n  1.3. Instruct patient to proceed to consultation area. [Responsible: Physician/Nurse]\nStep 2. Provide necessary information and submit to physical examination. Location: Medical Clinic, PUP Campus\n  2.1. Take medical history and perform physical examination of the patient. [Responsible: Physician/Nurse]\n  2.2. Provide treatment. [Responsible: Physician/Nurse]\nStep 3. Listen to discharge instructions, date of follow-up, and request for laboratory/consultatio n to a specialist as deemed necessary. Location: Medical Clinic, PUP Campus\n  3. Provide discharge instructions, and date of follow-up if needed. Prepare referral slip to specialist or laboratory request if indicated or as need arises. [Responsible: Physician/Nurse]\nStep 4. proceed to receiving area and present prescription of medicine and/or referral slip (for specialist or laboratory) as indicated. Location: Medical Clinic, PUP Campus\n  4. Dispense initial dose of medicines if available and advise home instruction, referral, and date of follow-up. [Responsible: Physician/Nurse]\nStep 5. Fill out and sign the Daily Treatment Record. Location: Medical Clinic, PUP Campus\n  5. Assist patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  30,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 608"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-MED-009",
+                         "service_name":  "Issuance of Follow-up of Students Referred During Enrollment",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Go to the receiving area of the medical clinic and state the purpose of consultation or follow- up. Location: Medical Clinic, PUP Campus\n  1. Ask for the purpose of consultation or follow-up and the name of the student for retrieval of his/her record. [Responsible: Physician/Nurse]\nStep 2. Present laboratory results or other documents required. Location: Medical Clinic, PUP Campus\n  2.1. Check the student\u0027s laboratory results or documents. [Responsible: Physician/Nurse]\n  2.2. Get the vital signs (Blood Pressure, Temperature, Respiratory Rate, Pulse Rate) of the student including weight (for PTB cases). [Responsible: Physician/Nurse]\n  2.3. Assist the student to the consultation area. [Responsible: Physician/Nurse]\nStep 3. Proceed to the consultation area and submit the laboratory results or documents requested. Fill out waiver form for follow- up Location: Medical Clinic, PUP Campus\n  3.1. Assess and evaluate documents submitted. [Responsible: Physician/Nurse]\n  3.2. Take medical history and perform a medical examination. [Responsible: Physician/Nurse]\n  3.3. Assist students in filling out the waiver form. [Responsible: Physician/Nurse]\nStep 4. Listen to home instructions. Location: Medical Clinic, PUP Campus\n  4. Provide discharge instructions. [Responsible: Physician/Nurse]\nStep 5. Proceed to the receiving area and sign the Registration Form. Location: Medical Clinic, PUP Campus\n  5. Assist student in filling out the Registration Form. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  27,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 611"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Laboratory results requested by the Physician",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Medical certificate from specialist",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: From any government / private pulmonologist"
+                                           },
+                                           {
+                                               "document_name":  "Other documents as deemed necessary",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Applicant / Client"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-005",
+                         "service_name":  "Issuance of Medical Certificate for Sick Note / Excuse Slip (For Patient who consulted outside PUP clinics and with Medical Certificate from attending physician)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students, Dependents",
+                         "processing_steps":  "Step 1. Go to the receiving area of the medical clinic and state the purpose visit. Location: Medical Clinic, PUP Campus\n  1. Ask the purpose of the visit. [Responsible: Physician/Nurse]\nStep 2. Proceed to the consultation area and present the medical certificate to the physician. Location: Medical Clinic, PUP Campus\n  2. Receive and validate the medical certificate of the student for record purposes. [Responsible: Physician/Nurse]\nStep 3. Proceed to the receiving area and sign the Daily Treatment Record / DTR. Location: Medical Clinic, PUP Campus\n  3. Assist students in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  5,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 614"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Medical Certificate",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Attending Physician"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-006",
+                         "service_name":  "Issuance of Medical Certificate for Sick Note / Excuse Slip (For Sick Note / Excuse Slip - Patient who consulted PUP Medical Clinic)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students, Dependents",
+                         "processing_steps":  "Step 1. Go to the receiving area of the medical clinic and state the purpose of the request for the issuance of the medical certificate. Location: Medical Clinic, PUP Campus\n  1.1. Ask about the purpose of the medical certificate, the name of the student, and the date of the previous consultation. [Responsible: Physician/Nurse]\n  1.2. Retrieve the patient\u0027s record. [Responsible: Physician/Nurse]\nStep 2. Proceed to the consultation area. Location: Medical Clinic, PUP Campus\n  2. Assist and endorses the student to the physician [Responsible: Physician/Nurse]\nStep 3. Submit self for assessment. Location: Medical Clinic, PUP Campus\n  3.1. Assess and evaluate patients and perform physical examinations. [Responsible: Physician/Nurse]\n  3.2. Issue medical certificate or excuse slip. [Responsible: Physician/Nurse]\nStep 4. Proceed to the receiving area and sign the Daily Treatment Record / DTR. Location: Medical Clinic, PUP Campus\n  4. Assist students in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  8,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 616"
+                                      },
+                         "documents":  [
+
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-007",
+                         "service_name":  "Issuance of Medical Clearance for Enrollment (For students with lung findings or other health problems that needs referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students (Incoming freshmen - SHS \u0026 College, Open University, College of Law, Graduate School, Post Baccalaureate, Returning and Transferees)",
+                         "processing_steps":  "Step 1. Proceed to the receiving area of the medical clinic Location: Medical Clinic, PUP Campus\n  1. Ask about the purpose of medical clearance. [Responsible: Physician/Nurse]\nStep 2. Present requirement for issuance of medical clearance. Location: Medical Clinic, PUP Campus\n  2.1. Check student\u0027s requirements. [Responsible: Physician/Nurse]\n  2.2. Assess chest X- ray result [Responsible: Physician/Nurse]\n  2.3. Assess pertinent health problems. [Responsible: Physician/Nurse]\nStep 3. Fill out the Registration form for students with normal chest x-rays and no other health problems. Location: Medical Clinic, PUP Campus\n  3. Assist students in filling out the Registration Form. [Responsible: Physician/Nurse]\nStep 4. Proceed to the assigned consultation room, and present chest x-ray and other documents required. Location: Medical Clinic, PUP Campus\n  4.1. Assist student to the consultation room depending on their chest- x-ray result and other medical problems as follows: Area 1 - with normal chest x-ray. Area 2 - with lung findings. Area 3 - with other health problem [Responsible: Physician/Nurse]\n  4.2. Assess and evaluate chest x-ray results and other documents required upon receipt. [Responsible: Physician/Nurse]\n  4.3. Take medical history and perform a physical examination. [Responsible: Physician/Nurse]\n  4.4. Provide necessary treatment as deemed necessary. [Responsible: Physician/Nurse]\nStep 5. For students with lung findings or other health problems that needs referral Location: Medical Clinic, PUP Campus\n  5.1. Explain the reason for referral and provide further instruction. [Responsible: Physician/Nurse]\n  5.2. Prepare a referral form for the laboratory or to the specialist. [Responsible: Physician/Nurse]\nStep 6. Fill out and sign the Registration Form. Location: Medical Clinic, PUP Campus\n  6. Assist students in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  22,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 619"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Chest x-ray (PA) result with film or CD with 1-year validity at the time of examination",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Other laboratory mandated by law",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Other laboratory results required by examining physician as deemed necessary",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Route Approval Form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Admission Office"
+                                           },
+                                           {
+                                               "document_name":  "Re-admission Form (for Returning Students)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Admission Office"
+                                           },
+                                           {
+                                               "document_name":  "Transferee Form (for Transferees)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Admission Office"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-008",
+                         "service_name":  "Issuance of Medical Clearance for Enrollment (For students with normal chest result and no serious health problem for issuance of medical clearance.)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students (Incoming freshmen - SHS \u0026 College, Open University, College of Law, Graduate School, Post Baccalaureate, Returning and Transferees)",
+                         "processing_steps":  "Step 1. Proceed to the receiving area of the medical clinic Location: Medical Clinic, PUP Campus\n  1. Ask about the purpose of medical clearance. [Responsible: Physician/Nurse]\nStep 2. Present requirement for issuance of medical clearance. Location: Medical Clinic, PUP Campus\n  2.1. Check student\u0027s requirements. [Responsible: Physician/Nurse]\n  2.2. Assess chest X- ray result [Responsible: Physician/Nurse]\n  2.3. Assess pertinent health problems. [Responsible: Physician/Nurse]\nStep 3. Fill out the Registration form for students with normal chest x-rays and no other health problems. Location: Medical Clinic, PUP Campus\n  3. Assist students in filling out the Registration Form. [Responsible: Physician/Nurse]\nStep 4. Proceed to the assigned consultation room, and present chest x-ray and other documents required. Location: Medical Clinic, PUP Campus\n  4.1. Assist student to the consultation room depending on their chest- x-ray result and other medical problems as follows: Area 1 - with normal chest x-ray. Area 2 - with lung findings. Area 3 - with other health problem [Responsible: Physician/Nurse]\n  4.2. Assess and evaluate chest x-ray results and other documents required upon receipt. [Responsible: Physician/Nurse]\n  4.3. Take medical history and perform a physical examination. [Responsible: Physician/Nurse]\n  4.4. Provide necessary treatment as deemed necessary. [Responsible: Physician/Nurse]\nStep 5. For students with normal chest result and no serious health problem for issuance of medical clearance. Location: Medical Clinic, PUP Campus\n  5. For students with normal chest results and no serious health problems for issuance of medical clearance. [Responsible: Physician/Nurse]\nStep 6. Fill out and sign the Registration Form. Location: Medical Clinic, PUP Campus\n  6. Assist students in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  15,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 623"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Chest x-ray (PA) result with film or CD with 1-year validity at the time of examination",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Other laboratory mandated by law",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Other laboratory results required by examining physician as deemed necessary",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Route Approval Form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Admission Office"
+                                           },
+                                           {
+                                               "document_name":  "Re-admission Form (for Returning Students)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Admission Office"
+                                           },
+                                           {
+                                               "document_name":  "Transferee Form (for Transferees)",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Admission Office"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-009",
+                         "service_name":  "Issuance of Medical Clearance for Laboratory Classes for Food-Handlers (For BSHM and Tourism students with laboratory subjects as food handlers | With Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Proceed to the receiving area of the medical clinic and Location: Medical Clinic, PUP Campus\n  1. Ask about the purpose of medical clearance. [Responsible: Physician/Nurse]\nStep 2. Present requirement for issuance of medical clearance. Location: Medical Clinic, PUP Campus\n  2.1. Check the patient\u0027s requirements. [Responsible: Physician/Nurse]\n  2.2. Take the patient\u0027s vital signs (Blood Pressure) [Responsible: Physician/Nurse]\n  2.3. Assist the student to the consultation area. [Responsible: Physician/Nurse]\nStep 3. Proceed to the consultation area and present documents. Location: Medical Clinic, PUP Campus\n  3.1. Assess/evaluate laboratory results upon receipt of the document. [Responsible: Physician/Nurse]\n  3.2. Take medical history and perform a physical examination [Responsible: Physician/Nurse]\nStep 4. With Referral Location: Medical Clinic, PUP Campus\n  4. Explain the reason for referral and prepare a referral form for laboratory/consultatio n to the specialist. [Responsible: Physician/Nurse]\nStep 5. Fill out and sign the Daily Treatment Record Location: Medical Clinic, PUP Campus\n  5. Assist the patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  17,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 627"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Chest x-ray (PA) result with film or CD with 1-year validity",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Fecalysis - 1-month validity",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Anti HAV IgM with 6 months validity",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-010",
+                         "service_name":  "Issuance of Medical Clearance for Laboratory Classes for Food-Handlers (For BSHM and Tourism students with laboratory subjects as food handlers | Without Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Proceed to the receiving area of the medical clinic and Location: Medical Clinic, PUP Campus\n  1. Ask about the purpose of medical clearance. [Responsible: Physician/Nurse]\nStep 2. Present requirement for issuance of medical clearance. Location: Medical Clinic, PUP Campus\n  2.1. Check the patient\u0027s requirements. [Responsible: Physician/Nurse]\n  2.2. Take the patient\u0027s vital signs (Blood Pressure) [Responsible: Physician/Nurse]\n  2.3. Assist the student to the consultation area. [Responsible: Physician/Nurse]\nStep 3. Proceed to the consultation area and present documents. Location: Medical Clinic, PUP Campus\n  3.1. Assess/evaluate laboratory results upon receipt of the document. [Responsible: Physician/Nurse]\n  3.2. Take medical history and perform a physical examination [Responsible: Physician/Nurse]\nStep 4. Without Referral Location: Medical Clinic, PUP Campus\n  4. Issuance of medical clearance if physically fit as food handlers. [Responsible: Physician/Nurse]\nStep 5. Fill out and sign the Daily Treatment Record Location: Medical Clinic, PUP Campus\n  5. Assist the patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  12,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 630"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Chest x-ray (PA) result with film or CD with 1-year validity",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Fecalysis - 1-month validity",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Anti HAV IgM with 6 months validity",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-011",
+                         "service_name":  "Issuance of Medical Clearance for Laboratory Classes for Food-Handlers (For BSND and BSFT with laboratory classes | With Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Proceed to the receiving area of the medical clinic and Location: Medical Clinic, PUP Campus\n  1. Ask about the purpose of medical clearance. [Responsible: Physician/Nurse]\nStep 2. Present requirement for issuance of medical clearance. Location: Medical Clinic, PUP Campus\n  2.1. Check the patient\u0027s requirement. [Responsible: Physician/Nurse]\n  2.2. Take the patient\u0027s vital signs (Blood Pressure) [Responsible: Physician/Nurse]\n  2.3. Assist the student to the consultation area. [Responsible: Physician/Nurse]\nStep 3. Proceed to the consultation area and present documents. Location: Medical Clinic, PUP Campus\n  3.1. Assess/evaluate laboratory results upon receipt of the document. [Responsible: Physician/Nurse]\n  3.2. Take medical history and perform physical examination [Responsible: Medical Clinic, PUP Campus]\nStep 4. With Referral Location: Medical Clinic, PUP Campus\n  4. Explain the reason for referral and prepare a referral form for laboratory/consultatio n to the specialist. [Responsible: Physician/Nurse]\nStep 5. Fill out and sign the Daily Treatment Record. Location: Medical Clinic, PUP Campus\n  5. Assist the patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  17,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 633"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Chest x-ray (PA) result with film or CD with 1-year validity",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Fecalysis - 1-month validity",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-012",
+                         "service_name":  "Issuance of Medical Clearance for Laboratory Classes for Food-Handlers (For BSND and BSFT with laboratory classes | Without Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Proceed to the receiving area of the medical clinic and Location: Medical Clinic, PUP Campus\n  1. Ask about the purpose of medical clearance. [Responsible: Physician/Nurse]\nStep 2. Present requirement for issuance of medical clearance. Location: Medical Clinic, PUP Campus\n  2.1. Check the patient\u0027s requirement. [Responsible: Physician/Nurse]\n  2.2. Take the patient\u0027s vital signs (Blood Pressure) [Responsible: Physician/Nurse]\n  2.3. Assist the student to the consultation area. [Responsible: Physician/Nurse]\nStep 3. Proceed to the consultation area and present documents. Location: Medical Clinic, PUP Campus\n  3.1. Assess/evaluate laboratory results upon receipt of the document. [Responsible: Physician/Nurse]\n  3.2. Take medical history and perform physical examination [Responsible: Medical Clinic, PUP Campus]\nStep 4. Without Referral Location: Medical Clinic, PUP Campus\n  4. Issuance of medical clearance if physically fit as food handlers. [Responsible: Physician/Nurse]\nStep 5. Fill out and sign the Daily Treatment Record. Location: Medical Clinic, PUP Campus\n  5. Assist the patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  12,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 636"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Chest x-ray (PA) result with film or CD with 1-year validity",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           },
+                                           {
+                                               "document_name":  "Fecalysis - 1-month validity",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility or hospital of choice of the patient."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-013",
+                         "service_name":  "Issuance of Medical Clearance for Off-Campus of Students (With Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Submit a letter of request for issuance of medical clearance to the Medical Director\u0027s Office indicating the list of participants, date, and activity signed by the Adviser / Chairperson / Dean. Location: Medical Clinic, PUP Campus\n  1.1. Receive the letter request for endorsement. [Responsible: Physician/Nurse]\n  1.2. Approve letter of request. [Responsible: Physician/Nurse]\nStep 2. Follow-up on the letter of request from the Director\u0027s Office. Location: Medical Clinic, PUP Campus\n  2. Hand over the approved letter of request to the student\u0027s representative. [Responsible: Physician/Nurse]\nStep 3. Submit the approved letter of request to the medical clinic of the respective campus Location: Medical Clinic, PUP Campus\n  3. Receive the approved letter and inform the student on the scheduled date of clearance. [Responsible: Physician/Nurse]\nStep 4. Proceed to the receiving area of the medical clinic on the scheduled date, state the purpose of the medical clearance needed, and present student ID / Registration card. Location: Medical Clinic, PUP Campus\n  4. Ask the purpose of medical clearance and look for his/her name in the master list. [Responsible: Physician/Nurse]\nStep 5. Present requirement for issuance of medical clearance. Location: Medical Clinic, PUP\n  5.1. Check the patient\u0027s requirements. [Responsible: Physician/Nurse]\n  5.2. Take the patient\u0027s vital signs (Blood Pressure, Pulse Rate, Temperature, Respiratory Rate) [Responsible: Physician/Nurse]\nStep 6. Proceed to the consultation area and present documents. Location: Medical Clinic, PUP Campus\n  6.1. Assist the student to the consultation area. [Responsible: Physician/Nurse]\n  6.2. Evaluate documents or laboratory results submitted, take a medical history, and perform a physical examination of the patient. [Responsible: Physician/Nurse]\nStep 7. With Referral Location: Medical Clinic, PUP Campus\n  7. Explain the reason for referral and prepare a referral form for laboratory or consultation with the specialist. [Responsible: Physician/Nurse]\nStep 8. Fill out and sign the Daily Treatment Record. Location: Medical Clinic, PUP Campus\n  8. Assist patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  8,
+                                          "duration_minutes":  30,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 639"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Student ID or registration card",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Student Services or Admission Office."
+                                           },
+                                           {
+                                               "document_name":  "Local sports and dance competitions (Exemption): Chest x-ray (PA) with 1-year validity",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "Local sports and dance competitions (Exemption): ECG with 12 lead validity of 6 months for normal results",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "Local sports and dance competitions (Exemption): Other laboratory required by organizing agency or sponsor",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "Local sports and dance competitions (Exemption): Other documents required as deemed necessary",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "Local team-building / community immersion / immersion with water activity (Exemption): Chest x-ray (PA) with 1-year validity",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "International: Chest x-ray (PA) official results with film or CD with 1-year validity",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "International: Other laboratory as deemed necessary after assessment and physical examination of the examining physician",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "International: Other laboratory required by organizing agency / sponsor",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-014",
+                         "service_name":  "Issuance of Medical Clearance for Off-Campus of Students (Without Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Submit a letter of request for issuance of medical clearance to the Medical Director\u0027s Office indicating the list of participants, date, and activity signed by the Adviser / Chairperson / Dean. Location: Medical Clinic, PUP Campus\n  1.1. Receive the letter request for endorsement. [Responsible: (Designation, Office) Physician/Nurse]\n  1.2. Approve letter of request. [Responsible: Physician/Nurse]\nStep 2. Follow-up on the letter of request from the Director\u0027s Office. Location: Medical Clinic, PUP Campus\n  2. Hand over the approved letter of request to the student\u0027s representative. [Responsible: Physician/Nurse]\nStep 3. Submit the approved letter of request to the medical clinic of the respective campus Location: Medical Clinic, PUP Campus\n  3. Receive the approved letter and inform the student on the scheduled date of clearance. [Responsible: Physician/Nurse]\nStep 4. Proceed to the receiving area of the medical clinic on the scheduled date, state the purpose of the medical clearance needed, and present student ID / Registration card. Location: Medical Clinic, PUP Campus\n  4. Ask the purpose of medical clearance and look for his/her name in the master list. [Responsible: Physician/Nurse]\nStep 5. Present requirement for issuance of medical clearance. Location: Medical Clinic, PUP Campus\n  5.1. Check the patient\u0027s requirements. [Responsible: Physician/Nurse]\n  5.2. Take the patient\u0027s vital signs (Blood Pressure, Pulse Rate, Temperature, Respiratory Rate) [Responsible: Physician/Nurse]\nStep 6. Proceed to the consultation area and present documents. Location: Medical Clinic, PUP Campus\n  6.1. Assist the student to the consultation area. [Responsible: Physician/Nurse]\n  6.2. Evaluate documents or laboratory results submitted, take a medical history, and perform a physical examination of the patient. [Responsible: Physician/Nurse]\nStep 7. Without Referral Location: Medical Clinic, PUP Campus\n  7. Issuance of medical clearance if physically fit to participate in the off- campus activity. [Responsible: Physician/Nurse]\nStep 8. Fill out and sign the Daily Treatment Record. Location: Medical Clinic, PUP Campus\n  8. Assist patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  8,
+                                          "duration_minutes":  23,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 644"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Student ID or registration card",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Student Services or Admission Office."
+                                           },
+                                           {
+                                               "document_name":  "Local sports and dance competitions (Exemption): Chest x-ray (PA) with 1-year validity",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "Local sports and dance competitions (Exemption): ECG with 12 lead validity of 6 months for normal results",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "Local sports and dance competitions (Exemption): Other laboratory required by organizing agency or sponsor",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "Local sports and dance competitions (Exemption): Other documents required as deemed necessary",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "Local team-building / community immersion / immersion with water activity (Exemption): Chest x-ray (PA) with 1-year validity",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "International: Chest x-ray (PA) official results with film or CD with 1-year validity",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "International: Other laboratory as deemed necessary after assessment and physical examination of the examining physician",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           },
+                                           {
+                                               "document_name":  "International: Other laboratory required by organizing agency / sponsor",
+                                               "is_mandatory":  false,
+                                               "notes":  "(1) Original Copy. Where to secure: From any DOH accredited laboratory diagnostic/laboratory or hospital depending on patient\u0027s choice."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-015",
+                         "service_name":  "Issuance of Medical Clearance for On-the-Job-Training of Students (With Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Proceed to the receiving area of the medical clinic and Location: Medical Clinic, PUP Campus\n  1. Ask the purpose of medical clearance. [Responsible: Physician/Nurse]\nStep 2. Present requirement for issuance of medical clearance. Location: Medical Clinic, PUP Campus\n  2.1. Check the patient\u0027s requirements. [Responsible: Physician/Nurse]\n  2.2. Take the patient\u0027s vital signs (Blood Pressure) [Responsible: Physician/Nurse]\n  2.3. Assist the student to the consultation area. [Responsible: Physician/Nurse]\nStep 3. Proceed to the consultation area and present documents. Location: Medical Clinic, PUP Campus\n  3.1. Assess/Evaluate laboratory results upon receipt of the document. [Responsible: Physician/Nurse]\n  3.2. Takes medical history and performs physical examination [Responsible: Physician/Nurse]\nStep 4. With Referral Location: Medical Clinic, PUP Campus\n  4. Explain the purpose of the referral and prepare a referral form for laboratory/consultatio n to the specialist. [Responsible: Physician/Nurse]\nStep 5. Fill out and sign the Daily Treatment Record. Location: Medical Clinic, PUP Campus\n  5. Assist patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  14,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 649"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Chest x-ray (PA) view official result with film or CD with 1-year validity at the time of examination",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility, hospital of choice of the patient or accredited clinic as per advised by the company or industry where he or she will take their OJT."
+                                           },
+                                           {
+                                               "document_name":  "Other laboratory as required by the company",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility, hospital of choice of the patient or accredited clinic as per advised by the company or industry where he or she will take their OJT."
+                                           },
+                                           {
+                                               "document_name":  "Other laboratory as required by examining physician after assessment and physical examination if necessary",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Other laboratory as required by examining physician after assessment and physical examination if necessary."
+                                           },
+                                           {
+                                               "document_name":  "Additional laboratory test for food handler: Fecalysis or stool exam result within 1-month validity (for BSND, BSFT and BSHM)",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement."
+                                           },
+                                           {
+                                               "document_name":  "Additional laboratory test for food handler: Anti-HAV IgM (for BSHM)",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-CLR-016",
+                         "service_name":  "Issuance of Medical Clearance for On-the-Job-Training of Students (Without Referral)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Proceed to the receiving area of the medical clinic and Location: Medical Clinic, PUP Campus\n  1. Ask the purpose of medical clearance. [Responsible: Physician/Nurse]\nStep 2. Present requirement for issuance of medical clearance. Location: Medical Clinic, PUP Campus\n  2.1. Check the patient\u0027s requirements. [Responsible: Physician/Nurse]\n  2.2. Take the patient\u0027s vital signs (Blood Pressure) [Responsible: Physician/Nurse]\n  2.3. Assist the student to the consultation area. [Responsible: Physician/Nurse]\nStep 3. Proceed to the consultation area and present documents. Location: Medical Clinic, PUP Campus\n  3.1. Assess/Evaluate laboratory results upon receipt of the document. [Responsible: Physician/Nurse]\n  3.2. Takes medical history and performs physical examination [Responsible: Physician/Nurse]\nStep 4. Without Referral Location: Medical Clinic, PUP Campus\n  4. Issuance of medical clearance if physically fit for the on-the-job training. [Responsible: Physician/Nurse]\nStep 5. Fill out and sign the Daily Treatment Record. Location: Medical Clinic, PUP Campus\n  5. Assist patient in filling out the Daily Treatment Record. [Responsible: Physician/Nurse]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  12,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 652"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Chest x-ray (PA) view official result with film or CD with 1-year validity at the time of examination",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility, hospital of choice of the patient or accredited clinic as per advised by the company or industry where he or she will take their OJT."
+                                           },
+                                           {
+                                               "document_name":  "Other laboratory as required by the company",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Any DOH accredited laboratory facility, hospital of choice of the patient or accredited clinic as per advised by the company or industry where he or she will take their OJT."
+                                           },
+                                           {
+                                               "document_name":  "Other laboratory as required by examining physician after assessment and physical examination if necessary",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Other laboratory as required by examining physician after assessment and physical examination if necessary."
+                                           },
+                                           {
+                                               "document_name":  "Additional laboratory test for food handler: Fecalysis or stool exam result within 1-month validity (for BSND, BSFT and BSHM)",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement."
+                                           },
+                                           {
+                                               "document_name":  "Additional laboratory test for food handler: Anti-HAV IgM (for BSHM)",
+                                               "is_mandatory":  false,
+                                               "notes":  "Situational requirement."
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-FAC-001",
+                         "service_name":  "Request for the Reservation of Campus Facilities (If Available)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Present Letter of request duly signed and approved by the Campus Director Location: Administrative/Director\u0027s Office, PUP Campus\n  1. Issue request form to the client [Responsible: Administrative Staff]\nStep 2. Secure Request for the use of Facilities Form at the Administrative Office Location: Administrative/Director\u0027s Office, PUP Campus\n  2. Have the client/s affix their names to the office logbook for control and reference [Responsible: Administrative Staff]\nStep 3. Fully accomplish the form Location: Administrative/Director\u0027s Office, PUP Campus Notes/Instruction: Fully accomplish the form: (1) Requesting Party/Person; (2) Department/Office; (3) Purpose of Request; (4) Date Requested; (5) Date to be Used, Facility and equipment requested; (6) Have the filled-up form signed by the Adviser/Head of Office; (7) Return the filled-up form to the Administrative Office for Approval\n  3. Receive the filled-out request form and check for the availability of the facility/equipment requested for the date of use on the request form. [Responsible: Administrative Staff]\nStep 4. If Available Location: Administrative/Director\u0027s Office, PUP Campus\n  4. Forward the request to the Administrative Officer for Approval [Responsible: Administrative Staff]\nStep 5. Receive the approved request form from the Staff of the Administrative Office and wait for the requested date to use the Facility. Location: Administrative/Director\u0027s Office, PUP Campus\n  5. Issue One (1) copy of the request to the client and have the other copy on file. [Responsible: Administrative Staff]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  12,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 655"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Letter of intent approved by the Campus Director",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Administrative Office PUP Campus"
+                                           },
+                                           {
+                                               "document_name":  "Request for the use of Facilities Form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(2) Original Copy. Where to secure: Polytechnic University of the Philippines - Administrative Office PUP Campus"
+                                           }
+                                       ]
+                     },
+                     {
+                         "office_code":  "CAMP-ADMIN",
+                         "service_code":  "CAMP-ADMIN-FAC-002",
+                         "service_name":  "Request for the Reservation of Campus Facilities (If Not Available)",
+                         "classification":  "SIMPLE",
+                         "service_scope":  "EXTERNAL",
+                         "transaction_types":  [
+                                                   "G2C"
+                                               ],
+                         "fees":  "None",
+                         "who_may_avail":  "Students",
+                         "processing_steps":  "Step 1. Present Letter of request duly signed and approved by the Campus Director Location: Administrative/Director\u0027s Office, PUP Campus\n  1. Issue request form to the client [Responsible: Administrative Staff]\nStep 2. Secure Request for the use of Facilities Form at the Administrative Office Location: Administrative/Director\u0027s Office, PUP Campus\n  2. Have the client/s affix their names to the office logbook for control and reference [Responsible: Administrative Staff]\nStep 3. Fully accomplish the form Location: Administrative/Director\u0027s Office, PUP Campus Notes/Instruction: Fully accomplish the form: (1) Requesting Party/Person; (2) Department/Office; (3) Purpose of Request; (4) Date Requested; (5) Date to be Used, Facility and equipment requested; (6) Have the filled-up form signed by the Adviser/Head of Office; (7) Return the filled-up form to the Administrative Office for Approval\n  3. Receive the filled-out request form and check for the availability of the facility/equipment requested for the date of use on the request form. [Responsible: Administrative Staff]\nStep 4. If Not Available Location: Administrative/Director\u0027s Office, PUP Campus\n  4. Check for other available dates for the request. Once settled, forward the request to the Administrative Officer for Approval [Responsible: Administrative Staff]\nStep 5. Receive the approved request form from the Staff of the Administrative Office and wait for the requested date to use the Facility. Location: Administrative/Director\u0027s Office, PUP Campus\n  5. Issue One (1) copy of the request to the client and have the other copy on file. [Responsible: Administrative Staff]",
+                         "standard":  {
+                                          "duration_days":  0,
+                                          "duration_hours":  0,
+                                          "duration_minutes":  12,
+                                          "effective_from":  "2025-01-01",
+                                          "charter_reference":  "PUP Citizen\u0027s Charter 2025 Edition, p. 659"
+                                      },
+                         "documents":  [
+                                           {
+                                               "document_name":  "Letter of intent approved by the Campus Director",
+                                               "is_mandatory":  true,
+                                               "notes":  "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Administrative Office PUP Campus"
+                                           },
+                                           {
+                                               "document_name":  "Request for the use of Facilities Form",
+                                               "is_mandatory":  true,
+                                               "notes":  "(2) Original Copy. Where to secure: Polytechnic University of the Philippines - Administrative Office PUP Campus"
+                                           }
+                                       ]
+                     }
+                 ]
+}

@@ -11,7 +11,7 @@ import {
 import { ServiceStandard } from '../entities/index.js';
 import { kickOutbox } from '../outbox.js';
 
-export const STANDARD_COLUMNS = `standard_id, service_id, version_no, duration_value, duration_unit,
+export const STANDARD_COLUMNS = `standard_id, service_id, version_no, duration_days, duration_hours, duration_minutes,
   effective_from::text AS effective_from, effective_to::text AS effective_to, charter_reference, created_at`;
 
 export function toStandardDto(row) {
@@ -19,8 +19,9 @@ export function toStandardDto(row) {
     standard_id: row.standard_id,
     service_id: row.service_id,
     version_no: row.version_no,
-    duration_value: row.duration_value,
-    duration_unit: row.duration_unit,
+    duration_days: row.duration_days,
+    duration_hours: row.duration_hours,
+    duration_minutes: row.duration_minutes,
     effective_from: row.effective_from,
     effective_to: row.effective_to ?? null,
     charter_reference: row.charter_reference,
@@ -68,8 +69,9 @@ export async function insertFirstStandard(manager, actor, service, fields, ipAdd
     standardId,
     serviceId: service.service_id,
     versionNo: 1,
-    durationValue: fields.durationValue,
-    durationUnit: fields.durationUnit,
+    durationDays: fields.durationDays,
+    durationHours: fields.durationHours,
+    durationMinutes: fields.durationMinutes,
     effectiveFrom: fields.effectiveFrom,
     effectiveTo: null,
     charterReference: fields.charterReference,
@@ -105,8 +107,9 @@ async function addVersionLocked(manager, actor, service, fields, ipAddress) {
     standardId,
     serviceId: service.service_id,
     versionNo: rows.reduce((max, r) => Math.max(max, r.version_no), 0) + 1,
-    durationValue: fields.durationValue,
-    durationUnit: fields.durationUnit,
+    durationDays: fields.durationDays,
+    durationHours: fields.durationHours,
+    durationMinutes: fields.durationMinutes,
     effectiveFrom: fields.effectiveFrom,
     effectiveTo: null,
     charterReference: fields.charterReference,
@@ -181,7 +184,7 @@ export async function listStandards(dataSource, user, serviceId) {
 export async function getStandardAsOf(dataSource, serviceId, asOf, viewer = null) {
   const rows = await dataSource.query(
     `SELECT s.service_id, s.office_id, s.service_code, s.service_name, s.is_active,
-            st.standard_id, st.duration_value, st.duration_unit
+            st.standard_id, st.duration_days, st.duration_hours, st.duration_minutes
        FROM services s
        LEFT JOIN service_standards st
          ON st.service_id = s.service_id
@@ -199,8 +202,9 @@ export async function getStandardAsOf(dataSource, serviceId, asOf, viewer = null
   if (!row.standard_id) throw Errors.notFound(`No standard is in force for this service on ${asOf}`, 'STANDARD_NOT_FOUND');
   return {
     standard_id: row.standard_id,
-    duration_value: row.duration_value,
-    duration_unit: row.duration_unit,
+    duration_days: row.duration_days,
+    duration_hours: row.duration_hours,
+    duration_minutes: row.duration_minutes,
     service_code: row.service_code,
     service_name: row.service_name,
     office_id: row.office_id,

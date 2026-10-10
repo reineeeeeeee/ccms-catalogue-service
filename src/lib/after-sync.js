@@ -69,21 +69,27 @@ async function catalogueRules(dataSource) {
   await addConstraint(
     dataSource,
     'services',
-    'services_transaction_type_ck',
-    "CHECK (transaction_type IN ('G2C', 'G2G', 'G2B'))",
+    'services_scope_ck',
+    "CHECK (service_scope IN ('INTERNAL', 'EXTERNAL'))",
+  );
+  await addConstraint(
+    dataSource,
+    'services',
+    'services_transaction_types_ck',
+    "CHECK (cardinality(transaction_types) >= 1 AND transaction_types <@ ARRAY['G2C', 'G2G', 'G2B']::text[])",
   );
   await addConstraint(dataSource, 'services', 'services_measurement_ck', "CHECK (measurement_type = 'TIMELINESS')");
   await addConstraint(
     dataSource,
     'service_standards',
-    'service_standards_value_ck',
-    'CHECK (duration_value >= 1 AND version_no >= 1)',
-  );
-  await addConstraint(
-    dataSource,
-    'service_standards',
-    'service_standards_unit_ck',
-    "CHECK (duration_unit IN ('MINUTES', 'HOURS', 'WORKING_DAYS'))",
+    'service_standards_duration_ck',
+    `CHECK (
+      duration_days BETWEEN 0 AND 1000000
+      AND duration_hours BETWEEN 0 AND 1000000
+      AND duration_minutes BETWEEN 0 AND 1000000
+      AND (duration_days > 0 OR duration_hours > 0 OR duration_minutes > 0)
+      AND version_no >= 1
+    )`,
   );
   await addConstraint(
     dataSource,

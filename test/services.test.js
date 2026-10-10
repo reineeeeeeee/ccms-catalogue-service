@@ -69,7 +69,14 @@ async function addOffice(code, name) {
 }
 
 const today = () => manilaToday();
-const validStandard = (over = {}) => ({ duration_value: 7, duration_unit: 'MINUTES', effective_from: addDays(today(), -30), charter_reference: 'Charter p. 1', ...over });
+const validStandard = (over = {}) => ({
+  duration_days: 0,
+  duration_hours: 0,
+  duration_minutes: 7,
+  effective_from: addDays(today(), -30),
+  charter_reference: 'Charter p. 1',
+  ...over,
+});
 
 let counter = 0;
 function serviceBody(office = registrar, over = {}) {
@@ -80,7 +87,8 @@ function serviceBody(office = registrar, over = {}) {
     service_code: `${office.office_code}-T${n}-${n}`,
     service_name: `Test Service ${n}`,
     classification: 'SIMPLE',
-    transaction_type: 'G2C',
+    service_scope: 'EXTERNAL',
+    transaction_types: ['G2C'],
     standard: validStandard(),
     ...over,
   };
@@ -138,7 +146,9 @@ describe('CC007 add service with first standard', () => {
       service_code: 'REG-TOR-001',
       fees: '  None  ',
       who_may_avail: '  PUP Students  ',
-      standard: validStandard({ effective_from: from, duration_value: 3, duration_unit: 'WORKING_DAYS' }),
+      service_scope: 'INTERNAL',
+      transaction_types: ['G2C', 'G2G'],
+      standard: validStandard({ effective_from: from, duration_days: 3, duration_minutes: 0 }),
     });
     assert.equal(response.status, 201);
     assert.equal(service.is_active, true);
@@ -147,8 +157,11 @@ describe('CC007 add service with first standard', () => {
     assert.equal(service.current_standard.version_no, 1);
     assert.equal(service.current_standard.effective_from, from);
     assert.equal(service.current_standard.effective_to, null);
-    assert.equal(service.current_standard.duration_value, 3);
-    assert.equal(service.current_standard.duration_unit, 'WORKING_DAYS');
+    assert.equal(service.service_scope, 'INTERNAL');
+    assert.deepEqual(service.transaction_types, ['G2C', 'G2G']);
+    assert.equal(service.current_standard.duration_days, 3);
+    assert.equal(service.current_standard.duration_hours, 0);
+    assert.equal(service.current_standard.duration_minutes, 0);
     assert.equal(service.current_standard.charter_reference, 'Charter p. 1');
     assert.equal(service.fees, 'None');
     assert.equal(service.who_may_avail, 'PUP Students');
@@ -188,15 +201,19 @@ describe('CC007 add service with first standard', () => {
     assert.equal(clash.response.status, 409);
   });
 
-  it('AC5: an invalid classification or transaction type is rejected, naming the field', async () => {
+  it('AC5: classification, service scope and transaction types are validated', async () => {
     const a = await createService({ classification: 'EASY' });
     assert.equal(a.response.status, 400);
     assert.ok(a.body.error.details.classification);
-    const b = await createService({ transaction_type: 'B2B' });
+    const b = await createService({ transaction_types: ['B2B'] });
     assert.equal(b.response.status, 400);
-    assert.ok(b.body.error.details.transaction_type);
-    const both = await createService({ classification: null, transaction_type: undefined });
-    assert.ok(both.body.error.details.classification && both.body.error.details.transaction_type);
+    assert.ok(b.body.error.details.transaction_types);
+    const scope = await createService({ service_scope: 'PUBLIC' });
+    assert.ok(scope.body.error.details.service_scope);
+    const both = await createService({ classification: null, service_scope: undefined, transaction_types: undefined });
+    assert.ok(both.body.error.details.classification && both.body.error.details.service_scope && both.body.error.details.transaction_types);
+    assert.ok((await createService({ transaction_types: [] })).body.error.details.transaction_types);
+    assert.ok((await createService({ transaction_types: ['G2C', 'G2C'] })).body.error.details.transaction_types);
   });
 
   it('AC6: an inactive or unknown office is rejected with "Office not found or inactive"', async () => {
@@ -214,7 +231,8 @@ describe('CC007 add service with first standard', () => {
   it('validates name, code format, steps and the standard block', async () => {
     const short = await createService({ service_name: 'ab' });
     assert.ok(short.body.error.details.service_name);
-    const tooLong = await createService({ service_name: 'x'.repeat(101) });
+    assert.equal((await createService({ service_name: 'x'.repeat(200) })).response.status, 201);
+    const tooLong = await createService({ service_name: 'x'.repeat(201) });
     assert.ok(tooLong.body.error.details.service_name);
     for (const bad of ['a<b name', 'say "hi" now', 'tick`s here', 'x>yz']) {
       const r = await createService({ service_name: bad });
@@ -225,12 +243,12 @@ describe('CC007 add service with first standard', () => {
     assert.ok(code.body.error.details.service_code);
     const noStandard = await createService({ standard: undefined });
     assert.ok(noStandard.body.error.details.standard);
-    const badStandard = await createService({ standard: { duration_value: 0, duration_unit: 'DAYS', effective_from: 'soon', charter_reference: ' ' } });
-    for (const field of ['duration_value', 'duration_unit', 'effective_from', 'charter_reference']) {
+    const badStandard = await createService({ standard: { duration_days: -1, duration_hours: 1.5, duration_minutes: 'nope', effective_from: 'soon', charter_reference: ' ' } });
+    for (const field of ['duration_days', 'duration_hours', 'duration_minutes', 'effective_from', 'charter_reference']) {
       assert.ok(badStandard.body.error.details[`standard.${field}`], field);
     }
-    const fraction = await createService({ standard: validStandard({ duration_value: 1.5 }) });
-    assert.ok(fraction.body.error.details['standard.duration_value']);
+    const zero = await createService({ standard: validStandard({ duration_minutes: 0 }) });
+    assert.ok(zero.body.error.details['standard.duration']);
     const badReferenceFields = await createService({ fees: 50, who_may_avail: false });
     assert.ok(badReferenceFields.body.error.details.fees);
     assert.ok(badReferenceFields.body.error.details.who_may_avail);
@@ -288,7 +306,8 @@ describe('CC008 edit and deactivate a service', () => {
     service_code: s.service_code,
     service_name: s.service_name,
     classification: s.classification,
-    transaction_type: s.transaction_type,
+    service_scope: s.service_scope,
+    transaction_types: s.transaction_types,
     processing_steps: s.processing_steps,
     fees: s.fees,
     who_may_avail: s.who_may_avail,
@@ -299,11 +318,12 @@ describe('CC008 edit and deactivate a service', () => {
     const service = await makeService({ fees: 'None', who_may_avail: 'Students' });
     const { status, body } = await edit(
       service.service_id,
-      editBody(service, { classification: 'COMPLEX', transaction_type: 'G2B', fees: 'PHP 50 per page', who_may_avail: 'Students and alumni' }),
+      editBody(service, { classification: 'COMPLEX', service_scope: 'INTERNAL', transaction_types: ['G2B', 'G2G'], fees: 'PHP 50 per page', who_may_avail: 'Students and alumni' }),
     );
     assert.equal(status, 200);
     assert.equal(body.service.classification, 'COMPLEX');
-    assert.equal(body.service.transaction_type, 'G2B');
+    assert.equal(body.service.service_scope, 'INTERNAL');
+    assert.deepEqual(body.service.transaction_types, ['G2B', 'G2G']);
     assert.equal(body.service.fees, 'PHP 50 per page');
     assert.equal(body.service.who_may_avail, 'Students and alumni');
     assert.equal(body.service.current_standard.standard_id, service.current_standard.standard_id);
@@ -416,7 +436,7 @@ describe('CC009 version a standard', () => {
     const service = await makeService();
     const monday = nextMonday();
     const sunday = addDays(monday, -1);
-    const { status, body } = await addStandard(service.service_id, validStandard({ effective_from: monday, duration_value: 4, duration_unit: 'HOURS', charter_reference: 'Charter rev 2' }));
+    const { status, body } = await addStandard(service.service_id, validStandard({ effective_from: monday, duration_hours: 4, duration_minutes: 0, charter_reference: 'Charter rev 2' }));
     assert.equal(status, 201);
     assert.equal(body.standard.version_no, 2);
     assert.equal(body.standard.effective_to, null);
@@ -431,14 +451,13 @@ describe('CC009 version a standard', () => {
   it('AC2: the as-of lookup returns version 1 for today and version 2 for next Monday', async () => {
     const service = await makeService();
     const monday = nextMonday();
-    const added = await addStandard(service.service_id, validStandard({ effective_from: monday, duration_value: 2, duration_unit: 'HOURS' }));
+    const added = await addStandard(service.service_id, validStandard({ effective_from: monday, duration_hours: 2, duration_minutes: 0 }));
     const now = await asOf(service.service_id, today());
     assert.equal(now.body.standard_id, service.current_standard.standard_id);
-    assert.equal(now.body.duration_value, 7);
+    assert.deepEqual([now.body.duration_days, now.body.duration_hours, now.body.duration_minutes], [0, 0, 7]);
     const later = await asOf(service.service_id, monday);
     assert.equal(later.body.standard_id, added.body.standard.standard_id);
-    assert.equal(later.body.duration_value, 2);
-    assert.equal(later.body.duration_unit, 'HOURS');
+    assert.deepEqual([later.body.duration_days, later.body.duration_hours, later.body.duration_minutes], [0, 2, 0]);
     const sunday = await asOf(service.service_id, addDays(monday, -1));
     assert.equal(sunday.body.standard_id, service.current_standard.standard_id);
   });
@@ -453,10 +472,10 @@ describe('CC009 version a standard', () => {
 
   it('a version may start today; version 1 then ends yesterday', async () => {
     const service = await makeService();
-    const { status } = await addStandard(service.service_id, validStandard({ effective_from: today(), duration_value: 9 }));
+    const { status } = await addStandard(service.service_id, validStandard({ effective_from: today(), duration_minutes: 9 }));
     assert.equal(status, 201);
     const now = await asOf(service.service_id, today());
-    assert.equal(now.body.duration_value, 9);
+    assert.equal(now.body.duration_minutes, 9);
     const v1 = (await detail(service.service_id)).body.standards.find((s) => s.version_no === 1);
     assert.equal(v1.effective_to, addDays(today(), -1));
   });
@@ -465,9 +484,9 @@ describe('CC009 version a standard', () => {
     const service = await makeService();
     const from = addDays(today(), 14);
     assert.equal((await addStandard(service.service_id, validStandard({ effective_from: from }))).status, 201);
-    const again = await addStandard(service.service_id, validStandard({ effective_from: from, duration_value: 11 }));
+    const again = await addStandard(service.service_id, validStandard({ effective_from: from, duration_minutes: 11 }));
     assert.equal(again.status, 409);
-    const alsoConcurrent = await Promise.all([1, 2].map((n) => addStandard(service.service_id, validStandard({ effective_from: addDays(today(), 30), duration_value: n }))));
+    const alsoConcurrent = await Promise.all([1, 2].map((n) => addStandard(service.service_id, validStandard({ effective_from: addDays(today(), 30), duration_minutes: n }))));
     assert.deepEqual(alsoConcurrent.map((r) => r.status).sort(), [201, 409]);
   });
 
@@ -476,24 +495,24 @@ describe('CC009 version a standard', () => {
     await addStandard(service.service_id, validStandard({ effective_from: addDays(today(), 20) }));
     const older = await addStandard(service.service_id, validStandard({ effective_from: addDays(today(), 10) }));
     assert.equal(older.status, 409);
-    const invalid = await addStandard(service.service_id, { duration_value: -2, duration_unit: 'WEEKS', effective_from: '', charter_reference: '' });
+    const invalid = await addStandard(service.service_id, { duration_days: -2, duration_hours: -1, duration_minutes: -3, effective_from: '', charter_reference: '' });
     assert.equal(invalid.status, 400);
-    for (const field of ['duration_value', 'duration_unit', 'effective_from', 'charter_reference']) assert.ok(invalid.body.error.details[field], field);
+    for (const field of ['duration_days', 'duration_hours', 'duration_minutes', 'effective_from', 'charter_reference']) assert.ok(invalid.body.error.details[field], field);
     assert.equal((await addStandard(randomUUID(), validStandard({ effective_from: addDays(today(), 3) }))).status, 404);
   });
 
-  it('AC5: history shows every version, newest first, with value, unit, dates and Charter reference', async () => {
+  it('AC5: history shows every version, newest first, with all duration parts, dates and Charter reference', async () => {
     const service = await makeService();
-    await addStandard(service.service_id, validStandard({ effective_from: addDays(today(), 7), duration_value: 2, duration_unit: 'HOURS', charter_reference: 'Ref two' }));
-    await addStandard(service.service_id, validStandard({ effective_from: addDays(today(), 21), duration_value: 1, duration_unit: 'WORKING_DAYS', charter_reference: 'Ref three' }));
+    await addStandard(service.service_id, validStandard({ effective_from: addDays(today(), 7), duration_hours: 2, duration_minutes: 0, charter_reference: 'Ref two' }));
+    await addStandard(service.service_id, validStandard({ effective_from: addDays(today(), 21), duration_days: 1, duration_hours: 1, duration_minutes: 40, charter_reference: 'Ref three' }));
     const history = await callJson(listStandards, req('GET', `/services/${service.service_id}/standards`, { token: tokens.officeStaffA }), ctx(service.service_id));
     assert.equal(history.status, 200);
     assert.deepEqual(history.body.items.map((s) => s.version_no), [3, 2, 1]);
     const [v3, v2, v1] = history.body.items;
-    assert.deepEqual([v3.duration_value, v3.duration_unit, v3.charter_reference, v3.effective_to], [1, 'WORKING_DAYS', 'Ref three', null]);
+    assert.deepEqual([v3.duration_days, v3.duration_hours, v3.duration_minutes, v3.charter_reference, v3.effective_to], [1, 1, 40, 'Ref three', null]);
     assert.equal(v2.effective_to, addDays(v3.effective_from, -1));
     assert.equal(v1.effective_to, addDays(v2.effective_from, -1));
-    for (const s of history.body.items) for (const key of ['standard_id', 'service_id', 'version_no', 'duration_value', 'duration_unit', 'effective_from', 'effective_to', 'charter_reference', 'created_at']) assert.ok(key in s, key);
+    for (const s of history.body.items) for (const key of ['standard_id', 'service_id', 'version_no', 'duration_days', 'duration_hours', 'duration_minutes', 'effective_from', 'effective_to', 'charter_reference', 'created_at']) assert.ok(key in s, key);
   });
 
   it('AC6: Office Head, Office Staff and Executive get 403 when adding a version', async () => {
@@ -598,6 +617,15 @@ describe('CC010 required-documents checklist', () => {
     assert.equal((await addDoc(randomUUID(), { document_name: 'Anything' })).status, 404);
   });
 
+  it('accepts Charter document names up to 250 characters and notes up to 1000', async () => {
+    const service = await makeService();
+    assert.equal((await addDoc(service.service_id, { document_name: 'n'.repeat(250), notes: 'x'.repeat(1000) })).status, 201);
+    const longName = await addDoc(service.service_id, { document_name: 'n'.repeat(251) });
+    assert.match(longName.body.error.details.document_name, /250/);
+    const longNotes = await addDoc(service.service_id, { document_name: 'Another document', notes: 'x'.repeat(1001) });
+    assert.match(longNotes.body.error.details.notes, /1000/);
+  });
+
   it('AC4: no file input or upload endpoint exists anywhere', () => {
     const root = new URL('../src', import.meta.url).pathname;
     const files = [];
@@ -654,7 +682,7 @@ describe('CC011 procedure steps (reference only)', () => {
   it('AC1: steps can be edited through PUT and are kept when an edit omits them', async () => {
     const service = await makeService({ processing_steps: 'Old steps' });
     const id = service.service_id;
-    const base = { office_id: service.office_id, service_code: service.service_code, service_name: service.service_name, classification: 'SIMPLE', transaction_type: 'G2C' };
+    const base = { office_id: service.office_id, service_code: service.service_code, service_name: service.service_name, classification: 'SIMPLE', service_scope: 'EXTERNAL', transaction_types: ['G2C'] };
     const put = (body) => callJson(putService, req('PUT', `/services/${id}`, { token: SA(), body }), ctx(id));
     assert.equal((await put({ ...base, processing_steps: 'New steps' })).body.service.processing_steps, 'New steps');
     assert.equal((await put({ ...base })).body.service.processing_steps, 'New steps');
@@ -672,7 +700,7 @@ describe('CC011 procedure steps (reference only)', () => {
   it('AC3: no transaction-side lookup uses the procedure text', async () => {
     const service = await makeService({ processing_steps: 'Reference only text' });
     const lookup = await asOf(service.service_id, today());
-    assert.deepEqual(Object.keys(lookup.body).sort(), ['duration_unit', 'duration_value', 'office_id', 'service_code', 'service_name', 'standard_id']);
+    assert.deepEqual(Object.keys(lookup.body).sort(), ['duration_days', 'duration_hours', 'duration_minutes', 'office_id', 'service_code', 'service_name', 'standard_id']);
     assert.ok(!JSON.stringify(lookup.body).includes('Reference only'));
   });
 });
@@ -681,8 +709,8 @@ describe('CC012 internal catalogue browse', () => {
   let inactive;
   before(async () => {
     await makeService({ service_name: 'Browse Alpha', classification: 'SIMPLE' });
-    await makeService({ service_name: 'Browse Beta', classification: 'COMPLEX' }, library);
-    await makeService({ service_name: 'Browse Gamma', classification: 'HIGHLY_TECHNICAL', standard: validStandard({ duration_value: 1, duration_unit: 'HOURS' }) });
+    await makeService({ service_name: 'Browse Beta', classification: 'COMPLEX', service_scope: 'INTERNAL' }, library);
+    await makeService({ service_name: 'Browse Gamma', classification: 'HIGHLY_TECHNICAL', standard: validStandard({ duration_hours: 1, duration_minutes: 0 }) });
     inactive = await makeService({ service_name: 'Browse Hidden' });
     await deactivateService(req('PATCH', `/services/${inactive.service_id}/deactivate`, { token: SA() }), ctx(inactive.service_id));
   });
@@ -700,7 +728,9 @@ describe('CC012 internal catalogue browse', () => {
       assert.equal(alpha.office_name, 'Registrar');
       assert.equal(alpha.office_code, 'REG');
       assert.equal(alpha.classification, 'SIMPLE');
-      assert.equal(alpha.current_standard.duration_value, 7);
+      assert.equal(alpha.current_standard.duration_minutes, 7);
+      assert.equal(alpha.service_scope, 'EXTERNAL');
+      assert.deepEqual(alpha.transaction_types, ['G2C']);
       assert.ok('page' in body && 'page_size' in body && 'total' in body);
     }
     assert.equal((await callJson(listRoute, req('GET', '/services'))).status, 401);
@@ -711,6 +741,8 @@ describe('CC012 internal catalogue browse', () => {
     assert.deepEqual(byOffice.body.items.map((s) => s.service_name), ['Browse Beta']);
     const byClass = await list('?classification=HIGHLY_TECHNICAL&search=Browse');
     assert.deepEqual(byClass.body.items.map((s) => s.service_name), ['Browse Gamma']);
+    const byScope = await list('?service_scope=INTERNAL&search=Browse');
+    assert.deepEqual(byScope.body.items.map((s) => s.service_name), ['Browse Beta']);
     const byOfficeName = await list('?search=library');
     assert.ok(byOfficeName.body.items.every((s) => s.office_name === 'Library') && byOfficeName.body.total >= 1);
     const byCode = await list('?search=' + encodeURIComponent(inactive.service_code));
@@ -725,6 +757,7 @@ describe('CC012 internal catalogue browse', () => {
     assert.equal(paged.body.page, 2);
     assert.equal(paged.body.page_size, 2);
     assert.equal((await list('?classification=NOPE')).status, 400);
+    assert.equal((await list('?service_scope=PUBLIC')).status, 400);
     assert.equal((await list('?status=weird')).status, 400);
     assert.equal((await list('?office_id=abc')).status, 400);
     assert.equal((await list('?page=0')).status, 400);
@@ -738,7 +771,7 @@ describe('CC012 internal catalogue browse', () => {
     await addDoc(service.service_id, { document_name: 'Form A', is_mandatory: true, notes: 'two copies' });
     const { status, body } = await detail(service.service_id, tokens.officeStaffA);
     assert.equal(status, 200);
-    assert.equal(body.service.current_standard.duration_unit, 'MINUTES');
+    assert.equal(body.service.current_standard.duration_minutes, 7);
     assert.equal(body.service.processing_steps, 'Step list');
     assert.equal(body.service.fees, 'None');
     assert.equal(body.service.who_may_avail, 'PUP Students');
@@ -774,11 +807,12 @@ describe('CC013 public service browse (no login)', () => {
   const pub = (path = '') => callJson(publicList, req('GET', `/public/services${path}`));
   let detailService;
   before(async () => {
-    await makeService({ service_name: 'Public Minutes', standard: validStandard({ duration_value: 7, duration_unit: 'MINUTES' }) });
-    await makeService({ service_name: 'Public Hours', standard: validStandard({ duration_value: 4, duration_unit: 'HOURS' }) }, library);
-    await makeService({ service_name: 'Public Days', standard: validStandard({ duration_value: 3, duration_unit: 'WORKING_DAYS' }) });
-    await makeService({ service_name: 'Public Single Day', standard: validStandard({ duration_value: 1, duration_unit: 'WORKING_DAYS' }) });
-    await makeService({ service_name: 'Public Single Minute', standard: validStandard({ duration_value: 1, duration_unit: 'MINUTES' }) });
+    await makeService({ service_name: 'Public Minutes', standard: validStandard({ duration_minutes: 7 }) });
+    await makeService({ service_name: 'Public Hours', standard: validStandard({ duration_hours: 4, duration_minutes: 0 }) }, library);
+    await makeService({ service_name: 'Public Days', standard: validStandard({ duration_days: 3, duration_minutes: 0 }) });
+    await makeService({ service_name: 'Public Single Day', standard: validStandard({ duration_days: 1, duration_minutes: 0 }) });
+    await makeService({ service_name: 'Public Single Minute', standard: validStandard({ duration_minutes: 1 }) });
+    await makeService({ service_name: 'Public Mixed Duration', standard: validStandard({ duration_days: 2, duration_hours: 5, duration_minutes: 30 }) });
     await makeService({ service_name: 'Public Future Only', standard: validStandard({ effective_from: addDays(today(), 3) }) });
     const gone = await makeService({ service_name: 'Public Gone' });
     await deactivateService(req('PATCH', `/services/${gone.service_id}/deactivate`, { token: SA() }), ctx(gone.service_id));
@@ -802,10 +836,10 @@ describe('CC013 public service browse (no login)', () => {
     assert.equal(text('Public Days').standard_text, '3 working days');
     assert.equal(text('Public Single Day').standard_text, '1 working day');
     assert.equal(text('Public Single Minute').standard_text, '1 minute');
+    assert.equal(text('Public Mixed Duration').standard_text, '2 working days, 5 hours, 30 minutes');
     assert.equal(text('Public Hours').office_name, 'Library');
     assert.equal(text('Public Hours').classification, 'SIMPLE');
-    assert.equal(text('Public Hours').duration_value, 4);
-    assert.equal(text('Public Hours').duration_unit, 'HOURS');
+    assert.deepEqual([text('Public Hours').duration_days, text('Public Hours').duration_hours, text('Public Hours').duration_minutes], [0, 4, 0]);
     assert.ok(!text('Public Future Only'), 'needs a standard in force today');
     assert.equal(body.page, 1);
     assert.ok(body.page_size >= 1 && body.total >= 6);
@@ -854,12 +888,12 @@ describe('CC013 public service browse (no login)', () => {
     const one = await callJson(publicDetail, req('GET', `/public/services/${detailService.service_id}`), ctx(detailService.service_id));
     assert.deepEqual(Object.keys(listed.body).sort(), ['items', 'page', 'page_size', 'total']);
     for (const item of listed.body.items) {
-      assert.deepEqual(Object.keys(item).sort(), ['classification', 'duration_unit', 'duration_value', 'office_name', 'service_id', 'service_name', 'standard_text']);
+      assert.deepEqual(Object.keys(item).sort(), ['classification', 'duration_days', 'duration_hours', 'duration_minutes', 'office_name', 'service_id', 'service_name', 'standard_text']);
     }
     assert.deepEqual(Object.keys(one.body.service).sort(), ['classification', 'documents', 'fees', 'office_name', 'processing_steps', 'service_id', 'service_name', 'standard_text', 'who_may_avail']);
     assert.deepEqual(Object.keys(one.body.service.documents[0]).sort(), ['document_name', 'is_mandatory', 'notes']);
     const text = JSON.stringify([listed.body, one.body]);
-    for (const banned of ['office_id', 'office_code', 'service_code', 'is_active', 'created_at', 'updated_at', 'standard_id', 'document_id', 'charter_reference', 'version_no', 'effective_', 'measurement_type', 'transaction_type', registrar.office_id, 'REG-']) {
+    for (const banned of ['office_id', 'office_code', 'service_code', 'service_scope', 'transaction_types', 'is_active', 'created_at', 'updated_at', 'standard_id', 'document_id', 'charter_reference', 'version_no', 'effective_', 'measurement_type', registrar.office_id, 'REG-']) {
       assert.ok(!text.includes(banned), `public response leaks ${banned}`);
     }
   });
@@ -911,15 +945,16 @@ describe('CC013 public service browse (no login)', () => {
 
 describe('TT1 standard as-of lookup', () => {
   it('AC1: returns the version in force on the given Manila date, with the service fields', async () => {
-    const service = await makeService({ service_name: 'AsOf Service', standard: validStandard({ effective_from: '2026-01-01', duration_value: 5 }) });
+    const service = await makeService({ service_name: 'AsOf Service', standard: validStandard({ effective_from: '2026-01-01', duration_minutes: 5 }) });
     const id = service.service_id;
     // Future-dated versions only need effective_from >= today; add one, then check the boundaries.
-    const v2 = await addStandard(id, validStandard({ effective_from: addDays(today(), 10), duration_value: 8, duration_unit: 'HOURS' }));
+    const v2 = await addStandard(id, validStandard({ effective_from: addDays(today(), 10), duration_days: 1, duration_hours: 8, duration_minutes: 30 }));
     const first = await asOf(id, '2026-01-01');
     assert.deepEqual(first.body, {
       standard_id: service.current_standard.standard_id,
-      duration_value: 5,
-      duration_unit: 'MINUTES',
+      duration_days: 0,
+      duration_hours: 0,
+      duration_minutes: 5,
       service_code: service.service_code,
       service_name: 'AsOf Service',
       office_id: registrar.office_id,
@@ -983,9 +1018,10 @@ describe('TT2 seeding script with duplicate guard', () => {
         service_code: 'SDA-ONE-001',
         service_name: 'Seed Service One',
         classification: 'SIMPLE',
-        transaction_type: 'G2C',
+        service_scope: 'EXTERNAL',
+        transaction_types: ['G2C'],
         processing_steps: 'Steps',
-        standard: { duration_value: 5, duration_unit: 'MINUTES', effective_from: '2026-01-01', charter_reference: 'ref' },
+        standard: { duration_days: 0, duration_hours: 0, duration_minutes: 5, effective_from: '2026-01-01', charter_reference: 'ref' },
         documents: [{ document_name: 'Seed Doc', is_mandatory: true }],
       },
       {
@@ -993,8 +1029,9 @@ describe('TT2 seeding script with duplicate guard', () => {
         service_code: 'SDB-ONE-001',
         service_name: 'Seed Service One',
         classification: 'COMPLEX',
-        transaction_type: 'G2B',
-        standard: { duration_value: 2, duration_unit: 'HOURS', effective_from: '2026-01-01', charter_reference: 'ref' },
+        service_scope: 'INTERNAL',
+        transaction_types: ['G2B', 'G2G'],
+        standard: { duration_days: 0, duration_hours: 2, duration_minutes: 0, effective_from: '2026-01-01', charter_reference: 'ref' },
       },
     ],
   };
@@ -1033,15 +1070,21 @@ describe('TT2 seeding script with duplicate guard', () => {
   });
 
   it('applies the same validation as the API, reports bad rows and still loads the good ones', async () => {
+    const seedService = (over = {}) => ({
+      service_scope: 'EXTERNAL',
+      transaction_types: ['G2C'],
+      standard: { duration_days: 0, duration_hours: 1, duration_minutes: 0, effective_from: '2026-01-01', charter_reference: 'r' },
+      ...over,
+    });
     const data = {
       offices: [{ office_code: 'SDC', office_name: 'SEED OFFICE C' }],
       services: [
-        { office_code: 'SDC', service_code: 'SDC-OK-001', service_name: 'Valid Seed Row', classification: 'SIMPLE', transaction_type: 'G2C', standard: { duration_value: 1, duration_unit: 'HOURS', effective_from: '2026-01-01', charter_reference: 'r' } },
-        { office_code: 'SDC', service_code: 'SDC-BAD-001', service_name: 'Bad Class', classification: 'EASY', transaction_type: 'G2C', standard: { duration_value: 1, duration_unit: 'HOURS', effective_from: '2026-01-01', charter_reference: 'r' } },
-        { office_code: 'NOPE', service_code: 'NOPE-X-001', service_name: 'No Office', classification: 'SIMPLE', transaction_type: 'G2C', standard: { duration_value: 1, duration_unit: 'HOURS', effective_from: '2026-01-01', charter_reference: 'r' } },
-        { office_code: 'SDC', service_code: 'SDC-CODE-001', service_name: 'Code Clash', classification: 'SIMPLE', transaction_type: 'G2C', standard: { duration_value: 0, duration_unit: 'HOURS', effective_from: '2026-01-01', charter_reference: 'r' } },
-        { office_code: 'SDC', service_code: 'SDC-OK-001', service_name: 'Same Code Other Name', classification: 'SIMPLE', transaction_type: 'G2C', standard: { duration_value: 1, duration_unit: 'HOURS', effective_from: '2026-01-01', charter_reference: 'r' } },
-        { office_code: 'SDC', service_code: 'SDC-DOC-001', service_name: 'Bad Doc Row', classification: 'SIMPLE', transaction_type: 'G2C', standard: { duration_value: 1, duration_unit: 'HOURS', effective_from: '2026-01-01', charter_reference: 'r' }, documents: [{ document_name: '' }] },
+        seedService({ office_code: 'SDC', service_code: 'SDC-OK-001', service_name: 'Valid Seed Row', classification: 'SIMPLE' }),
+        seedService({ office_code: 'SDC', service_code: 'SDC-BAD-001', service_name: 'Bad Class', classification: 'EASY' }),
+        seedService({ office_code: 'NOPE', service_code: 'NOPE-X-001', service_name: 'No Office', classification: 'SIMPLE' }),
+        seedService({ office_code: 'SDC', service_code: 'SDC-CODE-001', service_name: 'Code Clash', classification: 'SIMPLE', standard: { duration_days: 0, duration_hours: 0, duration_minutes: 0, effective_from: '2026-01-01', charter_reference: 'r' } }),
+        seedService({ office_code: 'SDC', service_code: 'SDC-OK-001', service_name: 'Same Code Other Name', classification: 'SIMPLE' }),
+        seedService({ office_code: 'SDC', service_code: 'SDC-DOC-001', service_name: 'Bad Doc Row', classification: 'SIMPLE', documents: [{ document_name: '' }] }),
       ],
     };
     const result = await runSeed(ds, data);
@@ -1054,6 +1097,28 @@ describe('TT2 seeding script with duplicate guard', () => {
     assert.equal((await ds.query(`SELECT count(*)::int AS n FROM services WHERE service_name = 'Bad Doc Row'`))[0].n, 0, 'a failing row leaves nothing behind');
     assert.equal((await ds.query(`SELECT count(*)::int AS n FROM services WHERE service_name = 'Valid Seed Row'`))[0].n, 1);
     await assert.rejects(() => runSeed(ds, { services: 'nope' }), /list of objects/);
+  });
+
+  it('does not mark a failed service name as seen before a later valid row commits', async () => {
+    const base = {
+      office_code: 'SDD',
+      service_name: 'Retry This Seed Name',
+      classification: 'SIMPLE',
+      service_scope: 'EXTERNAL',
+      transaction_types: ['G2C'],
+      standard: { duration_days: 0, duration_hours: 0, duration_minutes: 5, effective_from: '2026-01-01', charter_reference: 'r' },
+    };
+    const result = await runSeed(ds, {
+      offices: [{ office_code: 'SDD', office_name: 'SEED OFFICE D' }],
+      services: [
+        { ...base, service_code: 'SDD-ONE-001', documents: [{ document_name: '' }] },
+        { ...base, service_code: 'SDD-ONE-002' },
+      ],
+    });
+    assert.equal(result.counts.errors, 1);
+    assert.equal(result.counts.services_created, 1);
+    assert.equal(result.counts.services_duplicate, 0);
+    assert.equal((await ds.query(`SELECT count(*)::int AS n FROM services WHERE service_name = 'Retry This Seed Name'`))[0].n, 1);
   });
 
   it('the shipped seed/sample.json is clearly marked placeholder data and loads cleanly', async () => {
@@ -1073,7 +1138,7 @@ describe('TT2 seeding script with duplicate guard', () => {
     const dir = await mkdtemp(join(tmpdir(), 'seed-'));
     try {
       const file = join(dir, 'cli.json');
-      await writeFile(file, JSON.stringify({ offices: [{ office_code: 'CLI', office_name: 'CLI Office' }], services: [{ office_code: 'CLI', service_code: 'CLI-ONE-001', service_name: 'CLI Service', classification: 'SIMPLE', transaction_type: 'G2C', standard: { duration_value: 1, duration_unit: 'HOURS', effective_from: '2026-01-01', charter_reference: 'r' } }] }));
+      await writeFile(file, JSON.stringify({ offices: [{ office_code: 'CLI', office_name: 'CLI Office' }], services: [{ office_code: 'CLI', service_code: 'CLI-ONE-001', service_name: 'CLI Service', classification: 'SIMPLE', service_scope: 'EXTERNAL', transaction_types: ['G2C'], standard: { duration_days: 0, duration_hours: 1, duration_minutes: 0, effective_from: '2026-01-01', charter_reference: 'r' } }] }));
       const run = (...args) =>
         promisify(execFile)(process.execPath, ['scripts/seed.js', '--file', file, ...args], {
           cwd: new URL('..', import.meta.url).pathname,
