@@ -3,6 +3,7 @@
 import { strict as assert } from 'node:assert';
 import { after, before, describe, it } from 'node:test';
 import { runBoundarySuite } from 'ccms-shared/testing';
+import { POST as postAddMinutes } from '../src/app/api/add-working-minutes/route.js';
 import { POST as postDeadline } from '../src/app/api/deadline/route.js';
 import { POST as postException } from '../src/app/api/exceptions/route.js';
 import { GET as isWorkingDay } from '../src/app/api/is-working-day/route.js';
@@ -21,6 +22,10 @@ after(async () => env?.teardown());
 const key = { key: SERVICE_KEY };
 const minutes = async (body, opts = key) => {
   const response = await postMinutes(req('POST', '/working-minutes', { ...opts, body }));
+  return { status: response.status, body: await response.json() };
+};
+const addMinutes = async (body, opts = key) => {
+  const response = await postAddMinutes(req('POST', '/add-working-minutes', { ...opts, body }));
   return { status: response.status, body: await response.json() };
 };
 const deadline = async (body, opts = key) => {
@@ -185,6 +190,44 @@ describe('POST /deadline (AC7-AC12)', () => {
   });
 });
 
+describe('POST /add-working-minutes (TT3)', () => {
+  before(clear);
+
+  it('adds working minutes across closing times and non-working days', async () => {
+    assert.deepEqual((await addMinutes({ datetime: '2026-10-06T18:30:00+08:00', minutes: 120 })).body, {
+      datetime: '2026-10-07T09:30:00+08:00',
+    });
+    assert.deepEqual((await addMinutes({ datetime: '2026-10-09T19:00:00+08:00', minutes: 541 })).body, {
+      datetime: '2026-10-13T08:01:00+08:00',
+    });
+  });
+
+  it('observes office-specific exceptions and accepts zero minutes', async () => {
+    await addEntry({ exception_date: '2026-10-10', exception_type: 'SUSPENSION', description: 'Outage', office_id: OFFICE_A });
+    const body = { datetime: '2026-10-09T19:00:00+08:00', minutes: 60 };
+    assert.equal((await addMinutes({ ...body, officeId: OFFICE_A })).body.datetime, '2026-10-13T09:00:00+08:00');
+    assert.equal((await addMinutes({ ...body, officeId: OFFICE_B })).body.datetime, '2026-10-10T09:00:00+08:00');
+    assert.equal((await addMinutes({ datetime: '2026-10-09T19:00:00Z', minutes: 0 })).body.datetime, '2026-10-10T03:00:00+08:00');
+    await clear();
+  });
+
+  it('validates datetime, minutes and officeId', async () => {
+    const datetime = '2026-10-06T18:30:00+08:00';
+    for (const value of [-1, 1.5, '5', null, undefined]) {
+      assert.equal((await addMinutes({ datetime, minutes: value })).status, 400, String(value));
+    }
+    assert.equal((await addMinutes({ datetime: '2026-10-06T18:30:00', minutes: 1 })).status, 400);
+    assert.equal((await addMinutes({ datetime, minutes: 1, officeId: 'nope' })).status, 400);
+  });
+
+  it('needs the service key or a signed-in token', async () => {
+    const body = { datetime: '2026-10-06T18:30:00+08:00', minutes: 120 };
+    assert.equal((await addMinutes(body, {})).status, 401);
+    assert.equal((await addMinutes(body, { key: 'wrong' })).status, 401);
+    for (const token of Object.values(tokens)) assert.equal((await addMinutes(body, { token })).status, 200);
+  });
+});
+
 describe('GET /is-working-day', () => {
   before(clear);
 
@@ -248,6 +291,13 @@ runBoundarySuite({
       officeScoped: true,
       invoke: (token, target) =>
         postDeadline(req('POST', '/deadline', { token, body: { start: '2026-10-06T10:00:00+08:00', workingDays: 1, officeId: target === 'own' ? OFFICE_A : OFFICE_B } })),
+    },
+    {
+      name: 'POST /add-working-minutes',
+      write: false,
+      officeScoped: true,
+      invoke: (token, target) =>
+        postAddMinutes(req('POST', '/add-working-minutes', { token, body: { datetime: '2026-10-06T10:00:00+08:00', minutes: 60, officeId: target === 'own' ? OFFICE_A : OFFICE_B } })),
     },
     {
       name: 'GET /is-working-day',

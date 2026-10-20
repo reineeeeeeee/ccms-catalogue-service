@@ -3,8 +3,8 @@ import { ROLE_LIST, Errors, assertOfficeAccess, authenticate, hasValidServiceKey
 /**
  * Engine and holiday endpoints are for other services (shared service key) and for signed-in users.
  * Returns { service: true } or { service: false, user }. A missing or wrong credential is a 401.
- * The engine only reads data, even though POST /working-minutes and /deadline carry a body, so the
- * Executive role's "no writes" rule does not apply: it is checked against the role list only.
+ * The engine only reads data, even though its calculation endpoints carry a body, so the Executive
+ * role's "no writes" rule does not apply: it is checked against the role list only.
  */
 export async function authenticateCaller(request) {
   if (hasValidServiceKey(request)) return { service: true, user: null };

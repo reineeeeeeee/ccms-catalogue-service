@@ -181,7 +181,7 @@ The Calendar half: the campus calendar API under `/api` (browsers reach it at `/
 
 PostgreSQL 15 or newer is required: the one-entry-per-date-and-scope rule uses a `NULLS NOT DISTINCT` unique index (the `postgres:16` image of the local stack is fine). The weekly schedule is seeded with Mon-Fri 08:00-17:00 working, Sat/Sun non-working.
 
-Path check: the Catalogue uses `/health`, `/offices`, `/services`, `/public/...`; the Calendar uses `/schedule`, `/exceptions`, `/holidays`, `/terms`, `/working-minutes`, `/deadline`, `/is-working-day`, `/sync/...`. The only shared path was `/health`, which is now one route.
+Path check: the Catalogue uses `/health`, `/offices`, `/services`, `/public/...`; the Calendar uses `/schedule`, `/exceptions`, `/holidays`, `/terms`, `/working-minutes`, `/add-working-minutes`, `/deadline`, `/is-working-day`, `/sync/...`. The only shared path was `/health`, which is now one route.
 
 ### Conventions
 
@@ -208,6 +208,7 @@ Path check: the Catalogue uses `/health`, `/offices`, `/services`, `/public/...`
 | `POST /terms` | Super Admin | add a term |
 | `PUT /terms/:id` | Super Admin | edit a term |
 | `POST /working-minutes` | signed in or service key | working minutes between two instants |
+| `POST /add-working-minutes` | signed in or service key | move an instant forward by working minutes |
 | `POST /deadline` | signed in or service key | working-day deadline |
 | `GET /is-working-day` | signed in or service key | window of one date |
 | `GET /sync/status` | Super Admin | when Audit last synced, last FMS push, recent pushes |
@@ -341,6 +342,15 @@ curl -X POST -H "x-service-key: $K" -H "content-type: application/json" $BASE/wo
 ```
 With the schedule Tue-Fri 08:00-19:00, Sat 08:00-17:00, Sun/Mon off: `200 { "working_minutes": 660 }` (Fri 60 + Sat 540 + Tue 60). An end that is not after the start: `400` with message `End must be after start`.
 
+`POST /add-working-minutes`
+
+```bash
+curl -X POST -H "x-service-key: $K" -H "content-type: application/json" $BASE/add-working-minutes \
+  -d '{ "datetime": "2026-10-09T19:00:00+08:00", "minutes": 120, "officeId": "11111111-1111-4111-8111-111111111111" }'
+```
+
+`200 { "datetime": "2026-10-10T10:00:00+08:00" }`. `minutes` must be a whole number of 0 or more. The calculation skips non-working time and applicable holidays or suspensions, and the result always uses `+08:00`.
+
 `POST /deadline`
 
 ```bash
@@ -358,7 +368,7 @@ A non-working day gives `{ "is_working_day": false, "window": null }`. `closing_
 
 Engine errors are `400` in the standard format (bad timestamp, bad `officeId`, span longer than 3660 days, `End must be after start`). Spans up to 60 days are computed in milliseconds (tested against the 2 second limit).
 
-`GET /schedule` and `GET /holidays` (above) complete the set for Transaction and Reports; all five are callable with the service key.
+`GET /schedule` and `GET /holidays` (above) complete the set for Transaction and Reports; all six are callable with the service key.
 
 #### Calendar sharing (CC018, TT2)
 
