@@ -2,6 +2,7 @@ import { Errors, isUuid, isValidManilaDate } from 'ccms-shared';
 import { MSG, optionalText } from './calendar-rules.js';
 import {
   EngineError,
+  computeAddedWorkingMinutes,
   computeDeadline,
   computeWorkingMinutes,
   createCalendar,
@@ -55,6 +56,17 @@ export async function workingMinutes(dataSource, body) {
   const calendar = await loadCalendar(dataSource, officeId);
   try {
     return { working_minutes: computeWorkingMinutes(calendar, startMs, endMs) };
+  } catch (err) {
+    throw asHttpError(err);
+  }
+}
+
+export async function addWorkingMinutes(dataSource, body) {
+  const datetimeMs = parseInstant(body.datetime, 'datetime', 'Datetime');
+  const officeId = parseEngineOfficeId(body.officeId);
+  const calendar = await loadCalendar(dataSource, officeId);
+  try {
+    return { datetime: formatManilaIso(computeAddedWorkingMinutes(calendar, datetimeMs, body.minutes)) };
   } catch (err) {
     throw asHttpError(err);
   }

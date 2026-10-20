@@ -700,7 +700,7 @@ describe('CC011 procedure steps (reference only)', () => {
   it('AC3: no transaction-side lookup uses the procedure text', async () => {
     const service = await makeService({ processing_steps: 'Reference only text' });
     const lookup = await asOf(service.service_id, today());
-    assert.deepEqual(Object.keys(lookup.body).sort(), ['duration_days', 'duration_hours', 'duration_minutes', 'office_id', 'service_code', 'service_name', 'standard_id']);
+    assert.deepEqual(Object.keys(lookup.body).sort(), ['classification', 'duration_days', 'duration_hours', 'duration_minutes', 'office_code', 'office_id', 'service_code', 'service_name', 'standard_id']);
     assert.ok(!JSON.stringify(lookup.body).includes('Reference only'));
   });
 });
@@ -958,6 +958,8 @@ describe('TT1 standard as-of lookup', () => {
       service_code: service.service_code,
       service_name: 'AsOf Service',
       office_id: registrar.office_id,
+      office_code: registrar.office_code,
+      classification: 'SIMPLE',
     });
     const lastDay = await asOf(id, addDays(today(), 9));
     assert.equal(lastDay.body.standard_id, service.current_standard.standard_id);

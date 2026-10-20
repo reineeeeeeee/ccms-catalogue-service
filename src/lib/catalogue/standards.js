@@ -183,9 +183,11 @@ export async function listStandards(dataSource, user, serviceId) {
  */
 export async function getStandardAsOf(dataSource, serviceId, asOf, viewer = null) {
   const rows = await dataSource.query(
-    `SELECT s.service_id, s.office_id, s.service_code, s.service_name, s.is_active,
+    `SELECT s.service_id, s.office_id, o.office_code, s.service_code, s.service_name,
+            s.classification, s.is_active,
             st.standard_id, st.duration_days, st.duration_hours, st.duration_minutes
        FROM services s
+       JOIN offices o ON o.office_id = s.office_id
        LEFT JOIN service_standards st
          ON st.service_id = s.service_id
         AND st.effective_from <= $2::date
@@ -208,5 +210,7 @@ export async function getStandardAsOf(dataSource, serviceId, asOf, viewer = null
     service_code: row.service_code,
     service_name: row.service_name,
     office_id: row.office_id,
+    office_code: row.office_code,
+    classification: row.classification,
   };
 }

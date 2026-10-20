@@ -6,6 +6,7 @@ import { describe, it } from 'node:test';
 import { manilaParts } from 'ccms-shared';
 import {
   EngineError,
+  computeAddedWorkingMinutes,
   computeDeadline,
   computeWorkingMinutes,
   dateOfDayIndex,
@@ -185,6 +186,31 @@ describe('CC017 deadlines: AC7-AC12', () => {
   it('reports a calendar with no working days instead of looping forever', () => {
     const cal = calendar([], null, CHARTER_SCHEDULE.map((row) => ({ ...row, is_working: false })));
     assert.throws(() => computeDeadline(cal, { startMs: at(D.tue, '15:00'), workingDays: 1 }), /no working days/);
+  });
+});
+
+describe('TT3 add working minutes', () => {
+  it('moves forward through working windows and keeps an exact closing time', () => {
+    const cal = calendar();
+    assert.equal(iso(computeAddedWorkingMinutes(cal, at(D.tue, '18:30'), 120)), '2026-10-07T09:30:00+08:00');
+    assert.equal(iso(computeAddedWorkingMinutes(cal, at(D.fri, '19:00'), 540)), '2026-10-10T17:00:00+08:00');
+    assert.equal(iso(computeAddedWorkingMinutes(cal, at(D.fri, '19:00'), 541)), '2026-10-13T08:01:00+08:00');
+  });
+
+  it('starts at the next available window and observes exceptions', () => {
+    const exceptions = [entry(D.sat), entry(D.tue2, { exception_type: 'SUSPENSION', suspended_from: '09:00' })];
+    const cal = calendar(exceptions);
+    assert.equal(iso(computeAddedWorkingMinutes(cal, at(D.fri, '19:00'), 120)), '2026-10-14T09:00:00+08:00');
+  });
+
+  it('returns the same instant for zero and rejects invalid inputs', () => {
+    const cal = calendar();
+    const start = at(D.tue, '18:30');
+    assert.equal(computeAddedWorkingMinutes(cal, start, 0), start);
+    for (const value of [-1, 1.5, '5', null, undefined]) {
+      assert.throws(() => computeAddedWorkingMinutes(cal, start, value), (err) => err.code === 'INVALID_WORKING_MINUTES');
+    }
+    assert.throws(() => computeAddedWorkingMinutes(cal, Number.NaN, 1), EngineError);
   });
 });
 

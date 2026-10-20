@@ -161,7 +161,11 @@ export function computeWorkingMinutes(calendar, startMs, endMs) {
 }
 
 /** Moves `minutes` of working time forward from an instant. Ending exactly at a closing time stays there. */
-function advanceWorkingMinutes(calendar, fromMs, minutes) {
+export function computeAddedWorkingMinutes(calendar, fromMs, minutes) {
+  assertInstant(fromMs, 'Datetime');
+  if (!Number.isInteger(minutes) || minutes < 0) {
+    throw new EngineError('INVALID_WORKING_MINUTES', 'Minutes must be a whole number of 0 or more');
+  }
   if (minutes === 0) return fromMs;
   let remaining = minutes;
   const firstDay = dayIndexOfInstant(fromMs);
@@ -198,7 +202,7 @@ export function computeDeadline(calendar, { startMs, workingDays, heldMinutes = 
     if (!window) continue;
     counted += 1;
     if (counted === workingDays) {
-      return advanceWorkingMinutes(calendar, instantAt(day, window.close), heldMinutes);
+      return computeAddedWorkingMinutes(calendar, instantAt(day, window.close), heldMinutes);
     }
   }
   throw new EngineError('NO_WORKING_TIME', 'The calendar has no working days in the next ten years');
