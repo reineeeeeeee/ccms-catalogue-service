@@ -252,7 +252,7 @@ describe('CC007 add service with first standard', () => {
     const badReferenceFields = await createService({ fees: 50, who_may_avail: false });
     assert.ok(badReferenceFields.body.error.details.fees);
     assert.ok(badReferenceFields.body.error.details.who_may_avail);
-    const longReferenceFields = await createService({ fees: 'x'.repeat(501), who_may_avail: 'x'.repeat(501) });
+    const longReferenceFields = await createService({ fees: 'x'.repeat(501), who_may_avail: 'x'.repeat(1001) });
     assert.ok(longReferenceFields.body.error.details.fees);
     assert.ok(longReferenceFields.body.error.details.who_may_avail);
   });

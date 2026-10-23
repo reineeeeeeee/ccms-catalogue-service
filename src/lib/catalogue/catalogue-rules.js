@@ -100,7 +100,7 @@ export function parseServiceFields(body, details = {}) {
   if (body.who_may_avail === undefined) whoMayAvail = undefined;
   else if (body.who_may_avail === null) whoMayAvail = null;
   else if (typeof body.who_may_avail !== 'string') details.who_may_avail = 'Who may avail must be text';
-  else if (body.who_may_avail.length > 500) details.who_may_avail = 'Who may avail must be 500 characters or fewer';
+  else if (body.who_may_avail.length > 1000) details.who_may_avail = 'Who may avail must be 1000 characters or fewer';
   else whoMayAvail = body.who_may_avail.trim() === '' ? null : body.who_may_avail.trim();
 
   return {

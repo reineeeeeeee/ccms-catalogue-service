@@ -1,0 +1,557 @@
+{
+  "_README": "Campus Admission and Registration Section, extracted from the PUP Citizen's Charter 2025 (1st Edition), Student Affairs and Services Office, Admissions and Registrations Office Services, External Services (PDF \"1_CC Admission and Registrar(2).pdf\", received 10/21/2026, pages 3 to 44). effective_from 2025-01-01 is an ASSUMPTION (edition year start); replace if the Charter prints an effective date. Standards carry the three-part duration (duration_days, duration_hours, duration_minutes). Each service carries service_scope EXTERNAL. Staff names printed in the Person responsible column are NOT imported (PM decision 10/21/2026, D7 held): designations only. Documents that apply to one group only, conditional documents and the claim-time documents are not mandatory (see CCMS_SEEDING_INSTRUCTIONS_10062026.md section 5.5). Review before importing.",
+  "offices": [
+    {
+      "office_code": "PUP-ADMREG",
+      "office_name": "Campus Admission and Registration Section"
+    }
+  ],
+  "services": [
+    {
+      "office_code": "PUP-ADMREG",
+      "service_code": "PUP-ADMREG-ADM-001",
+      "service_name": "Processing of Freshman Admission",
+      "classification": "HIGHLY_TECHNICAL",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "Tuition and Misc Fees: NONE (covered by Republic Act 10931); English Placement Test: P150.00",
+      "who_may_avail": "1. Graduates of the K12 program or those who graduated from K12 pilot schools who have not enrolled in any technical/diploma/degree program immediately after graduation with GWA of 82% or higher. 2. A Philippine Educational Placement Test (PEPT) passer, eligible for admission to college with an average rating of 82% or higher in its five (5) subject areas: Math, English, Science, Filipino, and Araling Panlipunan. 3. An Alternative Learning System Accreditation &Equivalency (ALS A&E) Test for Secondary Level passer, eligible for admission to college and has 100 or higher Standard Score (SS) with Essay Writing of 2 or higher.",
+      "processing_steps": "Step 1. Visit the PUP Website for On-Line confirmation and scheduled date of processing the applicant's admission credentials, interview and enrolment\n  1. Base on iApply guidelines and policies set by the University\n  [Responsible: http://www.pup.edu.ph/iApply]\nStep 2. Fill out the Student Admission Records Form 1 (SAR Form 1). Click the PRINT button to print the SAR Form 1 with Route and Approval Slip 2.1 Follow the steps in enrolment as indicated in the Route and Approval Slip\n  [Responsible: http://www.pup.edu.ph/iApply]\nStep 3. Proceed to the Admission and Registration Office to process admission credentials.\n  3.1 Gives Logbook and Affix signature\n  3.2 Receive the entrance credentials from qualified freshmen applicants who passed the PUP College entrance Test (PUPCET)\n  3.2.1 HS/SHS GWA must be 82% or higher\n  3.2.2 If final grade in English is 80% or lower, the applicant must take the English Placement Test\n  [Responsible: Admission Services Staff; Head of Admission and Registration]\nStep 4. Proceed to the Head of Academic Programs for interview\n  4. Accommodate the interview of your program choice and submission of credentials\n  4.1 The Head of Academic Programs will tag the subjects for enrolment and assessment of fees\n  [Responsible: Head of Academic Programs]\nStep 5. Proceed to the Campus Medical Clinic or nearest government medical clinic to undergo physical examination 5.1 The applicant will provide the medical clinic the chest x-ray film for physical examination\n  5. The clinic will provide medical assessment and clearance to the applicant if physical fit to proceed for enrolment\n  [Responsible: Medical staff/ Physician]\nStep 6. Go back to the Admission Services to claim the Registration Certificate on prescribed date/schedule\n  6.1. Release and issuance of Registration Certificates for the current semester and evaluate the service rendered\n  [Responsible: Head of Admission and Registration]",
+      "standard": {
+        "duration_days": 12,
+        "duration_hours": 5,
+        "duration_minutes": 45,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 3"
+      },
+      "documents": [
+        {
+          "document_name": "Student Application Form 1 (SAR Form 1 - Confirmation Slip)",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be printed from PUP Website"
+        },
+        {
+          "document_name": "Route and Approval Slip",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be printed from PUP Website"
+        },
+        {
+          "document_name": "Form 138 (Senior High School Card)",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Certified True Copy of Grades 10 and 11 High School Card",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "For PEPT Passer - duly authenticated or verified copy of the Certificate of Rating and Certification issued by DepEd (CMO No.15, s.2003)",
+          "is_mandatory": false,
+          "notes": "Where to secure: Printed as item 4.1 under the Certified True Copy of Grades 10 and 11 High School Card (where to secure: Client)"
+        },
+        {
+          "document_name": "For ALS A&E Passer - duly authenticated or verified copy of Test Certificate of Rating certified by DepEd-NETRC-BAL for Tertiary Level",
+          "is_mandatory": false,
+          "notes": "Where to secure: Printed as item 4.2 under the Certified True Copy of Grades 10 and 11 High School Card (where to secure: Client)"
+        },
+        {
+          "document_name": "Certification from High School/SHS Registrar with school dry seal and noted by the Principal that no copy of F137A has been sent to other college or university",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Original PSA Birth Certificate",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Certification of Good Moral issued by the HS/SHS Principal/or Guidance Counselor with school dry seal",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "School ID for currently enrolled students or any valid ID with picture for previous HS/SHS graduates",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Current Chest X-Ray result with film (six (6) months validity from schedule date of medical clearance)",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Medical clearance issued by the PUP Medical Clinic",
+          "is_mandatory": true,
+          "notes": "Where to secure: PUP Medical Clinic"
+        },
+        {
+          "document_name": "2 pcs. 2 inch x 2 inch colored picture with white background with applicants name on the photo",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "One (1) pc. long brown envelope",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-ADMREG",
+      "service_code": "PUP-ADMREG-ADM-002",
+      "service_name": "Processing for Re-Admission (Returning Students)",
+      "classification": "COMPLEX",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "P300.00",
+      "who_may_avail": "Returning Students (Returnee)",
+      "processing_steps": "Step 1. Go to Admission Services and fill out the application for re-admission. 1.1 Secure clearance from accounting Office 1.2 Secure clearance from Campus Medical Clinic\n  1.1 Give Logbook and affix signature\n  1.2 Accept the filled out application for re-admission for verification and attach all pertinent documents needed for re-admission\n  [Responsible: Admission Services Staff; Head of Admission and Registration; Admission's Office]\nStep 2. Proceed to Cashier's Office to pay the amount\n  2.1 Accept payment and issues official receipt.\n  [Responsible: Cash Receipts Officer; Cashier's Office]\nStep 3. For S.I.S. students, proceed to the Admission and Registration Office to re-activate your account.\n  3.1 Bring the proof of payment and clients copy of the application form.\n  [Responsible: Head of Admission and Registration; Admission's Office]\nStep 4. Request Informative Copy of Grades (If you stopped for one (1) semester); Transcript of Records (TOR) if you stopped for two (2) or more years from the date of your last enrollment in P.U.P.\n  4.1 Process request and issue advisory and updates whenever necessary\n  4.2 Notify the client when document is ready for release.\n  [Responsible: Admission Services Staff; Head of Admission and Registration; Admission's Office]\nStep 5. Proceed to the Head of Academic Programs for academic evaluation and approval for re-admission.\n  5. Evaluate the student academic records and signs the re-admission form with recommendation\n  [Responsible: Head of Academic Programs; Academic Office]\nStep 6. Go back to Admission Services and submit two (2) sets of re-admission forms and attachments: Original and duplicate copy with 2\"x2\" colored photo with white background and nametag.\n  6. Accept re-admission form and required documents and start initial assessment and verification of completeness.\n  6.1 If documents are incomplete, indicate in the clients copy lacking form for immediate compliance and advise the date of release.\n  [Responsible: Admission Services Staff; Head of Admission and Registration; Admission's Office]\nStep 7. Claim the re-admission certificate and attachments on prescribed schedule.\n  7. Issue certificate of re-admission and sign in the logbook and evaluate the service rendered\n  [Responsible: Admission Services Staff; Head of Admission and Registration]\nStep 8. Proceed to the Head of Academic Programs for enrollment\n  [Responsible: Head of Academic Programs; Academic Office]",
+      "standard": {
+        "duration_days": 2,
+        "duration_hours": 7,
+        "duration_minutes": 53,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 37"
+      },
+      "documents": [
+        {
+          "document_name": "Accomplished re-admission form",
+          "is_mandatory": true,
+          "notes": "Where to secure: Admission Services"
+        },
+        {
+          "document_name": "Informative Copy of Grades/Transcript of Records",
+          "is_mandatory": true,
+          "notes": "Where to secure: Admission Services"
+        },
+        {
+          "document_name": "Curriculum Sheet",
+          "is_mandatory": true,
+          "notes": "Where to secure: Head of Academic Programs"
+        },
+        {
+          "document_name": "Latest Certificate of Registration",
+          "is_mandatory": true,
+          "notes": "Where to secure: Head of Admission and Registration"
+        },
+        {
+          "document_name": "Two (2) pcs. 2 inch x 2 inch colored picture with white background with applicants name on the photo",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Official Receipt for re-admission",
+          "is_mandatory": true,
+          "notes": "Where to secure: Cashier"
+        },
+        {
+          "document_name": "Medical Clearance",
+          "is_mandatory": true,
+          "notes": "Where to secure: PUP Medical Clinic/ Government Medical Clinic"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-ADMREG",
+      "service_code": "PUP-ADMREG-ADM-003",
+      "service_name": "Processing of Request for Leave of Absence",
+      "classification": "COMPLEX",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "None",
+      "who_may_avail": "Students",
+      "processing_steps": "Step 1. Submit Request letter addressed to the Campus Registrar stating the reason for his/her leave noted Head of Academic Programs/Director\n  1.1 Give Logbook and Affix Signature\n  1.2 Receive and sign the letter of intent by the Head of Academic Program/Director\n  [Responsible: Head of Academic Programs/Director; Director's Office]\nStep 2. Process ACE form to withdraw the subjects if officially enrolled during the semester.\n  2.1 Accept ACE Form and affix signature to corresponding subject\n  [Responsible: Assigned Professors]\nStep 3. Submit request letter noted by Head of Academic Program/Director to the Campus Registrar for signature and ACE Form for Currently enrolled\n  3.1 Gives Logbook and Affix Signature\n  3.2 Accept request letter for signature of the Campus Registrar and endorses to the Office of Admission Services\n  [Responsible: Head of Admission and Registration; Admission's Office]\nStep 4. Submit photocopy the approved letter signed by the Campus Registrar\n  7.1 Receive and tag the request for Leave of Absence in the SIS Module\n  [Responsible: Head of Admission and Registration; Admission's Office]",
+      "standard": {
+        "duration_days": 2,
+        "duration_hours": 7,
+        "duration_minutes": 40,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 36"
+      },
+      "documents": [
+        {
+          "document_name": "Letter of intent address to the Campus Registrar",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Documents as proof such as Medical Certificate, Employment Order",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Application for Change of Enrollment (ACE) if the student is currently enrolled",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-ADMREG",
+      "service_code": "PUP-ADMREG-ACC-001",
+      "service_name": "Processing of Request for Course Accreditation Service- Senior High School to Bridge Course",
+      "classification": "COMPLEX",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "NONE",
+      "who_may_avail": "Students",
+      "processing_steps": "Step 1. Accomplish Application for Accreditation of Academic Courses Form of subject together with the required documents\n  1.1 Give logbook and affix signature.\n  1.2 Approve and sign Accreditation of Course.\n  [Responsible: Head of Academic Programs; Academic Office]\nStep 2. Present accomplished Accreditation Form with complete requirements to Admission and Registration Office\n  2.1 Checks completeness of the presented Accreditation Form\n  2.2 If complete, signs the Accreditation Form\n  2.3 If not complete, returns the form to the student for compliance\n  [Responsible: Head of Admission and Registration; Admission's Office]\nStep 3. Submit the signed Accreditation Form to the Head of Student Services\n  2.4 Give logbook and affix signature.\n  2.5 Accept Accreditation Form for signature of the Campus Registrar\n  [Responsible: Head of Admission and Registration; Admission's Office]\nStep 4. Present accomplished Accreditation Form to Admission and Registration Office\n  4.1 Accept and tags the duly signed Accreditation Form\n  4.2 Give logbook and sign and evaluate service rendered\n  [Responsible: Head of Admission and Registration; Admission's Office]",
+      "standard": {
+        "duration_days": 2,
+        "duration_hours": 1,
+        "duration_minutes": 35,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 13"
+      },
+      "documents": [
+        {
+          "document_name": "Accomplished Course Accreditation Form",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be downloaded from the PUP Website"
+        },
+        {
+          "document_name": "Curriculum Sheet used upon admission",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Informative copy of grades for PUP SHS graduates",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Form 138 or 137 for graduates from other Senior High School",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-ADMREG",
+      "service_code": "PUP-ADMREG-ACC-002",
+      "service_name": "Processing of Course Accreditation Service (For Shiftees and Regular Students)",
+      "classification": "COMPLEX",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "NONE",
+      "who_may_avail": "Students",
+      "processing_steps": "Step 1. Accomplished Application for Accreditation of Academic Courses Form of subject together with the required documents\n  1.1 Give logbook and affix signature.\n  1.2 Approve and sign Accreditation of Course.\n  [Responsible: Head of Academic Programs; Academic Office]\nStep 2. Present accomplished Accreditation Form with complete requirements to the admission and Registration Office\n  2.1 Check completeness of the presented Accreditation Form\n  2.2 If complete, signs the Accreditation Form\n  2.3 If not complete, returns the form to the student for compliance\n  [Responsible: Head of Admission and Registration; Admission's Office]\nStep 3. Submit the signed Accreditation Form to the Head of Student Services\n  3.1 Give logbook and affix signature.\n  3.2 Accept Accreditation Form for signature of the Campus Registrar\n  [Responsible: Head of Admission and Registration; Admission's Office]\nStep 4. Present accomplished Accreditation Form to the Admission and Registration Office\n  4.1 Accept and tag the duly signed Accreditation Form\n  4.2 Give logbook and sign and evaluate service rendered\n  [Responsible: Head of Admission and Registration; Admission's Office]",
+      "standard": {
+        "duration_days": 4,
+        "duration_hours": 6,
+        "duration_minutes": 38,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 15"
+      },
+      "documents": [
+        {
+          "document_name": "SHIFTEES: Accomplished Course Accreditation Form",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be downloaded to the PUP Website"
+        },
+        {
+          "document_name": "SHIFTEES: Curriculum Sheet used upon admission",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "SHIFTEES: Informative copy of grades",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "SHIFTEES: Approved Shifting Form",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "SHIFTEES: Photocopy of Proof of Payment of Shifting Fee",
+          "is_mandatory": false,
+          "notes": "Where to secure: Cashier's Office"
+        },
+        {
+          "document_name": "REGULAR STUDENTS: Accomplished Accreditation Form",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be downloaded from the PUP Website"
+        },
+        {
+          "document_name": "REGULAR STUDENTS: Curriculum Sheet upon Admission to PUP",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "REGULAR STUDENTS: Informative Copy of Grades",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-ADMREG",
+      "service_code": "PUP-ADMREG-ACC-003",
+      "service_name": "Processing of Course Accreditation Service (for Transferees)",
+      "classification": "COMPLEX",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "From branches and campuses: NONE; from another University/College: P12.00 per unit",
+      "who_may_avail": "Students",
+      "processing_steps": "Step 1. Accomplished Application for Accreditation of Academic Courses Form of subject together with the required documents\n  1.1 Give logbook and affix signature.\n  1.2 Approve and sign Accreditation of Course.\n  [Responsible: Head of Academic Programs; Academic Office]\nStep 2. Present accomplished Accreditation Form with complete requirements to the Admission and Registration Office\n  2.1 Check completeness and validate Accreditation Form\n  2.2 If complete, advise the student to comeback the following day\n  2.3 If not complete, returns the form to the student for compliance\n  [Responsible: Head of Admission and Registration; Admission's Office]\nStep 3. Present accomplished Accreditation Form with complete requirements to the Admission and Registration Office\n  3.1 Check and validate the Accreditation Form\n  [Responsible: Admission Services Staff; Head of Admission and Registration; Admission's Office]\nStep 4. Submit the checked and verified Accreditation Form\n  4.1 Give logbook and affix signature.\n  4.2 Accept Accreditation Form for signature of the Campus Registrar\n  [Responsible: Head of Admission and Registration; Admission's Office]\nStep 5. For transferees from another University/ Branch, Proceed to the Cashier's Office\n  5.1 Accept Accreditation Form and assess payment\n  5.2 Accept payment and issue official receipt\n  [Responsible: Cashier; Cashier's Office]\nStep 6. Submit original copy to Office of Admission Services and photocopy to OVPC for tagging. (End of transaction)\n  5.1 Accept the duly signed Accreditation Form\n  5.2 Give logbook and sign and evaluate service rendered\n  [Responsible: OVPC]",
+      "standard": {
+        "duration_days": 2,
+        "duration_hours": 1,
+        "duration_minutes": 22,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 17"
+      },
+      "documents": [
+        {
+          "document_name": "TRANSFEREES FROM ANOTHER UNIVERSITY/COLLEGE: Accomplished Course Accreditation Form",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be downloaded from the PUP Website"
+        },
+        {
+          "document_name": "TRANSFEREES FROM ANOTHER UNIVERSITY/COLLEGE: Curriculum Sheet upon Admission to PUP",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "TRANSFEREES FROM ANOTHER UNIVERSITY/COLLEGE: Certified Copy of TOR with Remarks 'Copy for PUP'",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "TRANSFEREES FROM ANOTHER UNIVERSITY/COLLEGE: Subject Description taken from other school /university",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "TRANSFEREES FROM ANOTHER UNIVERSITY/COLLEGE: Proof of Payment",
+          "is_mandatory": false,
+          "notes": "Where to secure: Cashier's Office"
+        },
+        {
+          "document_name": "TRANSFEREES FROM BRANCH AND CAMPUS TO PUP MAIN: Accomplished Accreditation Form",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be downloaded from the PUP Website"
+        },
+        {
+          "document_name": "TRANSFEREES FROM BRANCH AND CAMPUS TO PUP MAIN: Curriculum Sheet upon Admission to PUP",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "TRANSFEREES FROM BRANCH AND CAMPUS TO PUP MAIN: Certified Copy of TOR with Remarks 'Copy for PUP'",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-ADMREG",
+      "service_code": "PUP-ADMREG-GRD-001",
+      "service_name": "Processing of Request for Application for Graduation SIS and Non-SIS",
+      "classification": "COMPLEX",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "Non-Engineering Courses: P1,590.00; Engineering Courses: P1,690.00. Possible Fees: P150.00 if not covered by RA 10931 (step 1); Grad. Fee P600.00; Non Eng'g P350.00; Eng'g. P450.00; Diploma P200.00; Cert. of Grad. P150.00; documentary stamp tax P90.00",
+      "who_may_avail": "Graduating Students",
+      "processing_steps": "Step 1. Pay the amount indicated in the payment voucher through the Cashier's Office\n  1. Accept payment and issues official receipt.\n  [Responsible: Cashier's Office]\nStep 2. Submit two copies of accomplished and printed Application for Graduation thru SIS (AFG) Submit two (2) copies of AFG form at the receiving window for non-SIS\n  2. Give Logbook and affix signature\n  2.1 Accept application for graduation by the receiving window\n  2.2 Endorses the AFG to the Records Room for retrieval of student records\n  2.3 Distribute the student records to the Records Analyst in charge of program for checking and validation\n  [Responsible: Head of Admission and Registration; Student Records]\nStep 3. Check SIS Account for any update or advisory from Head of Student Services\n  3. Process request and issues advisory and updates whenever necessary\n  If complete, forwards records to evaluator for first evaluation.\n  If not complete, informs the applicant thru SIS Account.\n  [Responsible: Head of Admission and Registration]\nStep 4. Monitor the SIS account for advisory from the evaluator\n  4. Evaluate all courses as prescribed by the approved curriculum and checks completeness of documents in the student envelope\n  If approved, print the Certificate of Candidacy (COC) and the computer-generated general Clearance Form\n  [Responsible: Head of Admission and Registration; Student Records]\nStep 5. Proceed to the Fund Management Office (Cashiers Office) for payment of fees\n  5. Receive payment of fees for those not covered by RA 10931\n  [Responsible: Cashier's Office]",
+      "standard": {
+        "duration_days": 2,
+        "duration_hours": 3,
+        "duration_minutes": 32,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 7"
+      },
+      "documents": [
+        {
+          "document_name": "Accomplished and printed copy of the Application for Graduation thru SIS Account",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Accomplished copy of the Application for Graduation for Non-SIS",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Proof of payment, if not covered by RA 10931 Covered otherwise known as Universal Access to Quality Tertiary Act of 2017.",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-ADMREG",
+      "service_code": "PUP-ADMREG-GRD-002",
+      "service_name": "Processing of Request for Correction of Entry of Grade, Completion of Incomplete Grade, Late Reporting of Grade",
+      "classification": "COMPLEX",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "P30.00",
+      "who_may_avail": "Currently Enrolled Students",
+      "processing_steps": "Step 1. Pay the amount for correction of Grade at the Cashier's Office\n  Accept payment and issues official receipt.\n  [Responsible: Cash receipts officer; Cashier Office]\nStep 2. Submit accomplished Completion Form and required documents to the Professor for the completion of incomplete subject\n  Accept application and required documents and gives grade\n  [Responsible: Assigned Professor]\nStep 3. Proceed to the Head of Academic Programs for the signature and approval\n  3. Give logbook and affix signature\n  3.1 Affix the signature of the Assigned Professor once validates the authenticity of the entry\n  3.2 Record in the logbook the duly signed completion form and submits one copy to the Office of the Campus Registrar and a receiving copy for the Admission Office.\n  [Responsible: Head of Academic Programs; Head of Admission and Registration]\nStep 4. Check the SIS account if grade is already tagged\n  4. Accept the completion form with required documents\n  4.1 Forward to the Campus Registrar for signature\n  4.2 Log the duly signed completion form and forwards the same to the assigned Records Analyst for tagging\n  [Responsible: Head of Admission and Registration]",
+      "standard": {
+        "duration_days": 0,
+        "duration_hours": 6,
+        "duration_minutes": 18,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 9"
+      },
+      "documents": [
+        {
+          "document_name": "Accomplished Completion Form 3 copies",
+          "is_mandatory": true,
+          "notes": "Where to secure: Downloadable to PUP Website"
+        },
+        {
+          "document_name": "Photocopy of Class Record of the Faculty",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Notarized Affidavit for the Change of Grades signed by the Professor",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Proof of payment",
+          "is_mandatory": true,
+          "notes": "Where to secure: Cashier's Office"
+        },
+        {
+          "document_name": "Official Logbook",
+          "is_mandatory": true,
+          "notes": "Where to secure: Not printed in the Charter"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-ADMREG",
+      "service_code": "PUP-ADMREG-CRD-001",
+      "service_name": "Processing of Request for Informative Copy of Grades",
+      "classification": "SIMPLE",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "P150.00. Step 2 prints: P150.00; P30.00 - documentary stamp tax",
+      "who_may_avail": "Students",
+      "processing_steps": "Step 1. Submit Request letter with required documents addressed to the Head of Admission and Registration\n  1.1 Give Logbook and Affix Signature\n  1.2 Receive and sign the letter\n  [Responsible: Head of Admission and Registration; Admission's Office; Student Records]\nStep 2. Pay the amount to the Cashier's Office\n  2. accept payment and issue official receipts\n  [Responsible: Cashier; Cashier's Office]\nStep 3. Submit request letter with required documents and proof of payments at the Admission and Registration Office\n  3.1 Accept and process the requested Informative Copy of Grades\n  3.2 Forward the printed Informative Copy of Grades to the Office of the Campus Registrar for CTC\n  [Responsible: Student Records]\nStep 4. Acknowledge receipt of requested credential.\n  4.1 Affixes signature and dry seal and issues the Informative copy\n  4.2 Gives logbook and sign and evaluate the service rendered\n  [Responsible: Student Records]",
+      "standard": {
+        "duration_days": 1,
+        "duration_hours": 1,
+        "duration_minutes": 47,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 35"
+      },
+      "documents": [
+        {
+          "document_name": "Letter of request stating the purpose of the request",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Proof of payment",
+          "is_mandatory": true,
+          "notes": "Where to secure: Cashier's Office"
+        },
+        {
+          "document_name": "PUP School Identification Card",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Authorization letter if to be claimed by a representative",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-ADMREG",
+      "service_code": "PUP-ADMREG-VER-001",
+      "service_name": "Processing of Request for Academic Verification Service",
+      "classification": "COMPLEX",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2B",
+        "G2G"
+      ],
+      "fees": "Local verification: P200.00; Foreign (On-line) verification: P10.00 (the payment step prints USD 10.00 for outside the country)",
+      "who_may_avail": "Companies, Government agencies",
+      "processing_steps": "Step 1. Submit letter request duly signed by the authorized company officer in charge with required documents for verification for Walk-in, or email for on-line verification\n  1.1 Give logbook and affix signature.\n  1.2 Accept request and required documents and start initial assessment and verification of completeness for walk-in.\n  Acknowledge request for online verification\n  1.3 If documents are complete Return the receiving copy of letter of request\n  1.4 If not complete, advice the client to comply with the lacking requirements otherwise the application will not be processed.\n  [Responsible: Head of Admission and Registration]\nStep 2. Follow-up request for any updates.\n  2.1 Processes request and issues advisory and updates whenever necessary and notify the client when document is ready for release.\n  2.2 If the verification is processed, informs the client to pay verification fee.\n  [Responsible: Head of Admission and Registration]\nStep 3. Proceed to the Cashier's Office for payment of fees for walk in verification. Submit scanned copy of payment made thru bank if outside the country\n  3. Accepts payment of verification\n  [Responsible: Cashier's Office]\nStep 4. 4.1 Pick up the verification results/documents for walk in 4.2 Check on-line the emailed result of verification\n  4.1 Issues verification results\n  4.2 Give logbook and sign and evaluate service rendered\n  7.2 Send thru email the result of verification\n  [Responsible: Head of Admission and Registration]",
+      "standard": {
+        "duration_days": 2,
+        "duration_hours": 1,
+        "duration_minutes": 50,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 40"
+      },
+      "documents": [
+        {
+          "document_name": "WALK-IN VERIFICATION: Letter of request with letter head",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client/ Company Verifier"
+        },
+        {
+          "document_name": "WALK-IN VERIFICATION: Photocopy of TOR, Diploma or credentials submitted",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client/company verifier"
+        },
+        {
+          "document_name": "WALK-IN VERIFICATION: Authorization letter signed by the student/graduate",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client/ Company Verifier"
+        },
+        {
+          "document_name": "WALK-IN VERIFICATION: Proof of payment",
+          "is_mandatory": false,
+          "notes": "Where to secure: Cashier's Office"
+        },
+        {
+          "document_name": "WALK-IN VERIFICATION: Authorization letter issued by the company to pick up the results of the verification with 2 valid IDs",
+          "is_mandatory": false,
+          "notes": "Where to secure: Company Verifier"
+        },
+        {
+          "document_name": "ON-LINE VERIFICATION: Letter of request with letter head",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client/ Company Verifier"
+        },
+        {
+          "document_name": "ON-LINE VERIFICATION: Photocopy of TOR, Diploma or credentials submitted",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client/company verifier"
+        },
+        {
+          "document_name": "ON-LINE VERIFICATION: Scanned proof of payment for verification outside the country",
+          "is_mandatory": false,
+          "notes": "Where to secure: Accredited Bank outside the Philippines"
+        },
+        {
+          "document_name": "ON-LINE VERIFICATION: Authorization letter signed by the student/graduate",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client/ Company Verifier"
+        }
+      ]
+    }
+  ]
+}

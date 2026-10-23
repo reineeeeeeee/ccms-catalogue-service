@@ -1,0 +1,75 @@
+{
+  "_README": "University Library, extracted from the PUP Citizen's Charter 2025 (1st Edition), Internal Services (PDF \"Citizens-Charter-2025-NEW-WORD-FILE-Library (1).pdf\", 6 pages, printed pp. 97 to 102, received 10/21/2026). It holds TWO of the three printed services, both INTERNAL (G2G): 'Processing Borrowing of Library Materials' and 'Processing of Request for Issuance of Referral Letter'. 'Processing of Library Clearance' is NOT in this file: the Charter prints no single total time for it (page 100 prints three unclear subtotals), so it waits for the Library to confirm the standard (PM decision 10/21/2026). Staff names printed in the Person responsible column are NOT imported (D7 held): the steps carry no [Responsible] part. Office code PUP-LIB, the service codes and the mandatory flags of the four documents were APPROVED by the PM on 10/21/2026. effective_from 2025-01-01 is an ASSUMPTION. Standards carry the three-part duration (duration_days, duration_hours, duration_minutes). ",
+  "offices": [
+    {
+      "office_code": "PUP-LIB",
+      "office_name": "University Library"
+    }
+  ],
+  "services": [
+    {
+      "office_code": "PUP-LIB",
+      "service_code": "PUP-LIB-CIR-001",
+      "service_name": "Processing Borrowing of Library Materials",
+      "classification": "SIMPLE",
+      "service_scope": "INTERNAL",
+      "transaction_types": [
+        "G2G"
+      ],
+      "fees": "None",
+      "who_may_avail": "PUP employees",
+      "processing_steps": "Step 1. Check the Online Public Access Catalog (OPAC) for the list of available library materials. Location: Miserior Hall/Any section of the library\n  1.1. Guide the client to the OPAC kiosks\nStep 2. Proceed to the location of the book, fill out the book card and hand it to the librarian/library staff of the section together with the PUP ID Location: Miserior Hall/Any section of the library\n  2.1. Receive the book, accomplished book card and Employee's ID; encode the ID number of the patron and enter the item barcode in the check-out module of the library system; hand over the book to the patron; Issue a transaction receipt.",
+      "standard": {
+        "duration_days": 0,
+        "duration_hours": 0,
+        "duration_minutes": 2,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), University Library, Internal Services, p. 98"
+      },
+      "documents": [
+        {
+          "document_name": "PUP Employee ID",
+          "is_mandatory": true,
+          "notes": "Where to secure: Human Resource Management Department"
+        },
+        {
+          "document_name": "Library Patron Account",
+          "is_mandatory": true,
+          "notes": "Where to secure: Polytechnic University of the Philippines - University Library"
+        },
+        {
+          "document_name": "Book Card",
+          "is_mandatory": true,
+          "notes": "Where to secure: Polytechnic University of the Philippines - University Library"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-LIB",
+      "service_code": "PUP-LIB-REF-001",
+      "service_name": "Processing of Request for Issuance of Referral Letter",
+      "classification": "SIMPLE",
+      "service_scope": "INTERNAL",
+      "transaction_types": [
+        "G2G"
+      ],
+      "fees": "None",
+      "who_may_avail": "PUP employees",
+      "processing_steps": "Step 1. Fill out the request form and attached a copy of PUP ID Location: Miserior Bldg\n  1.1. Check the submitted online form with attached copy of PUP ID\nStep 3. Claim the requested referral letter Location: Miserior Bldg\n  2. Issue the signed referral letter",
+      "standard": {
+        "duration_days": 0,
+        "duration_hours": 0,
+        "duration_minutes": 2,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), University Library, Internal Services, p. 101"
+      },
+      "documents": [
+        {
+          "document_name": "Valid PUP ID",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Applicant / Client"
+        }
+      ]
+    }
+  ]
+}

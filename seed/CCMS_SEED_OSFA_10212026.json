@@ -1,0 +1,38 @@
+{
+  "_README": "Office of Scholarship and Financial Assistance (OSFA), extracted from the PUP Citizen's Charter 2025 (1st Edition), Internal Service (PDF \"SCHOLARSHIP Citizen's Charter, 2025 First Edition.pdf\", 3 pages, received 10/21/2026). PM answers 10/21/2026 (CCMS_SEEDING_INSTRUCTIONS_10062026.md section 5.6): the Charter applies to the Quezon City campus; the office code PUP-OSFA is approved; internal services show on the public page; the printed total of 7 days is kept. It holds ONE service, an INTERNAL service (G2G). The printed total time is 7 days; the printed step times add up to 6 days 11 hours (or 7 days 3 hours if a working day has 8 hours); the total is copied as printed. effective_from 2025-01-01 is an ASSUMPTION (edition year start). Standards carry the three-part duration (duration_days, duration_hours, duration_minutes). The staff name printed in the Person responsible column is NOT imported (PM decision 10/21/2026, D7 held): designations only.",
+  "offices": [
+    {
+      "office_code": "PUP-OSFA",
+      "office_name": "Office of Scholarship and Financial Assistance"
+    }
+  ],
+  "services": [
+    {
+      "office_code": "PUP-OSFA",
+      "service_code": "PUP-OSFA-DAT-001",
+      "service_name": "Scholarship and Grants Data Request Services",
+      "classification": "COMPLEX",
+      "service_scope": "INTERNAL",
+      "transaction_types": [
+        "G2G"
+      ],
+      "fees": "None",
+      "who_may_avail": "PUP Academic Unit, PUP Administrative Unit",
+      "processing_steps": "Step 1. Submit the request letter with stated purpose and coverage period\n  1.1 Instruct to register in the PUP Smart Interactive Technical Assistant (SINTA) and logbook\n  1.2 Check if the details are complete in terms of program scope, campus, term, and academic year\n  [Responsible: Scholarship Coordinator, Misereor Bldg. Ground Floor, Office of Scholarship and Financial Assistance Front Desk; Director, Information and Communication Technology Office, 2nd Floor, University Library and Learning Resource Center]\nStep 2. Monitor the progress of request\n  2.1 Prepare the report\n  2.2 Submit the report to the immediate supervisor for review and approval\n  2.3 Review and approve the report\n  [Responsible: Scholarship Coordinator, Misereor Bldg. Ground Floor, Office of Scholarship and Financial Assistance Front Desk]\nStep 3. Receive the document\n  3.1 Release the document\n  3.2 Record the transaction in the logbook\n  [Responsible: Scholarship Coordinator, Misereor Bldg. Ground Floor, Office of Scholarship and Financial Assistance Front Desk]\nStep 4. Evaluate the service in the PUP Smart Interactive Technical Assistant (SINTA)\n  4.1 Close the transaction in the PUP Smart Interactive Technical Assistant (SINTA)\n  [Responsible: Scholarship Coordinator, Misereor Bldg. Ground Floor, Office of Scholarship and Financial Assistance Front Desk]",
+      "standard": {
+        "duration_days": 7,
+        "duration_hours": 0,
+        "duration_minutes": 0,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Office of Scholarship and Financial Assistance, Internal Service, p. 2"
+      },
+      "documents": [
+        {
+          "document_name": "Request Letter (1 original copy)",
+          "is_mandatory": true,
+          "notes": "Where to secure: Requesting Unit"
+        }
+      ]
+    }
+  ]
+}

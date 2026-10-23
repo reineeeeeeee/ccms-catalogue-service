@@ -9,10 +9,14 @@ import {
 import { parseDocumentInput } from '../src/lib/catalogue/documents.js';
 
 const seedFiles = [
-  ['CCMS_SEED_CAMPADMIN_10062026.json', 36, 80],
-  ['CCMS_SEED_CAMPACAD_10062026.json', 10, 21],
-  ['CCMS_SEED_CAMPSAS_10062026.json', 20, 98],
-  ['CCMS_SEED_CAMPACCT_10062026.json', 3, 9],
+  ['CCMS_SEED_ADMIN_10222026.json', 36, 80],
+  ['CCMS_SEED_ACAD_10222026.json', 10, 21],
+  ['CCMS_SEED_OSAS_10222026.json', 8, 24],
+  ['CCMS_SEED_ACCT_10222026.json', 3, 9],
+  ['CCMS_SEED_ADMREG_10212026.json', 10, 65],
+  ['CCMS_SEED_REG_10212026.json', 7, 65],
+  ['CCMS_SEED_OSFA_10212026.json', 1, 1],
+  ['CCMS_SEED_LIB_10212026.json', 2, 4],
 ];
 
 const loadSeed = (name) => JSON.parse(readFileSync(new URL(`../seed/${name}`, import.meta.url), 'utf8'));
@@ -33,6 +37,7 @@ describe('seeding compatibility rules', () => {
       classification: 'SIMPLE',
       service_scope: 'INTERNAL',
       transaction_types: ['G2C', 'G2G'],
+      who_may_avail: 'x'.repeat(1000),
     };
     const validDetails = {};
     const parsed = parseServiceFields(valid, validDetails);
@@ -45,6 +50,7 @@ describe('seeding compatibility rules', () => {
       [{ transaction_types: [] }, 'transaction_types'],
       [{ transaction_types: ['G2C', 'B2B'] }, 'transaction_types'],
       [{ transaction_types: ['G2C', 'G2C'] }, 'transaction_types'],
+      [{ who_may_avail: 'x'.repeat(1001) }, 'who_may_avail'],
     ]) {
       const details = {};
       parseServiceFields({ ...valid, ...change }, details);
@@ -92,7 +98,7 @@ describe('seeding compatibility rules', () => {
 });
 
 describe('supplied Charter seed files', () => {
-  it('contain the expected 69 services and 208 documents and pass the current input rules', () => {
+  it('contain the expected 77 services and 269 documents and pass the current input rules', () => {
     let services = 0;
     let documents = 0;
     let internal = 0;
@@ -130,12 +136,12 @@ describe('supplied Charter seed files', () => {
     }
 
     assert.deepEqual({ services, documents, internal, external, multipleTypes }, {
-      services: 69,
-      documents: 208,
-      internal: 13,
-      external: 56,
-      multipleTypes: 8,
+      services: 77,
+      documents: 269,
+      internal: 16,
+      external: 61,
+      multipleTypes: 9,
     });
-    assert.ok(!serviceCodes.has('CAMP-OSAS-CRD-005'), 'held CAMP-OSAS EXT.18 must remain absent');
+    assert.ok(!serviceCodes.has('PUP-OSAS-CRD-005'), 'superseded PUP-OSAS EXT.18 must remain absent');
   });
 });

@@ -1,0 +1,490 @@
+{
+  "_README": "Campus Registrar's Office, extracted from the PUP Citizen's Charter 2025 (1st Edition), Student Affairs and Services Office, Admissions and Registrations Office Services, External Services (PDF \"1_CC Admission and Registrar(2).pdf\", received 10/21/2026, pages 3 to 44). effective_from 2025-01-01 is an ASSUMPTION (edition year start); replace if the Charter prints an effective date. Standards carry the three-part duration (duration_days, duration_hours, duration_minutes). Each service carries service_scope EXTERNAL. Staff names printed in the Person responsible column are NOT imported (PM decision 10/21/2026, D7 held): designations only. Documents that apply to one group only, conditional documents and the claim-time documents are not mandatory (see CCMS_SEEDING_INSTRUCTIONS_10062026.md section 5.5). Review before importing. TEMPORARY (PM decision 10/21/2026): PUP-REG-GRD-001 (Correction of Name) prints no total time in the Registrar Charter; its standard of 6 days 7 hours 1 minute is the total of the old campus-Charter copy (CAMP-OSAS-GRD-003, p. 699). Replace it when the Registrar confirms the official total.",
+  "offices": [
+    {
+      "office_code": "PUP-REG",
+      "office_name": "Campus Registrar's Office"
+    }
+  ],
+  "services": [
+    {
+      "office_code": "PUP-REG",
+      "service_code": "PUP-REG-GRD-001",
+      "service_name": "Processing of Request for Correction of Name in Conformity with the Philippines Statistics Authority Certificate of Live Birth and/or Correction of Name in the School Records",
+      "classification": "HIGHLY_TECHNICAL",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "P150.00",
+      "who_may_avail": "Students",
+      "processing_steps": "Step 1. Pay the amount for correction of name at the Cashier's Office\n  1. Accept payment and issue official receipt.\n  [Responsible: Cashier's Office]\nStep 2. Submit accomplished Application for Correction of Name and required documents to the assigned Records Analyst\n  2. Request client to sign the logbook\n  3. Accept application and required documents and start initial assessment and verification of completeness.\n  3.1 If documents are complete:\n  3.1.1 Indicate in the clients copy of the application form the tentative date of release of requested Certification.\n  3.1.2 Return the proof of payment and clients copy of the application form.\n  3.2 If not complete, advice the client to comply with the lacking requirements otherwise the application will not be processed.\n  [Responsible: Registrar]\nStep 3. Check email for any updates or advisory from Head of Admission and Registration\n  3.1 Process request and issue advisory and updates whenever necessary\n  3.2 Notify the client when document is ready for release.\n  [Responsible: Student Records]\nStep 4. Present clients copy of application form together with authorization letter and ID, if claimant is immediate family member or Special Power of Attorney (SPA), if claimant is other than immediate family member.\n  4.1 verify the documents presented\n  4.2 issue the requested certification/s\n  [Responsible: Student Records]\nStep 5. Acknowledge receipt of the requested certification/s\n  5. Request client to sign the logbook and evaluate the service rendered.\n  [Responsible: Student Records]",
+      "standard": {
+        "duration_days": 6,
+        "duration_hours": 7,
+        "duration_minutes": 1,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 11; TEMPORARY total time from the campus Charter p. 699"
+      },
+      "documents": [
+        {
+          "document_name": "Letter address to the Campus Registrar",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted by the Client"
+        },
+        {
+          "document_name": "Original Copy of PSA Birth Certificate (annotated if there is a petition filed)",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted by the Client"
+        },
+        {
+          "document_name": "Parent Affidavit / Affidavit of Discrepancy",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted by the Client"
+        },
+        {
+          "document_name": "Joint Affidavit of Two Disinterested Person",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted by the Client"
+        },
+        {
+          "document_name": "Corrected copy of F137A/TOR (if applicable)",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the Client"
+        },
+        {
+          "document_name": "Original copy of Transcript of Records and Diploma (if previously issued)",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the Client"
+        },
+        {
+          "document_name": "General Clearance showing the client is cleared of all accountabilities",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "2 pcs. 2 inch x 2 inch picture in Formal Attire",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "Proof of payment",
+          "is_mandatory": true,
+          "notes": "Where to secure: Cashier's Office"
+        },
+        {
+          "document_name": "1 Long Brown Envelope",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "When claiming documents: Authorization letter and ID if claimant is immediate family member",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        },
+        {
+          "document_name": "When claiming documents: Special Power of Attorney (SPA) if the claimant is other than the immediate family",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-REG",
+      "service_code": "PUP-REG-CRD-001",
+      "service_name": "Processing of Request for Credentials Service (Certification, Authentication, Verification) CAV/APOSTILE",
+      "classification": "COMPLEX",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "DFA: P1,070.00 (P920.00 for DFA + P150.00 for Special Certification); CHED: P620.00; PRC: P470.00",
+      "who_may_avail": "Students and alumni",
+      "processing_steps": "Step 1. Pay the amount indicated in the payment voucher through the Cashier's Office\n  1. Accept payment and issues official receipt.\n  [Responsible: Cashier's Office]\nStep 2. Present proof of payment and submit the application at the Admission and Registration Office\n  2. Request client to sign the logbook\n  2.1 Accept application and required documents and start initial assessment and verification of completeness.\n  2.2 If documents are complete:\n  2.2.1 Indicate in the client copy of the application form the tentative date of release of requested CAV.\n  2.2.2 Return the proof of payment and client copy of the application form.\n  2.3 If not complete, advice the client to comply with the lacking requirements otherwise the application will not be processed.\n  [Responsible: Student Records]\nStep 3. Present clients copy of application form together with authorization letter and ID, if claimant is immediate family member or Special Power of Attorney (SPA), if claimant is other than immediate family member.\n  3. verify the documents presented\n  3.1 issues the requested CAV.\n  [Responsible: Registrar]\nStep 4. Acknowledge receipt of the requested certification/s\n  4. Request the client to sign the logbook and evaluate the service rendered.\n  [Responsible: Student Records]",
+      "standard": {
+        "duration_days": 3,
+        "duration_hours": 0,
+        "duration_minutes": 23,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 19"
+      },
+      "documents": [
+        {
+          "document_name": "Student's Request Letter",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "General Clearance showing the client is cleared of all accountabilities",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "Letter request addressed to CHED Regional Director (for CAV-CHED request only)",
+          "is_mandatory": false,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "2 pcs. 2 inch x 2 inch picture in Formal Attire",
+          "is_mandatory": true,
+          "notes": "Where to secure: Client"
+        },
+        {
+          "document_name": "Documentary stamp",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted by the client"
+        },
+        {
+          "document_name": "Proof of payment",
+          "is_mandatory": true,
+          "notes": "Where to secure: Cashier's Office"
+        },
+        {
+          "document_name": "1 Long Brown Envelope",
+          "is_mandatory": true,
+          "notes": "Where to secure: Not printed in the Charter"
+        },
+        {
+          "document_name": "When claiming documents: Authorization letter and ID if claimant is immediate family member",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        },
+        {
+          "document_name": "When claiming documents: Special Power of Attorney (SPA) if the claimant is other than the immediate family",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-REG",
+      "service_code": "PUP-REG-CRD-002",
+      "service_name": "Processing of Request for Credentials Service (Certificates of Attendance, Graduation, Medium of Instruction, General Weighted Average, Non-Issuance of Special Order and Certified True Copy",
+      "classification": "COMPLEX",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "P150.00 per certificate",
+      "who_may_avail": "Students and alumni",
+      "processing_steps": "Step 1. Pay the amount indicated in the payment voucher to the Cashier's Office\n  1. Accept payment and issues official receipt.\nStep 2. Present proof of payment and submit the application at the Admission and Registration Office\n  2. Request client to sign the logbook\n  2.1 Accept application and required documents and start initial assessment and verification of completeness.\n  2.2 If documents are complete:\n  2.2.1 Indicate in the client copy of the application form the tentative date of release of requested Certification.\n  2.2.2 Return the proof of payment and client copy of the application form.\n  2.3 If not complete, advice the client to comply with the lacking requirements otherwise the application will not be processed.\n  [Responsible: Student Records]\nStep 3. Check email or follow up for any update or advisory from the Registrar's Office\n  3. Process request and issues advisory and updates whenever necessary\n  3. Notify the client when document is ready for release.\n  [Responsible: Student Records]\nStep 4. Present clients copy of application form together with authorization letter and ID, if claimant is immediate family member or Special Power of Attorney (SPA), if claimant is other than immediate family member.\n  4. verify the documents presented\n  4.1 issue the requested certification/s\n  [Responsible: Registrar]\nStep 5. Acknowledge receipt of the requested certification/s\n  5. Request client to sign the logbook and evaluate the service rendered.\n  [Responsible: Student Records]",
+      "standard": {
+        "duration_days": 3,
+        "duration_hours": 5,
+        "duration_minutes": 11,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 22"
+      },
+      "documents": [
+        {
+          "document_name": "Student's Request Letter",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "General Clearance showing the client is cleared of all accountabilities",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "2 pcs. 2 inch x 2 inch picture in Formal Attire",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "Official receipt for documentary stamp",
+          "is_mandatory": true,
+          "notes": "Where to secure: Cashier's Office"
+        },
+        {
+          "document_name": "Proof of payment",
+          "is_mandatory": true,
+          "notes": "Where to secure: Cash Receipts Section, FMO"
+        },
+        {
+          "document_name": "1 Long Brown Envelope",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted by the client"
+        },
+        {
+          "document_name": "When claiming documents: Authorization letter and ID if claimant is immediate family member",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        },
+        {
+          "document_name": "When claiming documents: Special Power of Attorney (SPA) if the claimant is other than the immediate family",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-REG",
+      "service_code": "PUP-REG-CRD-003",
+      "service_name": "Processing of Request for Credentials Service (Course/Subject Description)",
+      "classification": "COMPLEX",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "P150.00 per course description",
+      "who_may_avail": "Students and alumni",
+      "processing_steps": "Step 1. Pay the amount indicated in the payment voucher to the Cashier's Office\n  1. Accept payment and issues official receipt.\n  [Responsible: Cashier's Office]\nStep 2. Present proof of payment and submit the application at the Admission and Registration Office\n  2. Request client to sign the logbook\n  2.1 Accept application and required documents and start initial assessment and verification of completeness.\n  2.2 If documents are complete:\n  2.2.1 Indicate in the clients copy of the application form the tentative date of release of requested course/subject description.\n  2.2.2 Return the proof of payment and clients copy of the application form.\n  2.3 If not complete, advice the client to comply with the lacking requirements otherwise the application will not be processed.\n  [Responsible: Registrar]\nStep 3. Check email accounts for any update or advisory from Head of Admission and Registration\n  3. Process request and issues advisory and updates whenever necessary\n  3.1 Notify the client when document is ready for release.\n  [Responsible: Registrar]\nStep 4. Present clients copy of application form together with authorization letter and ID, if claimant is immediate family member or Special Power of Attorney (SPA), if claimant is other than immediate family member.\n  4. Verify the documents presented\n  4.1 Issue the requested course/subject descriptions\n  [Responsible: Registrar]\nStep 5. Acknowledge receipt of the requested certification/s\n  5. Request client to sign the logbook and evaluate the service rendered.\n  [Responsible: Registrar]",
+      "standard": {
+        "duration_days": 3,
+        "duration_hours": 5,
+        "duration_minutes": 11,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 25"
+      },
+      "documents": [
+        {
+          "document_name": "Student's Request Letter",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "General Clearance showing the client is cleared of all accountabilities",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "2 pcs. 2 inch x 2 inch picture in Formal Attire",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "Documentary stamp",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be provided by the client"
+        },
+        {
+          "document_name": "Proof of payment",
+          "is_mandatory": true,
+          "notes": "Where to secure: Cashier's Office"
+        },
+        {
+          "document_name": "1 Long Brown Envelope",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be provided by the client"
+        },
+        {
+          "document_name": "When claiming documents: Authorization letter and ID if claimant is immediate family member",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        },
+        {
+          "document_name": "When claiming documents: Special Power of Attorney (SPA) if the claimant is other than the immediate family",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-REG",
+      "service_code": "PUP-REG-CRD-004",
+      "service_name": "Processing of Request for Certificate of Transfer Credential/Honorable Dismissal",
+      "classification": "COMPLEX",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "P150.00 per certificate",
+      "who_may_avail": "Students and alumni",
+      "processing_steps": "Step 1. Pay the amount indicated in the payment voucher through the Cashier's Office\n  1.1 Accept payment and issue official receipt.\n  [Responsible: Cashier]\nStep 6. Present proof of payment and submit the application at the Admission and Registration Office\n  6.1. Request client to sign the logbook\n  6.2. Accept application and required documents and start initial assessment and verification of completeness.\n  6.3. If documents are complete:\n  6.3.1. Indicate in the clients copy of the application form the tentative date of release of requested Certification/ Honorable Dismissal.\n  6.3.2. Return the proof of payment and client copy of the application form.\n  6.3.3. Process requested Certification/ Honorable Dismissal\n  6.4. If not complete, advice the client to comply with the lacking requirements otherwise the application will not be processed.\n  [Responsible: Registrar; Student Records]\nStep 7. Present clients copy of application form together with authorization letter and ID, if claimant is immediate family member or Special Power of Attorney (SPA), if claimant is other than immediate family member.\n  7.1. verify the documents presented\n  7.2. issue the requested Certificate of Transfer Credential/ Honorable Dismissal\n  [Responsible: Student Records; Registrar]\nStep 8. Acknowledge receipt of the requested certification/s\n  8.1. Request client to sign the logbook and evaluate the service rendered.\n  [Responsible: Student Records]",
+      "standard": {
+        "duration_days": 3,
+        "duration_hours": 5,
+        "duration_minutes": 4,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 27"
+      },
+      "documents": [
+        {
+          "document_name": "Student's Request Letter",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "General Clearance showing the client is cleared of all accountabilities",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "2 pcs. 2 inch x 2 inch picture in Formal Attire",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be submitted to the Registrar"
+        },
+        {
+          "document_name": "Documentary stamp",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be supplied by the client"
+        },
+        {
+          "document_name": "Proof of payment",
+          "is_mandatory": true,
+          "notes": "Where to secure: Cashier's Office"
+        },
+        {
+          "document_name": "1 Long Brown Envelope",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be supplied by the client"
+        },
+        {
+          "document_name": "When claiming documents: Authorization letter and ID if claimant is immediate family member",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        },
+        {
+          "document_name": "When claiming documents: Special Power of Attorney (SPA) if the claimant is other than the immediate family",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-REG",
+      "service_code": "PUP-REG-CRD-005",
+      "service_name": "Processing of Request for Credentials Service (Transcript of Records) - First Copy for New Graduate",
+      "classification": "HIGHLY_TECHNICAL",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "NONE (covered by Republic Act 10931, otherwise known as Universal Access to Quality Tertiary Education Act of 2017)",
+      "who_may_avail": "Students and alumni",
+      "processing_steps": "Step 1. Submit accomplished and printed copy of application and required documents at the Admission and Registration Office\n  1.1 Request the client to sign the logbook\n  1.2 Accept application and required documents and start initial assessment and verification of completeness.\n  1.3 If documents are complete:\n  1.3.1 Indicate in the clients copy of the application form the tentative date of release of requested first copy of TOR.\n  1.3.2 If not, required the client to submit complete documents\n  [Responsible: Registrar; Student Records]\nStep 2. Check email or follow up for any update or advisory from the Head of Admission and Registration\n  2.1 Process request and issues advisory and updates whenever necessary\n  2.2 Notify the client when document is ready for release.\n  [Responsible: Student Records]\nStep 3. Present clients copy of application form together with authorization letter and ID, if claimant is immediate family member or Special Power of Attorney (SPA), if claimant is other than immediate family member.\n  3.1 verify the documents presented\n  3.2 issue the requested TOR\n  [Responsible: Registrar; Student Records]\nStep 4. Acknowledge receipt of the requested TOR.\n  4.1 Request client to sign the logbook and evaluate the service rendered.\n  [Responsible: Student Records]",
+      "standard": {
+        "duration_days": 9,
+        "duration_hours": 0,
+        "duration_minutes": 55,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 29"
+      },
+      "documents": [
+        {
+          "document_name": "Accomplished and printed copy of the application and payment voucher",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be Printed by the Registrar From the Campus registrar"
+        },
+        {
+          "document_name": "General Clearance showing the client is cleared of all accountabilities",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be printed from SIS"
+        },
+        {
+          "document_name": "Certificate of Candidacy",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be Printed from SIS"
+        },
+        {
+          "document_name": "Certificate of Conferment of Degree (Dummy Diploma)",
+          "is_mandatory": true,
+          "notes": "Where to secure: Awarded during graduation ceremony"
+        },
+        {
+          "document_name": "2 pcs. 2 inch x 2 inch picture in Academic Gown (Toga)",
+          "is_mandatory": true,
+          "notes": "Where to secure: Resource Generations Office (RGO)"
+        },
+        {
+          "document_name": "Documentary stamp",
+          "is_mandatory": true,
+          "notes": "Where to secure: To be supplied by the client"
+        },
+        {
+          "document_name": "Proof of payments(for applicants not covered by RA 10931 otherwise known as Universal Access to Quality Tertiary Education Act of 2017)",
+          "is_mandatory": false,
+          "notes": "Where to secure: Cash Receipts Section/ Cashier"
+        },
+        {
+          "document_name": "When claiming documents: Authorization letter and ID if claimant is immediate family member",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        },
+        {
+          "document_name": "When claiming documents: Special Power of Attorney (SPA) if the claimant is other than the immediate family",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-REG",
+      "service_code": "PUP-REG-CRD-006",
+      "service_name": "Processing of Request for Credentials Service (Transcript of Records) - Second and Succeeding Copies and Copy for Another School",
+      "classification": "HIGHLY_TECHNICAL",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "Second and succeeding copies: Non-Engineering P350.00; Engineering P450.00. Copy for Another School: Non-Engineering P400.00; Engineering P500.00. P20.00 for White Long Envelope for 'TOR Copy For' another school",
+      "who_may_avail": "Students and alumni",
+      "processing_steps": "Step 1. Pay the amount indicated in the payment voucher through the Cashier's Office\n  1.1 Accept payment and issues official receipt.\nStep 2. Present proof of payment and submit the application at the Head of Admission and Registration\n  a. Request client to sign logbook\n  b. Accept application and required documents and start initial assessment and verification of completeness.\n  c. If documents are complete:\n  i. Indicate in the client copy of the application form the tentative date of release of requested TOR.\n  ii. Return the proof of payment and client copy of the application form.\n  d. If not complete, advice the client to comply with the lacking requirements otherwise the application will not be processed.\n  [Responsible: Registrar; Student Records]\nStep 3. Check email or follow up for any update or advisory from Registrar's Office\n  a. Process request and issues advisory and updates whenever necessary\n  b. Notify the client when document is ready for release.\n  [Responsible: Student Records]\nStep 4. Present clients copy of application form together with authorization letter and ID, if claimant is immediate family member or Special Power of Attorney (SPA), if claimant is other than immediate family member.\n  a. verify the documents presented\n  b. issues the requested TOR\n  [Responsible: Registrar; Student Records]\nStep 5. Acknowledge receipt of the requested TOR.\n  a. Request Client to sign logbook and evaluate the service rendered.\n  [Responsible: Student Records]",
+      "standard": {
+        "duration_days": 9,
+        "duration_hours": 0,
+        "duration_minutes": 58,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 (1st Edition), Admissions and Registrations Office Services, p. 29"
+      },
+      "documents": [
+        {
+          "document_name": "SECOND AND SUCCEEDING COPIES: Letter of request by the student",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted to the Registrar's Office"
+        },
+        {
+          "document_name": "SECOND AND SUCCEEDING COPIES: 2 inch x 2 inch picture in formal attire",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted to the Registrar's Office"
+        },
+        {
+          "document_name": "SECOND AND SUCCEEDING COPIES: Documentary Stamp",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be supplied by the client"
+        },
+        {
+          "document_name": "SECOND AND SUCCEEDING COPIES: Proof of payment",
+          "is_mandatory": false,
+          "notes": "Where to secure: Cashier's Office"
+        },
+        {
+          "document_name": "COPY FOR ANOTHER SCHOOL: Letter of request by the student",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted to the Registrar's Office"
+        },
+        {
+          "document_name": "COPY FOR ANOTHER SCHOOL: 2 inch x 2 inch picture in formal attire",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted o the Admission and Registration Office"
+        },
+        {
+          "document_name": "COPY FOR ANOTHER SCHOOL: Documentary Stamp",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be supplied by the client"
+        },
+        {
+          "document_name": "COPY FOR ANOTHER SCHOOL: Proof of payment",
+          "is_mandatory": false,
+          "notes": "Where to secure: Cashier's Office"
+        },
+        {
+          "document_name": "COPY FOR ANOTHER SCHOOL: Acknowledged/Signed Copy of Transfer Credential/Honorable Dismissal",
+          "is_mandatory": false,
+          "notes": "Where to secure: School where applicant is presently enrolled"
+        },
+        {
+          "document_name": "When claiming documents: Authorization letter and ID if claimant is immediate family member",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        },
+        {
+          "document_name": "When claiming documents: Special Power of Attorney (SPA) if the claimant is other than the immediate family",
+          "is_mandatory": false,
+          "notes": "Where to secure: To be submitted by the representative of the client"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,307 @@
+{
+  "_README": "Campus Student Affairs and Services Office, extracted from the PUP Citizen's Charter 2025 Edition (External Services, printed pp. 663-733). effective_from 2025-01-01 is an ASSUMPTION (edition year start); replace if the Charter prints an effective date. Each service lists transaction_types (all listed). Standards carry the three-part duration (duration_days, duration_hours, duration_minutes). See CCMS_SEEDING_INSTRUCTIONS_10062026.md section 5.3. Review before importing. Each service also carries service_scope (INTERNAL or EXTERNAL, from the Charter section it was printed in); see CCMS_SEEDING_INSTRUCTIONS_10062026.md section 7. UPDATED 10/21/2026 (Decision D1): the 12 services that also appear in the Admissions and Registrations Office Charter (PUP-OSAS-ADM-001 to 004, CRD-001 to 004, CRD-006, GRD-001 to 003) were removed from this file; they are now in CCMS_SEED_ADMREG_10212026.json and CCMS_SEED_REG_10212026.json (Correction of Name is PUP-REG-GRD-001 there, with a TEMPORARY total of 6 days 7 hours 1 minute taken from the old copy in this file until the Registrar confirms). 8 services remain (from 20). PUP-OSAS-CRD-005 stays reserved for the held EXT.18.",
+  "offices": [
+    {
+      "office_code": "PUP-OSAS",
+      "office_name": "Campus Student Affairs and Services Office"
+    }
+  ],
+  "services": [
+    {
+      "office_code": "PUP-OSAS",
+      "service_code": "PUP-OSAS-ACT-001",
+      "service_name": "Permission to Conduct an Activity",
+      "classification": "SIMPLE",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "None",
+      "who_may_avail": "Students",
+      "processing_steps": "Step 1. Present letter of request to the Office of Student Affairs and Services. The letter should be addressed to the Head of Student Affairs and Services duly noted by the organization Adviser Location: Campus Student Services and Affairs Office\r\n  1. Receive and check the letter [Responsible: Staff/ Head of Student Affairs and Services; Campus Student Services and Affairs Office]",
+      "standard": {
+        "duration_days": 0,
+        "duration_hours": 0,
+        "duration_minutes": 7,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 Edition, p. 680"
+      },
+      "documents": [
+        {
+          "document_name": "Current Registration Card or Identification Card (for currently enrolled student); Alumni ID or TOR with picture (for graduate)",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of Student Affairs and Services. Remarks: The form can be secured from the Office of Student Affairs and Services"
+        },
+        {
+          "document_name": "Form PUP-RPCA-5-OFSS-003",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of Student Affairs and Services. Remarks: The form can be secured from the Office of Student Affairs and Services"
+        },
+        {
+          "document_name": "Letter of Request",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of Student Affairs and Services"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-OSAS",
+      "service_code": "PUP-OSAS-CNS-001",
+      "service_name": "Consultation Service",
+      "classification": "SIMPLE",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "None",
+      "who_may_avail": "Students",
+      "processing_steps": "Step 1. Proceed to the front desk staff and present required document Location: Office of counseling and Psychological Services\r\n  1. Verify documents presented [Responsible: Guidance Counselor; Any of requesting office / division]\r\nStep 2. 5.Sign in the client Log Book Location: Office of counseling and Psychological Services\r\n  2. Give the Log Book to the client [Responsible: Guidance Counselor; Any of requesting office / division]\r\nStep 3. Accomplish Appointment Slip Location: Office of counseling and Psychological Services\r\n  3.1. Give Appointment Slip to be accomplished [Responsible: Guidance Counselor; Any of requesting office / division]\r\n  3.2. Advise and assist the client to the assigned counselor [Responsible: Guidance Counselor; Any of requesting office / division]\r\nStep 4. Undergo Background Verification Location: Office of counseling and Psychological Services\r\n  4. Gather information to have a background knowledge about the client and the topic or area to be consulted [Responsible: Guidance Counselor; Any of requesting office / division]\r\nStep 5. Collect information necessary for the topic or area to be consulted Location: Office of counseling and Psychological Services\r\n  5. Provide information [Responsible: Guidance Counselor; Campus Student Services and Affairs Office]\r\nStep 6. Secure an appointment slip Location: Office of counseling and Psychological Services\r\n  6. For services such as test validation and research provide another schedule to complete the service [Responsible: Guidance Counselor; Any of requesting office / division]",
+      "standard": {
+        "duration_days": 0,
+        "duration_hours": 0,
+        "duration_minutes": 28,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 Edition, p. 670"
+      },
+      "documents": [
+        {
+          "document_name": "Identification card/Registration certificate",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of the Student Services/Office of Admission's Services"
+        },
+        {
+          "document_name": "Letter of Request noted by the Faculty in charged/Chair/Dean",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Department/College"
+        },
+        {
+          "document_name": "Appointment Slip",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of Counseling and Psychological Services-Front desk"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-OSAS",
+      "service_code": "PUP-OSAS-CNS-002",
+      "service_name": "Counseling Service",
+      "classification": "SIMPLE",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "None",
+      "who_may_avail": "Students",
+      "processing_steps": "Step 1. 1.Proceed to the front desk staff and present required document to schedule for a counseling session. Location: Office of Counseling and Psychological Services\r\n  1. Verify documents presented [Responsible: Guidance Counselor; Any of requesting office / division]\r\nStep 2. Sign in the client Log Book Location: Office of Counseling and Psychological Services\r\n  2. Give the Log Book to the client [Responsible: Guidance Counselor; Any of requesting office / division]\r\nStep 3. AccomplishPersonal Data Sheet Location: Office of Counseling and Psychological Services\r\n  3. Give Personal data Sheet to be accomplished [Responsible: Guidance Counselor; Campus Student Services and Affairs Office]\r\nStep 4. Undergo Initial Assessment Location: Office of Counseling and Psychological Services\r\n  4.1. Interview and gather information for client's areas of concern [Responsible: Guidance Counselor; Campus Student Services and Affairs Office]\r\n  4.2. Provide and discuss about counseling procedures [Responsible: Guidance Counselor; Campus Student Services and Affairs Office]\r\nStep 5. Secure an appointment slip Location: Office of Counseling and Psychological Services\r\n  5. 5.For client needing more than one sessions, provide another session [Responsible: Guidance Counselor; Campus Student Services and Affairs Office]",
+      "standard": {
+        "duration_days": 0,
+        "duration_hours": 0,
+        "duration_minutes": 44,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 Edition, p. 673"
+      },
+      "documents": [
+        {
+          "document_name": "Identification card/Registration certificate",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of the Student Services/ Office of Admission's Services"
+        },
+        {
+          "document_name": "Referral Slip",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of counseling and Psychological Services-Front desk"
+        },
+        {
+          "document_name": "Call Slip",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Diiferent Colleges and department"
+        },
+        {
+          "document_name": "Appointment Slip",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of Counseling and Psychological Services"
+        },
+        {
+          "document_name": "Personal data sheet",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of Counseling and Psychological Services"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-OSAS",
+      "service_code": "PUP-OSAS-CRD-007",
+      "service_name": "Request for Certificate of Good Moral Character",
+      "classification": "SIMPLE",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "PHP 150",
+      "who_may_avail": "PUP Paranaque Students",
+      "processing_steps": "Step 1. Secure and fill-out the application form accordingly (Form PUP- ACGM-5-OFSS-0007) Location: Polytechnic University of the Philippines\r\n  1. Check the form [Responsible: Students/Alumni]\r\nStep 2. Pay appropriate fee at the Cashier's Office Location: Polytechnic University of the Philippines\r\n  2. Receive the payment and issue official receipt [Responsible: Collection Officer Cashier's Office]\r\nStep 3. Proceed to the Head of Student Affairs and Services for the processing and issuance of the certificate Location: Polytechnic University of the Philippines\r\n  3. Print and issue the certificate of good moral character [Responsible: Head of Student Affairs and Services]\r\nStep 4. Sign in the logbook provided for the purpose Location: Polytechnic University of the Philippines\r\n  4. Require the student/alumni to sign in the logbook [Responsible: Head of Students Affairs and Services]",
+      "standard": {
+        "duration_days": 0,
+        "duration_hours": 0,
+        "duration_minutes": 12,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 Edition, p. 732"
+      },
+      "documents": [
+        {
+          "document_name": "Registration Card or Identification Card (for currently enrolled student); Alumni ID or TOR with picture (for graduate)",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of the Students Affairs and Services. Remarks: The form can be secured from the Office of Student Affairs and Services"
+        },
+        {
+          "document_name": "Form PUP-ACGM-5-OFSS-0007",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Office of the Students Affairs and Services. Remarks: The form can be secured from the Office of Student Affairs and Services"
+        },
+        {
+          "document_name": "Proof of Payment",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Applicant / Client"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-OSAS",
+      "service_code": "PUP-OSAS-IDC-001",
+      "service_name": "Application for New Identification Card",
+      "classification": "SIMPLE",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "None",
+      "who_may_avail": "Students",
+      "processing_steps": "Step 1. Submit to the Office of the Student Services the filled-out form for application of new ID Location: Office of the Student affairs Services\r\n  1. Receive the form [Responsible: OSS Staff; Campus Student Services and Affairs Office]\r\nStep 2. Seek approval of the request by the Office of the Director of OSS Location: Office of the OSS\r\n  2. Approve the request [Responsible: OSS Head; Campus Student Services and Affairs Office]\r\nStep 3. Pay corresponding fee at the Cashier's Office Location: Cashier's Office Campus\r\n  3. Receive the payment and issue official receipt [Responsible: Collection Officer; Any of requesting office / division]\r\nStep 4. Proceed to the OSS for processing and issuance of ID Location: Office of the Vice President for Campuses (OVPC)\r\n  4. Process and issue the printed ID [Responsible: VPC Staff PUP Main Buidling; Any of requesting office / division]\r\nStep 5. Sign in the OSS logbook provided for the purpose Location: Office of the Student Services\r\n  5. Require the student/alumni to sign in the logbook [Responsible: OSS Staff; Campus Student Services and Affairs Office]",
+      "standard": {
+        "duration_days": 2,
+        "duration_hours": 0,
+        "duration_minutes": 23,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 Edition, p. 664"
+      },
+      "documents": [
+        {
+          "document_name": "Current Registration Card",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campuses"
+        },
+        {
+          "document_name": "Form PUP-NRID-5-OFSS-007",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Admission Office. Remarks: Click here to view the copy of new/application of ID: https://drive.google.com/file/d/1LvhKZbFzsLnoJEvlK_tnSSy6ew5g256T/view"
+        },
+        {
+          "document_name": "Proof of Payment",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Cashier's Office"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-OSAS",
+      "service_code": "PUP-OSAS-IDC-002",
+      "service_name": "Application for Replacement of Lost Identification Card",
+      "classification": "SIMPLE",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "PHP 150",
+      "who_may_avail": "Students",
+      "processing_steps": "Step 1. Submit to the Office of the Student Services the filled-out form for application for replacement of lost ID Location: Office of Students Assistance Services\r\n  1. Receive the form [Responsible: OSS Staff; Campus Student Services and Affairs Office]\r\nStep 2. Pay corresponding fee at the Cashier's Office Location: Cashier's Office\r\n  2. Receive the payment and issue official receipt [Responsible: Collection Officer; Any of requesting office / division]\r\nStep 3. Present to the OSS the official receipt of payment for the processing and issuance of ID Location: Office of the Vice President for Campuses (OVPC)\r\n  3. Process and issue the ID [Responsible: OVPC Staff PUP Main; Any of requesting office / division]\r\nStep 4. Sign in the OSS logbook provided for the purpose Location: Office of the Students Affairs and Services\r\n  4. Require the student to sign in the logbook [Responsible: OSS Staff; Campus Student Services and Affairs Office]",
+      "standard": {
+        "duration_days": 2,
+        "duration_hours": 0,
+        "duration_minutes": 23,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 Edition, p. 667"
+      },
+      "documents": [
+        {
+          "document_name": "Current Registration Card",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campuses"
+        },
+        {
+          "document_name": "Application for Replacement of Lost Identification Card Form",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campuses. Remarks: 1. Click here to view the copy of the form: https://drive.google.com/file/d/150ijzdHofoMcJzc6L_fChnmM-HSe8GHo/view 2. Attach with Parents/Gurdian ID or Cedula (for undergaduate students only)"
+        },
+        {
+          "document_name": "Proof of Payment",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Cashier's Office"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-OSAS",
+      "service_code": "PUP-OSAS-REC-001",
+      "service_name": "Issuance of Recommendation Letter",
+      "classification": "SIMPLE",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "None",
+      "who_may_avail": "Transferring and Graduating Students",
+      "processing_steps": "Step 1. Present required document Location: Campus Guidance Office or Office of the Student Affairs and Services\r\n  1. Verify documents presented and give the log book to the client [Responsible: Administrative Staff; Campus Student Services and Affairs Office]\r\nStep 2. Accomplish Exit Interview Form Location: Campus Guidance Office or Office of the Student Affairs and Services\r\n  2. 2.Give exit interview form to be accomplished [Responsible: Administrative Staff/; Campus Student Services and Affairs Office]\r\nStep 3. Undergo Background Verification Location: Campus Guidance Office or Office of the Student Affairs and Services\r\n  3. Gather information to have a background knowledge about the client [Responsible: Guidance Counselor; Campus Student Services and Affairs Office]\r\nStep 4. Issuance of the Recommendation Letter Location: Campus Guidance Office or Office of the Student Affairs and Services\r\n  4. Issue the Recommendation Letter [Responsible: Administrative Staff]",
+      "standard": {
+        "duration_days": 0,
+        "duration_hours": 0,
+        "duration_minutes": 50,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 Edition, p. 676"
+      },
+      "documents": [
+        {
+          "document_name": "Identification card or Registration certificate",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campus Guidance Office or Office of the Student Affairs and Services. Remarks: Proceed to the Office of the Student Services or Office of the Admission's Services"
+        },
+        {
+          "document_name": "Copy of Grades",
+          "is_mandatory": true,
+          "notes": "(1) Photo Copy. Where to secure: Polytechnic University of the Philippines - Campus Guidance Office or Office of the Student Affairs and Services. Remarks: Click the PUP SIS account"
+        },
+        {
+          "document_name": "Duly accomplished exit Interview Form",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campus Guidance Office or Office of the Student Affairs and Services. Remarks: Procees to the Office of the Student's Services or Office of Admission Services"
+        }
+      ]
+    },
+    {
+      "office_code": "PUP-OSAS",
+      "service_code": "PUP-OSAS-REC-002",
+      "service_name": "Issuance of Student/Alumni Referral and Recommendation",
+      "classification": "SIMPLE",
+      "service_scope": "EXTERNAL",
+      "transaction_types": [
+        "G2C"
+      ],
+      "fees": "None",
+      "who_may_avail": "Student/Alumni",
+      "processing_steps": "Step 1. Approach Receiving Clerk for verification of documents Location: Campus Student Services and Affairs Office\r\n  1. Receive and verify documents presented and give the log book to the client [Responsible: Administrative Staff; Campus Student Services and Affairs Office]\r\nStep 2. Accomplish Exit Interview Form while waiting for the letter of recommendation / referral Location: Campus Student Services and Affairs Office\r\n  2. Give the Exit Interview Form to be accomplished by the client [Responsible: Administrative Staff; Campus Student Services and Affairs Office]\r\nStep 3. Receive and verifies Letter of Recommendation Location: Campus Student Services and Affairs Office\r\n  3. Check and issue the recommendation /referral [Responsible: Administrative Staff; Campus Student Services and Affairs Office]",
+      "standard": {
+        "duration_days": 0,
+        "duration_hours": 0,
+        "duration_minutes": 49,
+        "effective_from": "2025-01-01",
+        "charter_reference": "PUP Citizen's Charter 2025 Edition, p. 678"
+      },
+      "documents": [
+        {
+          "document_name": "Duly Accomplished Student/ Alumni Request Form",
+          "is_mandatory": true,
+          "notes": "(1) Original Copy. Where to secure: Polytechnic University of the Philippines - Campus Office of Student Affairs and Services"
+        }
+      ]
+    }
+  ]
+}
