@@ -19,6 +19,7 @@ import { listDocumentRows, toDocumentDto } from './documents.js';
 import { Service } from '../entities/index.js';
 import { kickOutbox } from '../outbox.js';
 import { insertFirstStandard, listStandardRows, toStandardDto } from './standards.js';
+import { allocateServiceCode } from './service-codes.js';
 
 // One service row plus its office and the version in force today (Manila date).
 const SERVICE_SELECT = `
@@ -92,7 +93,7 @@ function audit(manager, actor, action, before, after, ipAddress) {
 /** The office must exist and be active. */
 async function requireActiveOffice(manager, officeId) {
   const rows = isUuid(officeId)
-    ? await manager.query('SELECT office_id, office_code, is_active FROM offices WHERE office_id = $1', [officeId])
+    ? await manager.query('SELECT office_id, office_code, is_active FROM offices WHERE office_id = $1 FOR UPDATE', [officeId])
     : [];
   if (!rows[0] || !rows[0].is_active) throw Errors.validation(OFFICE_INACTIVE, { office_id: OFFICE_INACTIVE });
   return rows[0];
@@ -131,9 +132,10 @@ function mapUniqueViolation(err) {
 }
 
 /** Service and its first standard in one transaction (version 1 may start on any chosen date). */
-export async function createService(dataSource, actor, body, { ipAddress } = {}) {
+export async function createService(dataSource, actor, body, { ipAddress, trustedCode = false } = {}) {
+  if (actor.role !== ROLES.SUPER_ADMIN) throw Errors.forbidden();
   const details = {};
-  const fields = parseServiceFields(body, details);
+  const fields = parseServiceFields(body, details, { mode: trustedCode ? 'seed' : 'create' });
   let standardFields = null;
   if (body.standard === null || typeof body.standard !== 'object' || Array.isArray(body.standard)) {
     details.standard = 'First standard is required';
@@ -144,7 +146,7 @@ export async function createService(dataSource, actor, body, { ipAddress } = {})
   try {
     const dto = await dataSource.transaction(async (manager) => {
       const office = await requireActiveOffice(manager, fields.officeId);
-      const serviceCode = checkCodeFormat(fields.serviceCode, office);
+      const serviceCode = trustedCode ? checkCodeFormat(fields.serviceCode, office) : await allocateServiceCode(manager, office, fields.serviceAbbr);
       const serviceNameKey = nameKey(fields.serviceName);
       await assertUnique(manager, { officeId: office.office_id, serviceCode, serviceNameKey });
 
@@ -166,7 +168,7 @@ export async function createService(dataSource, actor, body, { ipAddress } = {})
       });
       const created = await loadServiceDto(manager, serviceId);
       await audit(manager, actor, 'SERVICE_CREATED', null, created, ipAddress);
-      await insertFirstStandard(manager, actor, { service_id: serviceId, office_id: office.office_id }, standardFields, ipAddress);
+      await insertFirstStandard(manager, actor, { service_id: serviceId, office_id: office.office_id, service_name: created.service_name }, standardFields, ipAddress);
       return loadServiceDto(manager, serviceId);
     });
     kickOutbox();
@@ -177,22 +179,26 @@ export async function createService(dataSource, actor, body, { ipAddress } = {})
 }
 
 /** Edits the service fields (never the standard), with the same rules as creation. */
-export async function updateService(dataSource, actor, id, body, { ipAddress } = {}) {
+export async function updateService(dataSource, actor, id, body, { ipAddress, trustedRecode = false } = {}) {
+  if (actor.role !== ROLES.SUPER_ADMIN) throw Errors.forbidden();
   const details = {};
-  const fields = parseServiceFields(body, details);
+  const fields = parseServiceFields(body, details, { mode: 'edit' });
   throwIfInvalid(details);
   try {
     const dto = await dataSource.transaction(async (manager) => {
       const rows = await manager.query('SELECT service_id FROM services WHERE service_id = $1 FOR UPDATE', [id]);
       if (!rows[0]) throw Errors.notFound('Service not found', 'SERVICE_NOT_FOUND');
       const before = await loadServiceDto(manager, id);
+      if (!trustedRecode && Object.hasOwn(body, 'service_code') && fields.serviceCode !== before.service_code) {
+        throw Errors.conflict('Service code is immutable after creation', 'SERVICE_CODE_IMMUTABLE', { service_code: 'The saved code cannot be changed' });
+      }
 
       // An unchanged office may be inactive; moving to another office needs an active one.
       const office =
         fields.officeId === before.office_id
           ? { office_id: before.office_id, office_code: before.office_code }
           : await requireActiveOffice(manager, fields.officeId);
-      const serviceCode = checkCodeFormat(fields.serviceCode, office);
+      const serviceCode = trustedRecode ? checkCodeFormat(fields.serviceCode, office) : before.service_code;
       const serviceNameKey = nameKey(fields.serviceName);
       const processingSteps = fields.processingSteps === undefined ? before.processing_steps : fields.processingSteps;
       const fees = fields.fees === undefined ? before.fees : fields.fees;

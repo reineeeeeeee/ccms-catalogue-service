@@ -44,7 +44,7 @@ async function loadStandard(manager, standardId) {
 
 /** Locks the service row for the rest of the transaction so version changes do not race. */
 async function lockService(manager, serviceId) {
-  const rows = await manager.query('SELECT service_id, office_id FROM services WHERE service_id = $1 FOR UPDATE', [serviceId]);
+  const rows = await manager.query('SELECT service_id, office_id, service_name FROM services WHERE service_id = $1 FOR UPDATE', [serviceId]);
   if (!rows[0]) throw Errors.notFound('Service not found', 'SERVICE_NOT_FOUND');
   return rows[0];
 }
@@ -54,6 +54,7 @@ function audit(manager, actor, action, service, before, after, ipAddress) {
     actor,
     action,
     entityType: 'ServiceStandard',
+    entityName: service.service_name,
     entityId: (after ?? before).standard_id,
     officeId: service.office_id,
     before,
@@ -183,7 +184,7 @@ export async function listStandards(dataSource, user, serviceId) {
  */
 export async function getStandardAsOf(dataSource, serviceId, asOf, viewer = null) {
   const rows = await dataSource.query(
-    `SELECT s.service_id, s.office_id, o.office_code, s.service_code, s.service_name,
+    `SELECT s.service_id, s.office_id, o.office_code, o.office_name, s.service_code, s.service_name,
             s.classification, s.is_active,
             st.standard_id, st.duration_days, st.duration_hours, st.duration_minutes
        FROM services s
@@ -211,6 +212,7 @@ export async function getStandardAsOf(dataSource, serviceId, asOf, viewer = null
     service_name: row.service_name,
     office_id: row.office_id,
     office_code: row.office_code,
+    office_name: row.office_name,
     classification: row.classification,
   };
 }

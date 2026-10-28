@@ -139,6 +139,8 @@ export async function recodePupOffices(dataSource, { dryRun = false, actor } = {
   try {
     return await dataSource.transaction(async (manager) => {
       const plan = await buildPlan(manager);
+      // Only this reviewed administrative migration may rewrite legacy prefixes. Never set by HTTP handlers.
+      await manager.query("SELECT set_config('ccms.legacy_recode', 'on', true)");
       const scope = { manager, transaction: async (work) => work(manager) };
       let officesRecoded = 0;
       let servicesRecoded = 0;
@@ -149,11 +151,11 @@ export async function recodePupOffices(dataSource, { dryRun = false, actor } = {
         await updateOffice(scope, auditActor, item.office.office_id, {
           office_code: item.to,
           office_name: item.office.office_name,
-        });
+        }, { trustedRecode: true });
         officesRecoded += 1;
 
         for (const service of item.services) {
-          await updateService(scope, auditActor, service.service_id, serviceInput(service, service.serviceCode));
+          await updateService(scope, auditActor, service.service_id, serviceInput(service, service.serviceCode), { trustedRecode: true });
           servicesRecoded += 1;
           if (service.deactivate) {
             await setServiceActive(scope, auditActor, service.service_id, false);

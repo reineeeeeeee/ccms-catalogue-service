@@ -8,7 +8,8 @@ export function syncSettings(env = process.env) {
     return Number.isFinite(value) && value > 0 ? value : fallback;
   };
   return {
-    urls: { FMS: env.FMS_URL || null, AUDIT: env.AUDIT_URL || null },
+    // AUDIT is the legacy wire/queue name for SMS. Keep existing queued messages and acknowledgements valid.
+    urls: { FMS: env.FMS_URL || null, AUDIT: env.SMS_URL || env.AUDIT_URL || null },
     serviceKey: env.SERVICE_KEY,
     retryIntervalMs: number('SYNC_RETRY_INTERVAL_SECONDS', 60) * 1000,
     maxAttempts: Math.floor(number('SYNC_MAX_ATTEMPTS', 20)),

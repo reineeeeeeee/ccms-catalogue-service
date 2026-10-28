@@ -40,7 +40,7 @@ describe('seeding compatibility rules', () => {
       who_may_avail: 'x'.repeat(1000),
     };
     const validDetails = {};
-    const parsed = parseServiceFields(valid, validDetails);
+    const parsed = parseServiceFields(valid, validDetails, { mode: 'seed' });
     assert.deepEqual(validDetails, {});
     assert.deepEqual(parsed.transactionTypes, ['G2C', 'G2G']);
 
@@ -53,7 +53,7 @@ describe('seeding compatibility rules', () => {
       [{ who_may_avail: 'x'.repeat(1001) }, 'who_may_avail'],
     ]) {
       const details = {};
-      parseServiceFields({ ...valid, ...change }, details);
+      parseServiceFields({ ...valid, ...change }, details, { mode: 'seed' });
       assert.ok(details[field], `${field} should be invalid`);
     }
   });
@@ -120,7 +120,7 @@ describe('supplied Charter seed files', () => {
         serviceCodes.add(service.service_code);
 
         const serviceDetails = {};
-        parseServiceFields({ ...service, office_id: 'seed-office' }, serviceDetails);
+        parseServiceFields({ ...service, office_id: 'seed-office' }, serviceDetails, { mode: 'seed' });
         assert.deepEqual(serviceDetails, {}, `${service.service_code}: ${JSON.stringify(serviceDetails)}`);
         const standardDetails = {};
         parseStandardFields(service.standard, standardDetails, 'standard.');

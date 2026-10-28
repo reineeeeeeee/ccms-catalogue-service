@@ -101,7 +101,7 @@ export function createCalendar({ schedule, exceptions = [], officeId = null }) {
 
   const office = officeId == null ? null : String(officeId).toLowerCase();
   const applicable = exceptions.filter(
-    (entry) => entry.office_id == null || (office !== null && String(entry.office_id).toLowerCase() === office),
+    (entry) => entry.applies_to !== 'CLASSES' && (entry.office_id == null || (office !== null && String(entry.office_id).toLowerCase() === office)),
   );
   const exact = new Map(); // 'YYYY-MM-DD' -> entries
   const recurring = new Map(); // 'MM-DD' -> entries

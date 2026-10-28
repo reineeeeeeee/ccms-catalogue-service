@@ -8,6 +8,7 @@ import { kickOutbox } from '../outbox.js';
 import { readSchedule } from './schedule.js';
 import { kickSync } from '../outbox.js';
 import { enqueueSync } from './sync.js';
+import { getCatalogueSettings } from '../catalogue/settings.js';
 
 const UNIQUE_INDEX = 'calendar_exceptions_scope_date_uq';
 
@@ -16,6 +17,8 @@ export function toExceptionDto(row) {
     exception_id: row.exceptionId,
     exception_date: row.exceptionDate,
     exception_type: row.exceptionType,
+    applies_to: row.appliesTo ?? 'BOTH',
+    class_mode: row.classMode === undefined ? 'SUSPENDED' : row.classMode,
     description: row.description ?? '',
     office_id: row.officeId ?? null,
     suspended_from: row.suspendedFrom ?? null,
@@ -28,8 +31,13 @@ export function toExceptionDto(row) {
 export const toEngineEntry = toExceptionDto;
 
 /** Validates the body of POST /exceptions and PUT /exceptions/:id. */
-export function parseExceptionInput(body) {
+export function parseExceptionInput(body, { enabled = false } = {}) {
   const details = {};
+  const appliesTo = body.applies_to === undefined ? 'BOTH' : body.applies_to;
+  const classMode = body.class_mode === undefined ? (appliesTo === 'WORK' ? null : 'SUSPENDED') : body.class_mode;
+  if (!['WORK', 'CLASSES', 'BOTH'].includes(appliesTo)) details.applies_to = 'Applies to must be WORK, CLASSES or BOTH';
+  if (!enabled && ((body.applies_to !== undefined && body.applies_to !== 'BOTH') || Object.hasOwn(body, 'class_mode'))) details.applies_to = 'Enable class and office suspensions before specifying these fields';
+  if ((appliesTo === 'WORK' && classMode !== null) || (appliesTo !== 'WORK' && !['SUSPENDED', 'ONLINE'].includes(classMode))) details.class_mode = 'Use SUSPENDED or ONLINE for classes/both; leave class mode empty for work only';
   const exceptionDate = requireDate(body.exception_date, 'exception_date', 'Date', details);
 
   const exceptionType = body.exception_type;
@@ -64,11 +72,12 @@ export function parseExceptionInput(body) {
   if (isRecurring && exceptionType === 'SUSPENSION') {
     throw Errors.validation(MSG.SUSPENSION_NOT_RECURRING, { is_recurring: MSG.SUSPENSION_NOT_RECURRING });
   }
-  return { exceptionDate, exceptionType, description, officeId, suspendedFrom, isRecurring };
+  return { exceptionDate, exceptionType, description, officeId, suspendedFrom, isRecurring, appliesTo, classMode };
 }
 
 /** A suspended_from time must fall inside the working hours of that day (opening <= time < closing). */
 function assertWithinWorkingHours(schedule, input) {
+  if (input.appliesTo === 'CLASSES') return;
   if (!input.suspendedFrom) return;
   const row = schedule.find((item) => item.day_of_week === weekdayOfDayIndex(dayIndexOfDate(input.exceptionDate)));
   const at = timeToMinutes(input.suspendedFrom);
@@ -119,13 +128,17 @@ const toValues = (input) => ({
   officeId: input.officeId,
   suspendedFrom: input.suspendedFrom,
   isRecurring: input.isRecurring,
+  appliesTo: input.appliesTo,
+  classMode: input.classMode,
 });
 
 export async function createException(dataSource, actor, body, { ipAddress } = {}) {
-  const input = parseExceptionInput(body);
   try {
     const dto = await dataSource.transaction(async (manager) => {
       await lockCalendar(manager);
+      await manager.query('SELECT id FROM catalogue_settings WHERE id = 1 FOR SHARE');
+      const settings = await getCatalogueSettings(manager);
+      const input = parseExceptionInput(body, { enabled: settings.applies_to_enabled });
       assertWithinWorkingHours(await readSchedule(manager), input);
       await assertNoConflict(manager, input);
       const exceptionId = newId();
@@ -150,16 +163,20 @@ export async function createException(dataSource, actor, body, { ipAddress } = {
 }
 
 export async function updateException(dataSource, actor, id, body, { ipAddress } = {}) {
-  const input = parseExceptionInput(body);
   try {
     const dto = await dataSource.transaction(async (manager) => {
       await lockCalendar(manager);
+      await manager.query('SELECT id FROM catalogue_settings WHERE id = 1 FOR SHARE');
+      const settings = await getCatalogueSettings(manager);
+      const input = parseExceptionInput(body, { enabled: settings.applies_to_enabled });
       const before = toExceptionDto(await findOrFail(manager, id));
       assertWithinWorkingHours(await readSchedule(manager), input);
       await assertNoConflict(manager, input, id);
       const unchanged =
         before.exception_date === input.exceptionDate &&
         before.exception_type === input.exceptionType &&
+        before.applies_to === input.appliesTo &&
+        before.class_mode === input.classMode &&
         before.description === input.description &&
         before.office_id === input.officeId &&
         before.suspended_from === input.suspendedFrom &&
@@ -218,6 +235,7 @@ function parseDateParam(value, name) {
  * Office Head / Office Staff see campus-wide entries and their own office's entries only.
  */
 export async function listExceptions(dataSource, user, query = {}) {
+  if (query.applies_to && !['WORK','CLASSES','BOTH'].includes(query.applies_to)) throw Errors.validation('Invalid applies_to filter', { applies_to: 'Use WORK, CLASSES or BOTH' });
   const from = parseDateParam(query.from, 'from');
   const to = parseDateParam(query.to, 'to');
   if (from && to && from > to) throw Errors.validation('from must not be after to', { from: 'from must not be after to' });
@@ -232,6 +250,7 @@ export async function listExceptions(dataSource, user, query = {}) {
   if (officeId) qb.andWhere('e.officeId = :officeId', { officeId });
   else if (officeFilter(user)) qb.andWhere('(e.officeId IS NULL OR e.officeId = :own)', { own: officeFilter(user) });
   if (type) qb.andWhere('e.exceptionType = :type', { type });
+  if (query.applies_to) qb.andWhere('e.appliesTo = :appliesTo', { appliesTo: query.applies_to });
   qb.orderBy('e.exceptionDate', 'ASC').addOrderBy('e.createdAt', 'ASC');
   const rows = await qb.getMany();
   return rows
@@ -259,6 +278,8 @@ export async function listEffectiveHolidays(dataSource, { from, to, officeId = n
       items.push({
         date,
         exception_type: entry.exception_type,
+        applies_to: entry.applies_to,
+        class_mode: entry.class_mode,
         description: entry.description,
         office_id: entry.office_id,
         suspended_from: entry.suspended_from,

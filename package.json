@@ -8,6 +8,8 @@
     "port": 3003
   },
   "scripts": {
+    "migrate:sprint4": "node --env-file-if-exists=.env.local scripts/migrate-sprint4-critical.js",
+    "setup:pup": "node --env-file-if-exists=.env.local scripts/setup-pup.js",
     "predev": "npm run db:bootstrap",
     "db:bootstrap": "node --env-file-if-exists=.env.local scripts/bootstrap.js",
     "dev": "next dev -p 3003",
@@ -26,7 +28,7 @@
     "migrate": "node --env-file-if-exists=.env.local scripts/migrate.js"
   },
   "dependencies": {
-    "ccms-shared": "file:./vendor/ccms-shared",
+    "ccms-shared": "file:vendor/ccms-shared",
     "jose": "^6.2.0",
     "next": "^16.3.0",
     "pg": "^8.13.0",

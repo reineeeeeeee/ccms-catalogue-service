@@ -3,6 +3,24 @@ import { EntitySchema } from 'typeorm';
 
 // ---- Catalogue ----
 
+export const CatalogueSettings = new EntitySchema({
+  name: 'CatalogueSettings', tableName: 'catalogue_settings',
+  columns: {
+    id: { type: 'smallint', primary: true, default: 1 },
+    institutionCode: { name: 'institution_code', type: 'text', nullable: true },
+    appliesToEnabled: { name: 'applies_to_enabled', type: 'boolean', default: false },
+  },
+});
+
+export const ServiceCodeSequence = new EntitySchema({
+  name: 'ServiceCodeSequence', tableName: 'service_code_sequences',
+  columns: {
+    officeId: { name: 'office_id', type: 'uuid', primary: true },
+    serviceAbbr: { name: 'service_abbr', type: 'text', primary: true },
+    lastSeq: { name: 'last_seq', type: 'int' },
+  },
+});
+
 // The office list as printed in the Citizen's Charter. Offices are deactivated, never deleted.
 export const Office = new EntitySchema({
   name: 'Office',
@@ -105,6 +123,8 @@ export const CalendarException = new EntitySchema({
     exceptionId: { name: 'exception_id', type: 'uuid', primary: true },
     exceptionDate: { name: 'exception_date', type: 'date' },
     exceptionType: { name: 'exception_type', type: 'text' },
+    appliesTo: { name: 'applies_to', type: 'text', default: 'BOTH' },
+    classMode: { name: 'class_mode', type: 'text', nullable: true, default: 'SUSPENDED' },
     description: { name: 'description', type: 'text', default: '' },
     officeId: { name: 'office_id', type: 'uuid', nullable: true },
     suspendedFrom: { name: 'suspended_from', type: 'text', nullable: true },
@@ -158,6 +178,8 @@ export const SyncLog = new EntitySchema({
 
 // One database, one audit outbox (OutboxEvent): Catalogue and Calendar both write their audit events to it.
 export const entities = [
+  CatalogueSettings,
+  ServiceCodeSequence,
   Office,
   Service,
   ServiceStandard,

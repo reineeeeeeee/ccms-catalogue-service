@@ -1,3 +1,4 @@
+import { migrateSprint4Core } from './migrations/sprint4-critical.js';
 // Runs after TypeORM has created the tables. Everything here is idempotent.
 // TypeORM cannot declare expression indexes, NULLS NOT DISTINCT indexes, foreign keys with our names,
 // exclusion constraints or CHECK constraints, so the Catalogue's and the Calendar's data rules live here
@@ -16,6 +17,7 @@ export const DEFAULT_SCHEDULE_SQL = `
   ON CONFLICT (day_of_week) DO NOTHING`;
 
 export async function afterSync(dataSource) {
+  await migrateSprint4Core(dataSource);
   await catalogueRules(dataSource);
   await calendarRules(dataSource);
 }

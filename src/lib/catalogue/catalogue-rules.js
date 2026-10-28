@@ -54,10 +54,17 @@ export function normaliseServiceCode(value, officeCode) {
 const str = (v) => (typeof v === 'string' ? v : '');
 
 /** Office-independent checks of the editable service fields. Collects every problem by field name. */
-export function parseServiceFields(body, details = {}) {
+export function parseServiceFields(body, details = {}, { mode = 'create' } = {}) {
   const serviceCode = str(body.service_code).trim();
+  const serviceAbbr = str(body.service_abbr).trim();
   const serviceName = collapseSpaces(str(body.service_name));
-  if (!serviceCode) details.service_code = 'Service code is required';
+  if (mode === 'seed') {
+    if (!serviceCode) details.service_code = 'Service code is required for seeding';
+    if (Object.hasOwn(body, 'service_abbr')) details.service_abbr = 'Do not send both service_abbr and service_code';
+  } else if (mode === 'create') {
+    if (!/^[A-Z0-9]{2,5}$/.test(serviceAbbr)) details.service_abbr = 'Service abbreviation must be 2 to 5 uppercase letters or digits';
+    if (Object.hasOwn(body, 'service_code')) details.service_code = 'The server generates service_code; send only service_abbr';
+  } else if (Object.hasOwn(body, 'service_abbr')) details.service_abbr = 'Service abbreviation cannot be changed after creation';
   if (!serviceName) details.service_name = 'Service name is required';
   else if (serviceName.length < 3 || serviceName.length > 200) {
     details.service_name = 'Service name must be 3 to 200 characters';
@@ -106,6 +113,7 @@ export function parseServiceFields(body, details = {}) {
   return {
     officeId: typeof body.office_id === 'string' ? body.office_id.trim() : '',
     serviceCode,
+    serviceAbbr,
     serviceName,
     classification: body.classification,
     serviceScope: body.service_scope,

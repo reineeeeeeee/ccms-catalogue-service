@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { ROLES, Errors, isUniqueViolation, recordAudit } from 'ccms-shared';
 import { Office } from '../entities/index.js';
 import { kickOutbox } from '../outbox.js';
+import { requireInstitution } from './settings.js';
 
 export const CODE_TAKEN = 'Office code already exists';
 export const NAME_TAKEN = 'Office name already exists';
@@ -32,6 +33,20 @@ export function parseOfficeInput(body) {
   else if (officeName.length > 200) details.office_name = 'Office name must be 200 characters or fewer';
   if (Object.keys(details).length) throw Errors.validation('Please correct the highlighted fields', details);
   return { officeCode, officeName };
+}
+
+async function generatedOfficeInput(manager, body, trustedCode) {
+  if (trustedCode) return parseOfficeInput(body);
+  const institution = await requireInstitution(manager);
+  const part = typeof body.office_abbr === 'string' ? body.office_abbr.trim().toUpperCase() : '';
+  const details = {};
+  if (!/^[A-Z0-9]+$/.test(part)) details.office_abbr = 'Office abbreviation must contain letters or digits';
+  if (`${institution}-${part}`.length > 20) details.office_abbr = 'Office code must be 20 characters or fewer including the institution prefix';
+  if (Object.hasOwn(body, 'office_code')) details.office_code = 'Use office_abbr; the server generates the office code';
+  try { parseOfficeInput({ ...body, office_code: `${institution}-${part}` }); }
+  catch (error) { Object.assign(details, error.details); }
+  if (Object.keys(details).length) throw Errors.validation('Please correct the highlighted fields', details);
+  return parseOfficeInput({ ...body, office_code: `${institution}-${part}` });
 }
 
 async function codeTaken(manager, code, exceptId = null) {
@@ -84,8 +99,9 @@ async function findOrFail(manager, id) {
   return office;
 }
 
-export async function createOffice(dataSource, actor, input, { ipAddress } = {}) {
-  const { officeCode, officeName } = parseOfficeInput(input);
+export async function createOffice(dataSource, actor, input, { ipAddress, trustedCode = false } = {}) {
+  if (actor.role !== ROLES.SUPER_ADMIN) throw Errors.forbidden();
+  const { officeCode, officeName } = await generatedOfficeInput(dataSource, input, trustedCode);
   try {
     const dto = await dataSource.transaction(async (manager) => {
       await assertUnique(manager, officeCode, officeName);
@@ -104,12 +120,18 @@ export async function createOffice(dataSource, actor, input, { ipAddress } = {})
   }
 }
 
-export async function updateOffice(dataSource, actor, id, input, { ipAddress } = {}) {
-  const { officeCode, officeName } = parseOfficeInput(input);
+export async function updateOffice(dataSource, actor, id, input, { ipAddress, trustedRecode = false } = {}) {
+  if (actor.role !== ROLES.SUPER_ADMIN) throw Errors.forbidden();
+  const { officeCode, officeName } = await generatedOfficeInput(dataSource, input, trustedRecode);
   try {
     const dto = await dataSource.transaction(async (manager) => {
+      await manager.query('SELECT office_id FROM offices WHERE office_id = $1 FOR UPDATE', [id]);
       const existing = await findOrFail(manager, id);
       const before = toOfficeDto(existing);
+      if (!trustedRecode && before.office_code !== officeCode) {
+        const linked = await manager.query('SELECT 1 FROM services WHERE office_id = $1 LIMIT 1', [id]);
+        if (linked.length) throw Errors.conflict('Changing this office abbreviation would conflict with immutable service codes. A PM decision is required.', 'OFFICE_CODE_CHANGE_NEEDS_DECISION', { office_abbr: 'This office has services with immutable codes' });
+      }
       if (before.office_code === officeCode && before.office_name === officeName) return before;
       await assertUnique(manager, officeCode, officeName, id);
       await manager.getRepository(Office).update({ officeId: id }, { officeCode, officeName });

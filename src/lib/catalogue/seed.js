@@ -82,7 +82,7 @@ export async function runSeed(dataSource, data, { dryRun = false, actor = SYSTEM
             report('office', label, 'duplicate', 'Office code already exists; skipped');
             continue;
           }
-          await createOffice(scope, actor, office);
+          await createOffice(scope, actor, office, { trustedCode: true });
           report('office', label, 'created');
         } catch (err) {
           report('office', label, 'error', describeError(err));
@@ -112,7 +112,7 @@ export async function runSeed(dataSource, data, { dryRun = false, actor = SYSTEM
             }
           }
           const result = await scope.transaction(async () => {
-            const made = await createService(scope, actor, { ...service, office_id: officeId });
+            const made = await createService(scope, actor, { ...service, office_id: officeId }, { trustedCode: true });
             for (const doc of service.documents ?? []) await addDocument(scope, actor, made.service_id, doc);
             return made;
           });

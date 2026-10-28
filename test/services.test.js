@@ -2,6 +2,7 @@ import { strict as assert } from 'node:assert';
 import { randomUUID } from 'node:crypto';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { after, before, describe, it } from 'node:test';
 import { ROLES, setDataSource, setDefaultVerifier } from 'ccms-shared';
 import { createTestDatabase, createTestKeys, runBoundarySuite } from 'ccms-shared/testing';
@@ -23,6 +24,7 @@ import { afterSync } from '../src/lib/after-sync.js';
 import { entities } from '../src/lib/entities/index.js';
 import { publicLimiter } from '../src/lib/catalogue/public-catalogue.js';
 import { runSeed } from '../src/lib/catalogue/seed.js';
+import { updateCatalogueSettings } from '../src/lib/catalogue/settings.js';
 
 const SERVICE_KEY = 'test-service-key-0123456789';
 let testDb;
@@ -39,6 +41,7 @@ before(async () => {
   testDb = await createTestDatabase({ entities, afterSync });
   ds = testDb.dataSource;
   setDataSource(ds);
+  await updateCatalogueSettings(ds, { id: randomUUID(), role: ROLES.SUPER_ADMIN }, { institution_code: 'PUP' });
   tokens.superAdmin = await keys.signToken({ role: ROLES.SUPER_ADMIN, full_name: 'Sam Admin' });
   tokens.executive = await keys.signToken({ role: ROLES.EXECUTIVE });
   registrar = await addOffice('REG', 'Registrar');
@@ -63,7 +66,7 @@ const ctx = (id, extra = {}) => ({ params: Promise.resolve({ id, ...extra }) });
 const SA = () => tokens.superAdmin;
 
 async function addOffice(code, name) {
-  const response = await postOffice(req('POST', '/offices', { token: SA(), body: { office_code: code, office_name: name } }));
+  const response = await postOffice(req('POST', '/offices', { token: SA(), body: { office_abbr: code, office_name: name } }));
   assert.equal(response.status, 201);
   return (await response.json()).office;
 }
@@ -84,7 +87,7 @@ function serviceBody(office = registrar, over = {}) {
   const n = String(counter).padStart(3, '0');
   return {
     office_id: office.office_id,
-    service_code: `${office.office_code}-T${n}-${n}`,
+    service_abbr: `T${n}`,
     service_name: `Test Service ${n}`,
     classification: 'SIMPLE',
     service_scope: 'EXTERNAL',
@@ -143,7 +146,7 @@ describe('CC007 add service with first standard', () => {
     const from = addDays(today(), -10);
     const { response, service } = await createService({
       service_name: 'Transcript of Records',
-      service_code: 'REG-TOR-001',
+      service_abbr: 'TOR',
       fees: '  None  ',
       who_may_avail: '  PUP Students  ',
       service_scope: 'INTERNAL',
@@ -189,16 +192,16 @@ describe('CC007 add service with first standard', () => {
     assert.equal(response.status, 201);
   });
 
-  it('AC4: a duplicate service_code is rejected with "Service code already exists"', async () => {
+  it('TT8 supersedes typed-code creation: explicit codes are rejected by the normal API', async () => {
     for (const code of ['REG-TOR-001', 'reg-tor-001']) {
       const { response, body } = await createService({ service_code: code });
-      assert.equal(response.status, 409);
-      assert.equal(body.error.message, 'Service code already exists');
+      assert.equal(response.status, 400);
+      assert.ok(body.error.details.service_code);
     }
     const other = await createService({ service_code: 'LIB-TOR-001', service_name: 'Some other library service' }, library);
-    assert.equal(other.response.status, 201);
+    assert.equal(other.response.status, 400);
     const clash = await createService({ service_code: 'LIB-TOR-001' }, library);
-    assert.equal(clash.response.status, 409);
+    assert.equal(clash.response.status, 400);
   });
 
   it('AC5: classification, service scope and transaction types are validated', async () => {
@@ -258,9 +261,9 @@ describe('CC007 add service with first standard', () => {
   });
 
   it('normalises whitespace in the saved name and upper-cases the code', async () => {
-    const service = await makeService({ service_name: '  Library   Card  Renewal ', service_code: 'lib-lcr-001' }, library);
+    const service = await makeService({ service_name: '  Library   Card  Renewal ', service_abbr: 'LCR' }, library);
     assert.equal(service.service_name, 'Library Card Renewal');
-    assert.equal(service.service_code, 'LIB-LCR-001');
+    assert.equal(service.service_code, 'PUP-LIB-LCR-001');
   });
 
   it('AC7: Office Head, Office Staff and Executive get 403; no token gets 401', async () => {
@@ -340,20 +343,21 @@ describe('CC008 edit and deactivate a service', () => {
     assert.equal((await audits('SERVICE_UPDATED', service.service_id)).length, 1, 're-submitting the same values is not audited');
   });
 
-  it('can change name, code and office, with the CC007 rules re-checked', async () => {
+  it('can change name and office while preserving the original immutable code', async () => {
     const service = await makeService();
-    const moved = await edit(service.service_id, editBody(service, { office_id: library.office_id, service_code: 'LIB-MOV-001', service_name: 'Moved  Service' }));
+    const moved = await edit(service.service_id, editBody(service, { office_id: library.office_id, service_name: 'Moved  Service' }));
     assert.equal(moved.status, 200);
     assert.equal(moved.body.service.office_name, 'Library');
     assert.equal(moved.body.service.service_name, 'Moved Service');
+    assert.equal(moved.body.service.service_code, service.service_code);
     const badCode = await edit(service.service_id, editBody(moved.body.service, { service_code: 'REG-MOV-001' }));
-    assert.equal(badCode.status, 400, 'the code prefix must match the (new) office');
+    assert.equal(badCode.status, 409, 'a saved code cannot change, even after a move');
     const badClass = await edit(service.service_id, editBody(moved.body.service, { classification: 'NOPE' }));
     assert.equal(badClass.status, 400);
     assert.ok(badClass.body.error.details.classification);
     const inactive = await addOffice('ZZZ', 'Zed Office');
     await deactivateOffice(req('PATCH', `/offices/${inactive.office_id}/deactivate`, { token: SA() }), ctx(inactive.office_id));
-    const toInactive = await edit(service.service_id, editBody(moved.body.service, { office_id: inactive.office_id, service_code: 'ZZZ-MOV-001' }));
+    const toInactive = await edit(service.service_id, editBody(moved.body.service, { office_id: inactive.office_id }));
     assert.equal(toInactive.body.error.message, 'Office not found or inactive');
     assert.equal((await edit(randomUUID(), editBody(service))).status, 404);
   });
@@ -366,7 +370,7 @@ describe('CC008 edit and deactivate a service', () => {
     assert.equal(clash.body.error.message, 'This office already has a service with this name');
     const codeClash = await edit(two.service_id, editBody(two, { service_code: one.service_code }));
     assert.equal(codeClash.status, 409);
-    assert.equal(codeClash.body.error.message, 'Service code already exists');
+    assert.equal(codeClash.body.error.code, 'SERVICE_CODE_IMMUTABLE');
     // Changing only the letter case of its own name is fine.
     assert.equal((await edit(two.service_id, editBody(two, { service_name: 'EDIT DUP TWO' }))).status, 200);
   });
@@ -627,7 +631,7 @@ describe('CC010 required-documents checklist', () => {
   });
 
   it('AC4: no file input or upload endpoint exists anywhere', () => {
-    const root = new URL('../src', import.meta.url).pathname;
+    const root = fileURLToPath(new URL('../src', import.meta.url));
     const files = [];
     const walk = (dir) => {
       for (const name of readdirSync(dir)) {
@@ -700,7 +704,7 @@ describe('CC011 procedure steps (reference only)', () => {
   it('AC3: no transaction-side lookup uses the procedure text', async () => {
     const service = await makeService({ processing_steps: 'Reference only text' });
     const lookup = await asOf(service.service_id, today());
-    assert.deepEqual(Object.keys(lookup.body).sort(), ['classification', 'duration_days', 'duration_hours', 'duration_minutes', 'office_code', 'office_id', 'service_code', 'service_name', 'standard_id']);
+    assert.deepEqual(Object.keys(lookup.body).sort(), ['classification', 'duration_days', 'duration_hours', 'duration_minutes', 'office_code', 'office_id', 'office_name', 'service_code', 'service_name', 'standard_id']);
     assert.ok(!JSON.stringify(lookup.body).includes('Reference only'));
   });
 });
@@ -726,7 +730,7 @@ describe('CC012 internal catalogue browse', () => {
       assert.ok(!names.includes('Browse Hidden'));
       const alpha = body.items.find((s) => s.service_name === 'Browse Alpha');
       assert.equal(alpha.office_name, 'Registrar');
-      assert.equal(alpha.office_code, 'REG');
+      assert.equal(alpha.office_code, 'PUP-REG');
       assert.equal(alpha.classification, 'SIMPLE');
       assert.equal(alpha.current_standard.duration_minutes, 7);
       assert.equal(alpha.service_scope, 'EXTERNAL');
@@ -959,6 +963,7 @@ describe('TT1 standard as-of lookup', () => {
       service_name: 'AsOf Service',
       office_id: registrar.office_id,
       office_code: registrar.office_code,
+      office_name: registrar.office_name,
       classification: 'SIMPLE',
     });
     const lastDay = await asOf(id, addDays(today(), 9));
@@ -1143,7 +1148,7 @@ describe('TT2 seeding script with duplicate guard', () => {
       await writeFile(file, JSON.stringify({ offices: [{ office_code: 'CLI', office_name: 'CLI Office' }], services: [{ office_code: 'CLI', service_code: 'CLI-ONE-001', service_name: 'CLI Service', classification: 'SIMPLE', service_scope: 'EXTERNAL', transaction_types: ['G2C'], standard: { duration_days: 0, duration_hours: 1, duration_minutes: 0, effective_from: '2026-01-01', charter_reference: 'r' } }] }));
       const run = (...args) =>
         promisify(execFile)(process.execPath, ['scripts/seed.js', '--file', file, ...args], {
-          cwd: new URL('..', import.meta.url).pathname,
+          cwd: fileURLToPath(new URL('..', import.meta.url)),
           env: { ...process.env, DATABASE_URL: testDb.url, DB_SYNCHRONIZE: 'false', SERVICE_KEY: '', LOGS_SERVICE_URL: '' },
         });
       const n = async () => (await ds.query(`SELECT count(*)::int AS n FROM services WHERE service_name = 'CLI Service'`))[0].n;
@@ -1156,7 +1161,7 @@ describe('TT2 seeding script with duplicate guard', () => {
       const again = await run();
       assert.match(again.stdout, /Created: 0 office\(s\), 0 service\(s\)\. Duplicates skipped: 1 office\(s\), 1 service\(s\)/);
       assert.equal(await n(), 1);
-      await assert.rejects(() => promisify(execFile)(process.execPath, ['scripts/seed.js'], { cwd: new URL('..', import.meta.url).pathname, env: { ...process.env, DATABASE_URL: testDb.url } }), /Usage/);
+      await assert.rejects(() => promisify(execFile)(process.execPath, ['scripts/seed.js'], { cwd: fileURLToPath(new URL('..', import.meta.url)), env: { ...process.env, DATABASE_URL: testDb.url } }), /Usage/);
     } finally {
       await rm(dir, { recursive: true, force: true });
     }
@@ -1174,7 +1179,7 @@ runBoundarySuite({
   assert,
   tokens,
   endpoints: [
-    { name: 'POST /services', write: true, superAdminOnly: true, invoke: (token) => postService(req('POST', '/services', { token, body: { ...serviceBody(), service_code: `REG-BND-${Math.floor(Math.random() * 900 + 100)}`, service_name: `Boundary ${randomUUID()}` } })) },
+    { name: 'POST /services', write: true, superAdminOnly: true, invoke: (token) => postService(req('POST', '/services', { token, body: { ...serviceBody(), service_name: `Boundary ${randomUUID()}` } })) },
     { name: 'PUT /services/:id', write: true, superAdminOnly: true, invoke: wrapped(putService, `/services/${boundaryServiceId}`, { method: 'PUT', body: { office_id: randomUUID() } }, ctx(boundaryServiceId)) },
     { name: 'PATCH /services/:id/deactivate', write: true, superAdminOnly: true, invoke: wrapped(deactivateService, `/services/${boundaryServiceId}/deactivate`, { method: 'PATCH' }, ctx(boundaryServiceId)) },
     { name: 'PATCH /services/:id/reactivate', write: true, superAdminOnly: true, invoke: wrapped(reactivateService, `/services/${boundaryServiceId}/reactivate`, { method: 'PATCH' }, ctx(boundaryServiceId)) },
