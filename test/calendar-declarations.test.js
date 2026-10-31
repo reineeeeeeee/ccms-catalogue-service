@@ -5,17 +5,17 @@ import { GET as declarationsRoute } from '../src/app/api/declarations/route.js';
 import { DELETE as deleteRoute } from '../src/app/api/exceptions/[id]/route.js';
 import { POST as postRoute } from '../src/app/api/exceptions/route.js';
 import { PUT as putSchedule } from '../src/app/api/schedule/route.js';
-
+import { issueMachineKey } from '../src/lib/machine-keys.js';
 import { CHARTER_DAYS, SERVICE_KEY, ctx, req, setupTestEnv, tokens } from './calendar-helpers.js';
 
 let env;
-
+let machineKey;
 before(async () => {
   env = await setupTestEnv();
   assert.equal((await putSchedule(req('PUT', '/schedule', { token: tokens.superAdmin, body: { days: CHARTER_DAYS } }))).status, 200);
   await env.ds.query(`INSERT INTO catalogue_settings (id) VALUES (1) ON CONFLICT DO NOTHING`);
   await env.ds.query(`UPDATE catalogue_settings SET applies_to_enabled = true`);
-  
+  machineKey = (await issueMachineKey(env.ds, { id: 'sa', role: 'SUPER_ADMIN' }, { caller: 'FMS', environment: 'test' })).key;
 });
 after(async () => env?.teardown());
 beforeEach(async () => {
@@ -29,9 +29,9 @@ const add = async (body) => {
 };
 const remove = (id) => deleteRoute(req('DELETE', `/exceptions/${id}`, { token: tokens.superAdmin }), ctx(id));
 const holiday = (date, extra = {}) => ({ exception_date: date, exception_type: 'REGULAR_HOLIDAY', description: 'Holiday', ...extra });
-const pull = async (query, { key = SERVICE_KEY, token } = {}) => {
+const pull = async (query, { key = machineKey, token } = {}) => {
   const qs = new URLSearchParams(query).toString();
-  const response = await declarationsRoute(req('GET', `/declarations?${qs}`, { key, token }));
+  const response = await declarationsRoute(req('GET', `/declarations?${qs}`, { token: token ?? key }));
   return { response, body: await response.json() };
 };
 
@@ -74,6 +74,8 @@ describe('EB6: GET /declarations', () => {
     assert.equal((await pull(range, { key: null })).response.status, 401);
     assert.equal((await pull(range, { key: 'wrong' })).response.status, 401);
     assert.equal((await pull(range, { key: null, token: tokens.superAdmin })).response.status, 401);
+    const shared = await declarationsRoute(req('GET', '/declarations?from=2026-08-17&to=2026-12-12', { key: SERVICE_KEY }));
+    assert.equal(shared.status, 401);
   });
 
   it('refuses a bad range, limit or cursor', async () => {
