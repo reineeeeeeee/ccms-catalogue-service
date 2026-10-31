@@ -23,5 +23,5 @@ The caller sends `Authorization: Bearer ccms_mk_<ref>.<secret>` (PROPOSED header
 ## Not done / open
 - Clerk vs our own: undecided.
 - The other direction (the key FMS issues for our push) is an environment secret on our side. Nothing to build; it must be set in the environment, never in code or chat.
-- `caller` is stored but the pull route only checks the scope. EB19 (an FMS key must not work as an SMS key) is not built.
+- The pull route (`GET /api/declarations`) accepts only keys issued to FMS: a key issued to SMS gets the same 401. Other routes for SMS (EB19) are not built yet; they should pass `'SMS'` to `requireMachineKey`.
 - Run `npm run migrate:sprint4` to create the `machine_keys` table.
