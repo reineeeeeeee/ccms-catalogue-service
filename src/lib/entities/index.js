@@ -157,7 +157,7 @@ export const TermDate = new EntitySchema({
 
 // One outward push (to FMS or to Audit) for one change. Created in the same transaction as the
 // change; the dispatcher sends it and retries it. status: PENDING (not sent yet) -> SENT | FAILED,
-// and ACKNOWLEDGED once Audit confirms through POST /sync/ack. FMS rows end SENT or FAILED.
+// and ACKNOWLEDGED once Audit confirms through POST /sync/ack. SUPERSEDED: a newer term snapshot replaced it before delivery (EB17). FMS rows end SENT or FAILED.
 export const SyncLog = new EntitySchema({
   name: 'SyncLog',
   tableName: 'sync_log',
@@ -173,6 +173,8 @@ export const SyncLog = new EntitySchema({
     lastError: { name: 'last_error', type: 'text', nullable: true },
     lastAttemptAt: { name: 'last_attempt_at', type: 'timestamptz', nullable: true },
     lastSyncedAt: { name: 'last_synced_at', type: 'timestamptz', nullable: true },
+    // EB17: the receiver's reply to a term snapshot (term ID and counts applied, or the failure reason), stored as sent.
+    reply: { name: 'reply', type: 'jsonb', nullable: true },
     nextAttemptAt: { name: 'next_attempt_at', type: 'timestamptz', default: () => 'now()' },
     createdAt: { name: 'created_at', type: 'timestamptz', createDate: true },
   },

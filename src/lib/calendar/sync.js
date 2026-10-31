@@ -1,6 +1,7 @@
 import { Errors, isUuid } from 'ccms-shared';
 import { newId } from './calendar-rules.js';
 import { SyncLog } from '../entities/index.js';
+import { enqueueAffectedSnapshots } from './sms-snapshot.js';
 import { CHANGE_KIND, buildMessage, calendarWindow, effectEnabled, entityIdOf, occurrenceDates, sendableToFms } from './message.js';
 
 export const CONSUMERS = Object.freeze(['FMS', 'AUDIT']);
@@ -86,6 +87,8 @@ export async function enqueueCalendarChange(manager, { eventType, entry, previou
       });
     }
   }
+  // EB17: SMS also gets a fresh term snapshot (it recalculates its deadlines from the whole term).
+  if (consumers.includes('AUDIT')) await enqueueAffectedSnapshots(manager, { entry, previous });
 }
 
 const iso = (value) => (value ? new Date(value).toISOString() : null);
