@@ -50,6 +50,36 @@ async function offices(ds) {
   return checks;
 }
 
+/** Reads the CSV written by `npm run readiness -- --offices` (office_id,office_code,"office_name"). */
+export function parseOfficeBaseline(text) {
+  const rows = [];
+  for (const line of text.split(/\r?\n/).slice(1)) {
+    if (!line.trim()) continue;
+    const m = /^([^,]+),([^,]*),(.*)$/.exec(line);
+    if (m) rows.push({ office_id: m[1].trim(), office_code: m[2].trim() });
+  }
+  return rows;
+}
+
+/**
+ * EB15: office IDs must not change when the office codes are re-coded (PUP- prefix). Compares a saved export (taken before
+ * the re-coding) with the database now: every saved ID must still exist, and a saved code must not have moved to a new ID
+ * (that would mean the office was re-created instead of re-coded). Re-coded offices are listed as INFO.
+ */
+export async function officeBaseline(ds, baseline) {
+  const now = await ds.query('SELECT office_id, office_code FROM offices');
+  const byId = new Map(now.map((o) => [o.office_id, o.office_code]));
+  const idByCode = new Map(now.map((o) => [o.office_code.toLowerCase(), o.office_id]));
+  const missing = baseline.filter((b) => !byId.has(b.office_id));
+  const reused = baseline.filter((b) => !byId.has(b.office_id) && idByCode.has(b.office_code.toLowerCase()));
+  const recoded = baseline.filter((b) => byId.has(b.office_id) && byId.get(b.office_id) !== b.office_code);
+  return [
+    result('offices.baseline_ids', 'Every office ID in the saved export still exists', ok(missing), list(missing, (b) => `${b.office_id} (${b.office_code})`)),
+    result('offices.baseline_not_recreated', 'No saved office code now belongs to a different ID', ok(reused), list(reused, (b) => `${b.office_code} -> ${idByCode.get(b.office_code.toLowerCase())}`)),
+    result('offices.baseline_recoded', 'Offices whose code changed with the same ID', 'INFO', list(recoded, (b) => `${b.office_code} -> ${byId.get(b.office_id)}`) || 'none'),
+  ];
+}
+
 async function calendar(ds) {
   const checks = [];
   const bad = await ds.query(
@@ -103,8 +133,8 @@ async function constraints(ds) {
   return checks;
 }
 
-export async function runReadiness(ds) {
-  return [...(await offices(ds)), ...(await calendar(ds)), ...(await constraints(ds))];
+export async function runReadiness(ds, { baseline } = {}) {
+  return [...(await offices(ds)), ...(baseline ? await officeBaseline(ds, baseline) : []), ...(await calendar(ds)), ...(await constraints(ds))];
 }
 
 export const readinessFailed = (checks) => checks.some((c) => c.status === 'FAIL');
