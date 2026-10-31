@@ -7,7 +7,7 @@ import { timeToMinutes, weekdayOfDayIndex, dayIndexOfDate } from './engine/worki
 import { kickOutbox } from '../outbox.js';
 import { readSchedule } from './schedule.js';
 import { kickSync } from '../outbox.js';
-import { enqueueSync } from './sync.js';
+import { enqueueCalendarChange } from './sync.js';
 import { getCatalogueSettings } from '../catalogue/settings.js';
 
 const UNIQUE_INDEX = 'calendar_exceptions_scope_date_uq';
@@ -22,7 +22,9 @@ export function toExceptionDto(row) {
     description: row.description ?? '',
     office_id: row.officeId ?? null,
     suspended_from: row.suspendedFrom ?? null,
+    suspended_until: row.suspendedUntil ?? null,
     is_recurring: row.isRecurring,
+    revision: row.revision ?? 1,
     created_at: row.createdAt,
   };
 }
@@ -33,10 +35,19 @@ export const toEngineEntry = toExceptionDto;
 /** Validates the body of POST /exceptions and PUT /exceptions/:id. */
 export function parseExceptionInput(body, { enabled = false } = {}) {
   const details = {};
-  const appliesTo = body.applies_to === undefined ? 'BOTH' : body.applies_to;
+  let officeId = null;
+  try {
+    officeId = parseOptionalUuid(body.office_id, 'office_id', 'Office');
+  } catch (err) {
+    Object.assign(details, err.details);
+  }
+  // C42: classes are affected campus-wide only. An entry for one office is WORK, so that is also its default.
+  const appliesTo = body.applies_to === undefined ? (officeId ? 'WORK' : 'BOTH') : body.applies_to;
   const classMode = body.class_mode === undefined ? (appliesTo === 'WORK' ? null : 'SUSPENDED') : body.class_mode;
   if (!['WORK', 'CLASSES', 'BOTH'].includes(appliesTo)) details.applies_to = 'Applies to must be WORK, CLASSES or BOTH';
-  if (!enabled && ((body.applies_to !== undefined && body.applies_to !== 'BOTH') || Object.hasOwn(body, 'class_mode'))) details.applies_to = 'Enable class and office suspensions before specifying these fields';
+  else if (officeId && appliesTo !== 'WORK') details.applies_to = 'An entry for one office can only apply to work; classes are affected campus-wide';
+  const officeWorkOnly = officeId && body.applies_to === 'WORK' && (body.class_mode === undefined || body.class_mode === null);
+  if (!enabled && !officeWorkOnly && ((body.applies_to !== undefined && body.applies_to !== 'BOTH') || Object.hasOwn(body, 'class_mode'))) details.applies_to = 'Enable class and office suspensions before specifying these fields';
   if ((appliesTo === 'WORK' && classMode !== null) || (appliesTo !== 'WORK' && !['SUSPENDED', 'ONLINE'].includes(classMode))) details.class_mode = 'Use SUSPENDED or ONLINE for classes/both; leave class mode empty for work only';
   const exceptionDate = requireDate(body.exception_date, 'exception_date', 'Date', details);
 
@@ -61,18 +72,23 @@ export function parseExceptionInput(body, { enabled = false } = {}) {
     details.suspended_from = 'Suspended from must be a time in 24-hour HH:MM format';
   }
 
-  let officeId = null;
-  try {
-    officeId = parseOptionalUuid(body.office_id, 'office_id', 'Office');
-  } catch (err) {
-    Object.assign(details, err.details);
+  // EB4: a part-day entry needs both a start and an end; a whole-day entry has neither.
+  const suspendedUntil = optionalText(body.suspended_until);
+  if (suspendedUntil === undefined || (suspendedUntil !== null && !isHHMM(suspendedUntil))) {
+    details.suspended_until = 'Suspended until must be a time in 24-hour HH:MM format';
+  } else if (suspendedFrom && isHHMM(suspendedFrom) && !suspendedUntil) {
+    details.suspended_until = 'End time is required for a part-day entry';
+  } else if (suspendedUntil && !suspendedFrom) {
+    details.suspended_from = 'Start time is required when an end time is given';
+  } else if (suspendedUntil && suspendedFrom && isHHMM(suspendedFrom) && timeToMinutes(suspendedUntil) <= timeToMinutes(suspendedFrom)) {
+    details.suspended_until = 'End time must be after the start time';
   }
 
   if (Object.keys(details).length) throw Errors.validation('Please correct the highlighted fields', details);
   if (isRecurring && exceptionType === 'SUSPENSION') {
     throw Errors.validation(MSG.SUSPENSION_NOT_RECURRING, { is_recurring: MSG.SUSPENSION_NOT_RECURRING });
   }
-  return { exceptionDate, exceptionType, description, officeId, suspendedFrom, isRecurring, appliesTo, classMode };
+  return { exceptionDate, exceptionType, description, officeId, suspendedFrom, suspendedUntil, isRecurring, appliesTo, classMode };
 }
 
 /** A suspended_from time must fall inside the working hours of that day (opening <= time < closing). */
@@ -93,7 +109,7 @@ function assertWithinWorkingHours(schedule, input) {
 async function assertNoConflict(manager, input, exceptId = null) {
   const sameScope = await manager
     .getRepository(CalendarException)
-    .find({ where: { officeId: input.officeId ?? IsNull() } });
+    .find({ where: { officeId: input.officeId ?? IsNull(), removedAt: IsNull() } });
   const candidate = { exception_date: input.exceptionDate, is_recurring: input.isRecurring, office_id: input.officeId };
   for (const row of sameScope) {
     if (row.exceptionId === exceptId) continue;
@@ -116,7 +132,7 @@ function audit(manager, actor, action, before, after, ipAddress) {
 }
 
 async function findOrFail(manager, id) {
-  const row = await manager.getRepository(CalendarException).findOneBy({ exceptionId: id });
+  const row = await manager.getRepository(CalendarException).findOneBy({ exceptionId: id, removedAt: IsNull() });
   if (!row) throw Errors.notFound('Calendar entry not found', 'CALENDAR_ENTRY_NOT_FOUND');
   return row;
 }
@@ -127,6 +143,7 @@ const toValues = (input) => ({
   description: input.description,
   officeId: input.officeId,
   suspendedFrom: input.suspendedFrom,
+  suspendedUntil: input.suspendedUntil,
   isRecurring: input.isRecurring,
   appliesTo: input.appliesTo,
   classMode: input.classMode,
@@ -145,12 +162,7 @@ export async function createException(dataSource, actor, body, { ipAddress } = {
       await manager.getRepository(CalendarException).insert({ exceptionId, ...toValues(input) });
       const created = toExceptionDto(await findOrFail(manager, exceptionId));
       await audit(manager, actor, 'CALENDAR_EXCEPTION_ADDED', null, created, ipAddress);
-      await enqueueSync(manager, {
-        eventType: 'CALENDAR_EXCEPTION_ADDED',
-        entityType: 'calendar_exception',
-        entityId: exceptionId,
-        data: { exception: created },
-      });
+      await enqueueCalendarChange(manager, { eventType: 'CALENDAR_EXCEPTION_ADDED', entry: created });
       return created;
     });
     kickOutbox();
@@ -180,18 +192,15 @@ export async function updateException(dataSource, actor, id, body, { ipAddress }
         before.description === input.description &&
         before.office_id === input.officeId &&
         before.suspended_from === input.suspendedFrom &&
+        before.suspended_until === input.suspendedUntil &&
         before.is_recurring === input.isRecurring;
       if (unchanged) return before;
-      await manager.getRepository(CalendarException).update({ exceptionId: id }, toValues(input));
+      // EB3: every real change raises the revision by 1.
+      await manager.getRepository(CalendarException).update({ exceptionId: id }, { ...toValues(input), revision: before.revision + 1 });
       const after = toExceptionDto(await findOrFail(manager, id));
       // The audit row belongs to the office the entry now applies to; a scope change is visible in before/after.
       await audit(manager, actor, 'CALENDAR_EXCEPTION_UPDATED', before, after, ipAddress);
-      await enqueueSync(manager, {
-        eventType: 'CALENDAR_EXCEPTION_UPDATED',
-        entityType: 'calendar_exception',
-        entityId: id,
-        data: { exception: after, previous: before },
-      });
+      await enqueueCalendarChange(manager, { eventType: 'CALENDAR_EXCEPTION_UPDATED', entry: after, previous: before });
       return after;
     });
     kickOutbox();
@@ -203,18 +212,21 @@ export async function updateException(dataSource, actor, id, body, { ipAddress }
   }
 }
 
-/** Removes an entry (recurring ones for every year). The audit keeps the removed values. */
+/**
+ * Removes an entry (recurring ones for every year). The row is kept as a tombstone (EB3): it is marked removed, its
+ * revision goes up by 1 and REMOVE is sent, so FMS can tell a withdrawn entry from one it never received. A removed
+ * entry no longer affects the engine, the lists or the holidays. The audit keeps the removed values.
+ */
 export async function deleteException(dataSource, actor, id, { ipAddress } = {}) {
   await dataSource.transaction(async (manager) => {
     await lockCalendar(manager);
     const before = toExceptionDto(await findOrFail(manager, id));
-    await manager.getRepository(CalendarException).delete({ exceptionId: id });
+    await manager.getRepository(CalendarException).update({ exceptionId: id }, { removedAt: new Date(), revision: before.revision + 1 });
     await audit(manager, actor, 'CALENDAR_EXCEPTION_REMOVED', before, null, ipAddress);
-    await enqueueSync(manager, {
+    await enqueueCalendarChange(manager, {
       eventType: 'CALENDAR_EXCEPTION_REMOVED',
-      entityType: 'calendar_exception',
-      entityId: id,
-      data: { exception: before, removed: true },
+      entry: { ...before, revision: before.revision + 1 },
+      removed: true,
     });
   });
   kickOutbox();
@@ -247,6 +259,7 @@ export async function listExceptions(dataSource, user, query = {}) {
   if (officeId) assertOfficeAccess(user, officeId);
 
   const qb = dataSource.getRepository(CalendarException).createQueryBuilder('e');
+  qb.andWhere('e.removedAt IS NULL');
   if (officeId) qb.andWhere('e.officeId = :officeId', { officeId });
   else if (officeFilter(user)) qb.andWhere('(e.officeId IS NULL OR e.officeId = :own)', { own: officeFilter(user) });
   if (type) qb.andWhere('e.exceptionType = :type', { type });
@@ -263,6 +276,7 @@ export async function loadEngineEntries(manager, officeId = null) {
   const qb = manager.getRepository(CalendarException).createQueryBuilder('e');
   if (officeId) qb.where('(e.officeId IS NULL OR e.officeId = :officeId)', { officeId });
   else qb.where('e.officeId IS NULL');
+  qb.andWhere('e.removedAt IS NULL'); // a tombstone never affects the engine
   return (await qb.getMany()).map(toEngineEntry);
 }
 
@@ -283,6 +297,7 @@ export async function listEffectiveHolidays(dataSource, { from, to, officeId = n
         description: entry.description,
         office_id: entry.office_id,
         suspended_from: entry.suspended_from,
+        suspended_until: entry.suspended_until,
       });
     }
   }

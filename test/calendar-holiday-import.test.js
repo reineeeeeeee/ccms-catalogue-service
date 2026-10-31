@@ -32,7 +32,7 @@ const fakeFetch = (payload, { status = 200, calls = [] } = {}) => {
   fn.calls = calls;
   return fn;
 };
-const entries = () => env.ds.query(`SELECT to_char(exception_date, 'YYYY-MM-DD') AS d, exception_type, description, office_id, is_recurring, suspended_from FROM calendar_exceptions ORDER BY exception_date`);
+const entries = () => env.ds.query(`SELECT to_char(exception_date, 'YYYY-MM-DD') AS d, exception_type, description, office_id, is_recurring, suspended_from FROM calendar_exceptions WHERE removed_at IS NULL ORDER BY exception_date`);
 
 describe('holiday import', () => {
   it('asks Nager.Date for the Philippine holidays of the year', async () => {
@@ -97,6 +97,10 @@ describe('holiday import', () => {
     assert.equal(edited.is_recurring, true);
     await deleteException(env.ds, SYSTEM_ACTOR, row.exception_id);
     assert.equal((await entries()).length, 0);
+    // EB3: the removed entry stays as a tombstone with a higher revision.
+    const [tombstone] = await env.ds.query('SELECT revision, removed_at FROM calendar_exceptions');
+    assert.equal(tombstone.revision, 3);
+    assert.ok(tombstone.removed_at);
   });
 
   it('honours the actor it is given', async () => {

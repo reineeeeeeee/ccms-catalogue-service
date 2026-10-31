@@ -7,8 +7,11 @@
 //
 // Rules (Administrative Code of 1987, Book I, Sec. 31: the start day is not counted, the last is):
 //   window of a date   none when the schedule marks the weekday non-working or a whole-day entry
-//                      applies (campus-wide, or that office's); otherwise opening to closing, cut at
-//                      the earliest applicable suspended_from.
+//                      applies (campus-wide, or that office's); otherwise opening to closing with each
+//                      applicable part-day suspension cut out. A suspension runs from suspended_from to
+//                      suspended_until (EB4); an old entry without suspended_until runs to closing time.
+//                      A date can therefore have two working segments (before and after a mid-day
+//                      suspension); windowOf gives their outer span, segmentsOf gives the segments.
 //   working minutes    sum over each Manila date of the overlap of [start, end] with that date's
 //                      window; whole minutes, rounded down.
 //   deadline           counting starts the day after the start date; the Nth date with a non-empty
@@ -114,26 +117,47 @@ export function createCalendar({ schedule, exceptions = [], officeId = null }) {
   const cache = new Map();
   function compute(dayIndex) {
     const base = byWeekday[weekdayOfDayIndex(dayIndex)];
-    if (!base) return null;
+    if (!base) return [];
     const date = dateOfDayIndex(dayIndex);
     const entries = [...(exact.get(date) ?? []), ...(recurring.get(date.slice(5)) ?? [])].filter((entry) =>
       occursOn(entry, date),
     );
-    let close = base.close;
+    const cuts = [];
     for (const entry of entries) {
       const from = entry.suspended_from == null || entry.suspended_from === '' ? null : timeToMinutes(entry.suspended_from);
-      if (from === null) return null; // a whole-day entry wins over everything else
-      close = Math.min(close, from); // otherwise the earliest suspended_from
+      if (from === null) return []; // a whole-day entry wins over everything else
+      const until = entry.suspended_until == null || entry.suspended_until === '' ? null : timeToMinutes(entry.suspended_until);
+      cuts.push([from, until === null ? base.close : Math.max(until, from)]);
     }
-    return close > base.open ? { open: base.open, close } : null;
+    cuts.sort((a, b) => a[0] - b[0]);
+    const segments = [];
+    let cursor = base.open;
+    for (const [from, until] of cuts) {
+      if (from > cursor) segments.push({ open: cursor, close: Math.min(from, base.close) });
+      cursor = Math.max(cursor, until);
+    }
+    if (cursor < base.close) segments.push({ open: cursor, close: base.close });
+    return segments.filter((segment) => segment.close > segment.open);
   }
+  const segmentsOf = (dayIndex) => {
+    if (!cache.has(dayIndex)) cache.set(dayIndex, compute(dayIndex));
+    return cache.get(dayIndex);
+  };
 
   return {
+    segmentsOf,
     windowOf(dayIndex) {
-      if (!cache.has(dayIndex)) cache.set(dayIndex, compute(dayIndex));
-      return cache.get(dayIndex);
+      const segments = segmentsOf(dayIndex);
+      return segments.length ? { open: segments[0].open, close: segments[segments.length - 1].close } : null;
     },
   };
+}
+
+/** The working segments of a day; works with any calendar object that has windowOf. */
+function segmentsFor(calendar, dayIndex) {
+  if (typeof calendar.segmentsOf === 'function') return calendar.segmentsOf(dayIndex);
+  const window = calendar.windowOf(dayIndex);
+  return window ? [window] : [];
 }
 
 function assertInstant(value, name) {
@@ -152,10 +176,10 @@ export function computeWorkingMinutes(calendar, startMs, endMs) {
   }
   let total = 0;
   for (let day = firstDay; day <= lastDay; day += 1) {
-    const window = calendar.windowOf(day);
-    if (!window) continue;
-    const overlap = Math.min(endMs, instantAt(day, window.close)) - Math.max(startMs, instantAt(day, window.open));
-    if (overlap > 0) total += overlap;
+    for (const segment of segmentsFor(calendar, day)) {
+      const overlap = Math.min(endMs, instantAt(day, segment.close)) - Math.max(startMs, instantAt(day, segment.open));
+      if (overlap > 0) total += overlap;
+    }
   }
   return Math.floor(total / MINUTE_MS);
 }
@@ -170,13 +194,13 @@ export function computeAddedWorkingMinutes(calendar, fromMs, minutes) {
   let remaining = minutes;
   const firstDay = dayIndexOfInstant(fromMs);
   for (let day = firstDay; day <= firstDay + MAX_SPAN_DAYS; day += 1) {
-    const window = calendar.windowOf(day);
-    if (!window) continue;
-    const cursor = Math.max(fromMs, instantAt(day, window.open));
-    const available = Math.floor((instantAt(day, window.close) - cursor) / MINUTE_MS);
-    if (available <= 0) continue;
-    if (remaining <= available) return cursor + remaining * MINUTE_MS;
-    remaining -= available;
+    for (const segment of segmentsFor(calendar, day)) {
+      const cursor = Math.max(fromMs, instantAt(day, segment.open));
+      const available = Math.floor((instantAt(day, segment.close) - cursor) / MINUTE_MS);
+      if (available <= 0) continue;
+      if (remaining <= available) return cursor + remaining * MINUTE_MS;
+      remaining -= available;
+    }
   }
   throw new EngineError('NO_WORKING_TIME', 'No working time is available to extend the deadline');
 }

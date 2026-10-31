@@ -48,5 +48,51 @@ export async function migrateSprint4Core(dataSource) {
       applies_to IN ('WORK','CLASSES','BOTH') AND
       ((applies_to = 'WORK' AND class_mode IS NULL) OR
        (applies_to IN ('CLASSES','BOTH') AND class_mode IS NOT NULL AND class_mode IN ('SUSPENDED','ONLINE'))))`);
+    await migrateCalendarCal10(manager);
   });
 }
+
+const TIME_CHECK = "~ '^([01][0-9]|2[0-3]):[0-5][0-9]$'";
+
+async function addCheck(manager, table, name, definition) {
+  const [present] = await manager.query('SELECT 1 FROM pg_constraint WHERE conname = $1 AND conrelid = $2::regclass', [name, table]);
+  if (!present) await manager.query(`ALTER TABLE ${table} ADD CONSTRAINT ${name} ${definition}`);
+}
+
+/**
+ * Calendar message cal-1.0 (EB3, EB4). Additive and repeatable, run inside the Sprint 4 migration:
+ *   suspended_until  end time of a part-day suspension (EB4)
+ *   revision         1, then +1 on every change (EB3)
+ *   removed_at       a removed entry is kept as a tombstone instead of being deleted (EB3)
+ * The one-entry-per-date-and-scope index now ignores tombstones, so a removed date can be entered again.
+ * Existing rows keep their values: revision starts at 1 and no entry is removed or changed.
+ */
+export async function migrateCalendarCal10(manager) {
+  await manager.query('ALTER TABLE calendar_exceptions ADD COLUMN IF NOT EXISTS suspended_until text');
+  await manager.query('ALTER TABLE calendar_exceptions ADD COLUMN IF NOT EXISTS revision integer NOT NULL DEFAULT 1');
+  await manager.query('ALTER TABLE calendar_exceptions ADD COLUMN IF NOT EXISTS removed_at timestamptz');
+  await addCheck(manager, 'calendar_exceptions', 'calendar_exceptions_revision_ck', 'CHECK (revision >= 1)');
+  await addCheck(
+    manager,
+    'calendar_exceptions',
+    'calendar_exceptions_suspended_until_ck',
+    `CHECK (suspended_until IS NULL OR (suspended_until ${TIME_CHECK} AND suspended_from IS NOT NULL AND suspended_until > suspended_from))`,
+  );
+  // C42: classes are affected campus-wide only, so a one-office entry can only be WORK. NOT VALID: old rows that
+  // break the rule are not rewritten here (the readiness report lists them); every new or changed row must obey it.
+  await addCheck(
+    manager,
+    'calendar_exceptions',
+    'calendar_exceptions_office_work_ck',
+    "CHECK (office_id IS NULL OR applies_to = 'WORK') NOT VALID",
+  );
+  const [index] = await manager.query("SELECT indexdef FROM pg_indexes WHERE indexname = 'calendar_exceptions_scope_date_uq'");
+  if (!index || !/removed_at/i.test(index.indexdef)) {
+    await manager.query('DROP INDEX IF EXISTS calendar_exceptions_scope_date_uq');
+    await manager.query(
+      `CREATE UNIQUE INDEX calendar_exceptions_scope_date_uq
+         ON calendar_exceptions (office_id, exception_date) NULLS NOT DISTINCT WHERE removed_at IS NULL`,
+    );
+  }
+}
+

@@ -90,9 +90,10 @@ describe('holidays and suspensions (CC015)', () => {
   });
 
   it('AC3: a suspension from 13:00 leaves working time only from opening until 13:00', async () => {
-    const { response, body } = await add({ exception_date: '2026-10-07', exception_type: 'SUSPENSION', description: 'Typhoon', suspended_from: '13:00' });
+    const { response, body } = await add({ exception_date: '2026-10-07', exception_type: 'SUSPENSION', description: 'Typhoon', suspended_from: '13:00', suspended_until: '19:00' });
     assert.equal(response.status, 201);
     assert.equal(body.exception.suspended_from, '13:00');
+    assert.equal(body.exception.suspended_until, '19:00');
     assert.equal(await minutes('2026-10-07T12:00:00+08:00', '2026-10-07T15:00:00+08:00'), 60);
     assert.equal(await minutes('2026-10-07T05:00:00+08:00', '2026-10-07T23:00:00+08:00'), 300);
     const day = await (await isWorkingDay(req('GET', '/is-working-day?date=2026-10-07', { key: SERVICE_KEY }))).json();
@@ -103,7 +104,7 @@ describe('holidays and suspensions (CC015)', () => {
   it('AC4: a second entry for the same date and scope is rejected with 409', async () => {
     const first = await add(holiday('2026-11-03'));
     assert.equal(first.response.status, 201);
-    for (const extra of [{}, { exception_type: 'SPECIAL_NON_WORKING' }, { exception_type: 'SUSPENSION', suspended_from: '10:00' }]) {
+    for (const extra of [{}, { exception_type: 'SPECIAL_NON_WORKING' }, { exception_type: 'SUSPENSION', suspended_from: '10:00', suspended_until: '11:00' }]) {
       const again = await add(holiday('2026-11-03', extra));
       assert.equal(again.response.status, 409);
       assert.equal(again.body.error.message, 'An entry already exists for this date and scope');
@@ -192,7 +193,7 @@ describe('holidays and suspensions (CC015)', () => {
 
   it('AC11: a suspended_from time outside that day\'s working hours is rejected', async () => {
     const attempt = async (exception_date, suspended_from) =>
-      add({ exception_date, exception_type: 'SUSPENSION', description: 'x', suspended_from });
+      add({ exception_date, exception_type: 'SUSPENSION', description: 'x', suspended_from, suspended_until: '23:59' });
     // Wed 2026-10-14 is 08:00-19:00.
     for (const time of ['07:59', '19:00', '19:30', '23:00', '00:00']) {
       const { response, body } = await attempt('2026-10-14', time);
@@ -254,7 +255,7 @@ describe('holidays and suspensions (CC015)', () => {
   });
 
   it('a suspension that becomes invalid after a schedule change is still applied safely', async () => {
-    const { body } = await add({ exception_date: '2026-11-17', exception_type: 'SUSPENSION', description: 'x', suspended_from: '18:00' });
+    const { body } = await add({ exception_date: '2026-11-17', exception_type: 'SUSPENSION', description: 'x', suspended_from: '18:00', suspended_until: '19:00' });
     assert.equal(body.exception.suspended_from, '18:00');
     // Shorten Tuesdays so 18:00 is now after closing: the cut changes nothing, nothing crashes.
     const days = CHARTER_DAYS.map((d) => (d.day_of_week === 2 ? { ...d, closing_time: '16:00' } : d));
@@ -331,7 +332,7 @@ describe('listing exceptions and holidays', () => {
     await add(holiday('2026-01-01', { description: 'NY', is_recurring: true }));
     await add(holiday('2026-06-12', { description: 'Independence' }));
     await add(holiday('2026-06-12', { description: 'Office A', office_id: OFFICE_A, exception_type: 'LOCAL_HOLIDAY' }));
-    await add({ exception_date: '2026-10-07', exception_type: 'SUSPENSION', description: 'B only', office_id: OFFICE_B, suspended_from: '13:00' });
+    await add({ exception_date: '2026-10-07', exception_type: 'SUSPENSION', description: 'B only', office_id: OFFICE_B, suspended_from: '13:00', suspended_until: '17:00' });
     await add(holiday('2028-02-29', { description: 'Leap', is_recurring: true }));
   });
 
@@ -349,7 +350,7 @@ describe('listing exceptions and holidays', () => {
     assert.equal(all.body.items.length, 5);
     assert.deepEqual(
       Object.keys(all.body.items[0]).sort(),
-      ['applies_to', 'class_mode', 'created_at', 'description', 'exception_date', 'exception_id', 'exception_type', 'is_recurring', 'office_id', 'suspended_from'],
+      ['applies_to', 'class_mode', 'created_at', 'description', 'exception_date', 'exception_id', 'exception_type', 'is_recurring', 'office_id', 'revision', 'suspended_from', 'suspended_until'],
     );
     assert.deepEqual((await list('?from=2026-06-01&to=2026-06-30')).body.items.map((i) => i.description).sort(), ['Independence', 'Office A']);
     // A recurring entry shows when one of its dates is in the range.
@@ -376,9 +377,9 @@ describe('listing exceptions and holidays', () => {
     const { status, body } = await holidays('?from=2026-01-01&to=2027-12-31');
     assert.equal(status, 200);
     assert.deepEqual(body.items, [
-      { date: '2026-01-01', exception_type: 'REGULAR_HOLIDAY', applies_to: 'BOTH', class_mode: 'SUSPENDED', description: 'NY', office_id: null, suspended_from: null },
-      { date: '2026-06-12', exception_type: 'REGULAR_HOLIDAY', applies_to: 'BOTH', class_mode: 'SUSPENDED', description: 'Independence', office_id: null, suspended_from: null },
-      { date: '2027-01-01', exception_type: 'REGULAR_HOLIDAY', applies_to: 'BOTH', class_mode: 'SUSPENDED', description: 'NY', office_id: null, suspended_from: null },
+      { date: '2026-01-01', exception_type: 'REGULAR_HOLIDAY', applies_to: 'BOTH', class_mode: 'SUSPENDED', description: 'NY', office_id: null, suspended_from: null, suspended_until: null },
+      { date: '2026-06-12', exception_type: 'REGULAR_HOLIDAY', applies_to: 'BOTH', class_mode: 'SUSPENDED', description: 'Independence', office_id: null, suspended_from: null, suspended_until: null },
+      { date: '2027-01-01', exception_type: 'REGULAR_HOLIDAY', applies_to: 'BOTH', class_mode: 'SUSPENDED', description: 'NY', office_id: null, suspended_from: null, suspended_until: null },
     ]);
   });
 
@@ -390,7 +391,7 @@ describe('listing exceptions and holidays', () => {
     ]);
     const b = await holidays(`?from=2026-10-01&to=2026-10-31&officeId=${OFFICE_B}`);
     assert.deepEqual(b.body.items, [
-      { date: '2026-10-07', exception_type: 'SUSPENSION', applies_to: 'BOTH', class_mode: 'SUSPENDED', description: 'B only', office_id: OFFICE_B, suspended_from: '13:00' },
+      { date: '2026-10-07', exception_type: 'SUSPENSION', applies_to: 'WORK', class_mode: null, description: 'B only', office_id: OFFICE_B, suspended_from: '13:00', suspended_until: '17:00' },
     ]);
     assert.deepEqual((await holidays('?from=2026-10-01&to=2026-10-31')).body.items, []);
   });

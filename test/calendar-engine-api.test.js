@@ -78,7 +78,7 @@ describe('POST /working-minutes (AC1-AC6, AC13, AC14)', () => {
   });
 
   it('AC6: a suspension from 13:00 on Wed, Wed 12:00 to Wed 15:00 = 60', async () => {
-    await addEntry({ exception_date: '2026-10-07', exception_type: 'SUSPENSION', description: 'Typhoon', suspended_from: '13:00' });
+    await addEntry({ exception_date: '2026-10-07', exception_type: 'SUSPENSION', description: 'Typhoon', suspended_from: '13:00', suspended_until: '19:00' });
     assert.equal((await minutes({ start: '2026-10-07T12:00:00+08:00', end: '2026-10-07T15:00:00+08:00' })).body.working_minutes, 60);
     await clear();
   });
@@ -235,7 +235,7 @@ describe('GET /is-working-day', () => {
     assert.deepEqual((await day('?date=2026-10-06')).body, { is_working_day: true, window: { opening_time: '08:00', closing_time: '19:00' } });
     assert.deepEqual((await day('?date=2026-10-10')).body, { is_working_day: true, window: { opening_time: '08:00', closing_time: '17:00' } });
     assert.deepEqual((await day('?date=2026-10-11')).body, { is_working_day: false, window: null });
-    await addEntry({ exception_date: '2026-10-07', exception_type: 'SUSPENSION', description: 'x', suspended_from: '13:00', office_id: OFFICE_A });
+    await addEntry({ exception_date: '2026-10-07', exception_type: 'SUSPENSION', description: 'x', suspended_from: '13:00', suspended_until: '19:00', office_id: OFFICE_A });
     assert.deepEqual((await day(`?date=2026-10-07&officeId=${OFFICE_A}`)).body.window, { opening_time: '08:00', closing_time: '13:00' });
     assert.deepEqual((await day(`?date=2026-10-07&officeId=${OFFICE_B}`)).body.window, { opening_time: '08:00', closing_time: '19:00' });
     await addEntry({ exception_date: '2026-10-08', exception_type: 'REGULAR_HOLIDAY', description: 'x' });

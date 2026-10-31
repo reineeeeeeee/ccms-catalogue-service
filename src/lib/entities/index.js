@@ -128,6 +128,12 @@ export const CalendarException = new EntitySchema({
     description: { name: 'description', type: 'text', default: '' },
     officeId: { name: 'office_id', type: 'uuid', nullable: true },
     suspendedFrom: { name: 'suspended_from', type: 'text', nullable: true },
+    // EB4: end of a part-day suspension (HH:MM, Asia/Manila). Empty on a whole-day entry. An old entry that has only
+    // suspended_from keeps its old effect (suspended until closing time) but cannot be sent until an end is set.
+    suspendedUntil: { name: 'suspended_until', type: 'text', nullable: true },
+    // EB3: starts at 1 and goes up by 1 on every change; a removal raises it too and keeps the row (tombstone).
+    revision: { name: 'revision', type: 'int', default: 1 },
+    removedAt: { name: 'removed_at', type: 'timestamptz', nullable: true },
     isRecurring: { name: 'is_recurring', type: 'boolean', default: false },
     createdAt: { name: 'created_at', type: 'timestamptz', createDate: true },
     updatedAt: { name: 'updated_at', type: 'timestamptz', updateDate: true },
