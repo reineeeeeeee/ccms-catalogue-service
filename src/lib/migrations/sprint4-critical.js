@@ -49,6 +49,7 @@ export async function migrateSprint4Core(dataSource) {
       ((applies_to = 'WORK' AND class_mode IS NULL) OR
        (applies_to IN ('CLASSES','BOTH') AND class_mode IS NOT NULL AND class_mode IN ('SUSPENDED','ONLINE'))))`);
     await migrateCalendarCal10(manager);
+    await migrateMachineKeys(manager);
   });
 }
 
@@ -96,3 +97,21 @@ export async function migrateCalendarCal10(manager) {
   }
 }
 
+/** EB7: the machine_keys table. Additive and repeatable. Holds a hash of each secret, never the secret. */
+export async function migrateMachineKeys(manager) {
+  await manager.query(`CREATE TABLE IF NOT EXISTS machine_keys (
+    key_id uuid PRIMARY KEY,
+    key_ref text NOT NULL UNIQUE,
+    key_hash text NOT NULL,
+    caller text NOT NULL,
+    environment text NOT NULL,
+    scope text NOT NULL,
+    issued_at timestamptz NOT NULL,
+    expires_at timestamptz NOT NULL,
+    revoked_at timestamptz,
+    replaced_by uuid,
+    created_by text)`);
+  await addCheck(manager, 'machine_keys', 'machine_keys_caller_ck', "CHECK (caller IN ('FMS', 'SMS'))");
+  await addCheck(manager, 'machine_keys', 'machine_keys_environment_ck', "CHECK (environment IN ('development', 'test', 'staging', 'production'))");
+  await addCheck(manager, 'machine_keys', 'machine_keys_scope_ck', "CHECK (scope IN ('read-calendar'))");
+}

@@ -182,6 +182,25 @@ export const SyncLog = new EntitySchema({
   ],
 });
 
+// EB7: keys for systems that call CCMS. Only a hash of the secret is stored; see src/lib/machine-keys.js.
+export const MachineKey = new EntitySchema({
+  name: 'MachineKey',
+  tableName: 'machine_keys',
+  columns: {
+    keyId: { name: 'key_id', type: 'uuid', primary: true },
+    keyRef: { name: 'key_ref', type: 'text', unique: true },
+    keyHash: { name: 'key_hash', type: 'text' },
+    caller: { name: 'caller', type: 'text' },
+    environment: { name: 'environment', type: 'text' },
+    scope: { name: 'scope', type: 'text' },
+    issuedAt: { name: 'issued_at', type: 'timestamptz' },
+    expiresAt: { name: 'expires_at', type: 'timestamptz' },
+    revokedAt: { name: 'revoked_at', type: 'timestamptz', nullable: true },
+    replacedBy: { name: 'replaced_by', type: 'uuid', nullable: true },
+    createdBy: { name: 'created_by', type: 'text', nullable: true },
+  },
+});
+
 // One database, one audit outbox (OutboxEvent): Catalogue and Calendar both write their audit events to it.
 export const entities = [
   CatalogueSettings,
@@ -194,6 +213,7 @@ export const entities = [
   CalendarException,
   TermDate,
   SyncLog,
+  MachineKey,
   OutboxEvent,
   RateLimitHit,
 ];
