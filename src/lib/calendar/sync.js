@@ -1,6 +1,7 @@
 import { Errors, isUuid } from 'ccms-shared';
 import { newId } from './calendar-rules.js';
 import { SyncLog } from '../entities/index.js';
+import { CHANGE_KIND, buildMessage, calendarWindow, effectEnabled, entityIdOf, occurrenceDates, sendableToFms } from './message.js';
 
 export const CONSUMERS = Object.freeze(['FMS', 'AUDIT']);
 
@@ -31,6 +32,59 @@ export async function enqueueSync(manager, { eventType, entityType, entityId, da
       },
       status: 'PENDING',
     });
+  }
+}
+
+/**
+ * Queues the cal-1.0 messages for one calendar-entry change (EB3). Call it inside the same transaction as the change.
+ *   entry      the entry after the change (for a removal: the entry as it was, with its raised revision)
+ *   previous   the entry before an update (null for an add or a removal)
+ *   removed    true for a removal (the row is kept as a tombstone and REMOVE is sent)
+ * One message per dated entry: a recurring entry gives one per date inside the calendar window. Dates that an edit
+ * made disappear get a REMOVE. Each message is its own sync row; its messageId is that row's ID, and a retry sends
+ * the stored payload again, so the messageId never changes. The EB5 switch (default off) is FMS's: while off, ONLINE entries
+ * and the `effect` field are not sent to FMS. The SMS queue (AUDIT) is not held back by it and always gets `effect`.
+ */
+export async function enqueueCalendarChange(manager, { eventType, entry, previous = null, removed = false, consumers = CONSUMERS, env = process.env }) {
+  const window = calendarWindow(env);
+  const fmsEffectOn = effectEnabled(env);
+  const repo = manager.getRepository(SyncLog);
+  const withRevision = (value) => ({ ...value, revision: entry.revision });
+
+  for (const consumerSystem of consumers) {
+    const effectOn = consumerSystem === 'FMS' ? fmsEffectOn : true;
+    const accepts = (value) => consumerSystem !== 'FMS' || sendableToFms(value, effectOn);
+    const planned = []; // { value, date, changeKind }
+    if (removed) {
+      if (accepts(entry)) for (const date of occurrenceDates(entry, window)) planned.push({ value: entry, date, changeKind: CHANGE_KIND.REMOVE });
+    } else {
+      const now = new Set();
+      for (const date of occurrenceDates(entry, window)) {
+        now.add(entityIdOf(entry, date));
+        if (accepts(entry)) planned.push({ value: entry, date, changeKind: CHANGE_KIND.UPSERT });
+      }
+      // What an earlier version sent and this version no longer has (a moved date, or a recurring entry that changed
+      // shape) is withdrawn; so is an entry that the EB5 switch now keeps back from FMS.
+      if (previous && accepts(previous)) {
+        for (const date of occurrenceDates(previous, window)) {
+          const gone = !now.has(entityIdOf(previous, date)) || !accepts(entry);
+          if (gone) planned.push({ value: withRevision(previous), date, changeKind: CHANGE_KIND.REMOVE });
+        }
+      }
+    }
+    for (const { value, date, changeKind } of planned) {
+      const syncId = newId();
+      const payload = buildMessage({ messageId: syncId, entry: value, date, changeKind, effectOn });
+      await repo.insert({
+        syncId,
+        consumerSystem,
+        eventType,
+        entityType: 'calendar_exception',
+        entityId: payload.entityId,
+        payload,
+        status: 'PENDING',
+      });
+    }
   }
 }
 

@@ -105,9 +105,11 @@ async function calendarRules(dataSource) {
   // One entry per date per scope. A null office_id (campus-wide) counts as a value, so two campus-wide
   // entries for one date collide (PostgreSQL 15+: NULLS NOT DISTINCT; a plain unique index would let
   // them through). The service also checks recurring entries by month and day before saving.
+  // Removed entries stay as tombstones (EB3) and must not block entering the same date again, so the index
+  // ignores them. migrateCalendarCal10 replaces an older index of the same name that did not.
   await dataSource.query(
     `CREATE UNIQUE INDEX IF NOT EXISTS calendar_exceptions_scope_date_uq
-       ON calendar_exceptions (office_id, exception_date) NULLS NOT DISTINCT`,
+       ON calendar_exceptions (office_id, exception_date) NULLS NOT DISTINCT WHERE removed_at IS NULL`,
   );
 
   await addConstraint(dataSource, 'working_hours', 'working_hours_day_ck', 'CHECK (day_of_week BETWEEN 0 AND 6)');

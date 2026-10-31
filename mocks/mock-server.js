@@ -87,7 +87,7 @@ export function createMockServer({ name, serviceKey, ccmsUrl = 'http://127.0.0.1
     const body = parseJson(text);
     if (!body) return send(400, { error: 'Body must be JSON' });
     state.received.push({ received_at: new Date().toISOString(), path, correlation_id: request.headers['x-correlation-id'] ?? null, body });
-    return send(200, { received: true, sync_id: body.sync_id ?? null });
+    return send(200, { received: true, sync_id: body.messageId ?? body.sync_id ?? null });
   });
 
   return {

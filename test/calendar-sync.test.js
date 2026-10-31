@@ -79,23 +79,24 @@ describe('CC018 pushing to FMS and Audit', () => {
     await dispatch();
     const [push] = fms.state.received;
     assert.equal(push.path, '/calendar');
-    assert.equal(push.body.event_type, 'CALENDAR_EXCEPTION_ADDED');
-    assert.equal(push.body.consumer_system, 'FMS');
-    assert.equal(push.body.entity_type, 'calendar_exception');
-    assert.equal(push.body.entity_id, exception.exception_id);
-    assert.equal(push.body.data.exception.exception_date, '2026-12-25');
-    assert.equal(push.body.data.exception.exception_type, 'REGULAR_HOLIDAY');
-    assert.ok(push.body.occurred_at);
-    assert.equal(push.body.sync_id, (await rowOf('FMS')).sync_id);
-    assert.equal(audit.state.received[0].body.sync_id, (await rowOf('AUDIT')).sync_id);
-    assert.notEqual(push.body.sync_id, audit.state.received[0].body.sync_id);
+    // EB3: the push is a cal-1.0 message; its messageId is the sync row's own ID.
+    assert.equal(push.body.schemaVersion, 'cal-1.0');
+    assert.equal(push.body.changeKind, 'UPSERT');
+    assert.equal(push.body.entityId, exception.exception_id);
+    assert.equal(push.body.entityRevision, 1);
+    assert.equal(push.body.date, '2026-12-25');
+    assert.equal(push.body.entryType, 'REGULAR_HOLIDAY');
+    assert.deepEqual(push.body.appliesTo, ['CLASSES', 'WORK']);
+    assert.equal(push.body.messageId, (await rowOf('FMS')).sync_id);
+    assert.equal(audit.state.received[0].body.messageId, (await rowOf('AUDIT')).sync_id);
+    assert.notEqual(push.body.messageId, audit.state.received[0].body.messageId);
     assert.ok(push.correlation_id);
     // A wrong key is refused by the mock, so a SENT row proves the key was sent.
     const refused = await fetch(`${fmsUrl}/calendar`, { method: 'POST', headers: { 'x-service-key': 'wrong' }, body: '{}' });
     assert.equal(refused.status, 401);
   });
 
-  it('every kind of change queues its rows: schedule (FMS + Audit), term (Audit only)', async () => {
+  it('every kind of change queues its rows: schedule (Audit only, EB1), term (Audit only)', async () => {
     assert.equal((await putSchedule(req('PUT', '/schedule', { token: tokens.superAdmin, body: { days: CHARTER_DAYS } }))).status, 200);
     const termResponse = await postTerm(req('POST', '/terms', { token: tokens.superAdmin, body: { term_name: 'T1', start_date: '2026-08-17', end_date: '2026-12-18' } }));
     assert.equal(termResponse.status, 201);
@@ -273,7 +274,7 @@ describe('CC018 pushing to FMS and Audit', () => {
       assert.deepEqual(syncSettings().enabledConsumers, ['FMS', 'AUDIT']);
       assert.deepEqual(await runCalendarSync(), { skipped: false, sent: 1, failed: 0 });
       assert.equal(audit.state.received.length, 1);
-      assert.equal(audit.state.received[0].body.sync_id, waiting.sync_id);
+      assert.equal(audit.state.received[0].body.messageId, waiting.sync_id);
     } finally {
       for (const name of ['FMS_URL', 'AUDIT_URL', 'SMS_SYNC_ENABLED']) delete process.env[name];
     }
@@ -364,7 +365,7 @@ describe('TT2 the mock FMS and Audit services', () => {
     assert.equal(report.system, 'FMS');
     assert.equal(report.count, 1);
     assert.equal(report.fail, false);
-    assert.equal(report.items[0].body.event_type, 'CALENDAR_EXCEPTION_ADDED');
+    assert.equal(report.items[0].body.changeKind, 'UPSERT');
     await fetch(`${fmsUrl}/received`, { method: 'DELETE' });
     assert.equal((await (await fetch(`${fmsUrl}/received`)).json()).count, 0);
   });
