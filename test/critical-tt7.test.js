@@ -54,7 +54,7 @@ describe('TT7 class/work calendar contract', () => {
   });
   it('sends additive fields to FMS and SMS through the existing retry dispatcher', async () => {
     const deliveries = [];
-    const settings = syncSettings({ SMS_URL: 'https://sms.test/calendar', FMS_URL: 'https://fms.test/calendar', SERVICE_KEY: 'test-only' });
+    const settings = syncSettings({ SMS_URL: 'https://sms.test/calendar', FMS_URL: 'https://fms.test/calendar', SERVICE_KEY: 'test-only', SMS_SYNC_ENABLED: 'true' });
     await dispatchSyncLogs(env.ds, { ...settings, fetchImpl: async (url, init) => { deliveries.push({ url, payload: JSON.parse(init.body) }); return new Response('{}'); } });
     for (const url of ['https://sms.test/calendar', 'https://fms.test/calendar']) {
       const updated = deliveries.find((d) => d.url === url && d.payload.event_type === 'CALENDAR_EXCEPTION_UPDATED');

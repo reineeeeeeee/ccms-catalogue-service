@@ -14,6 +14,9 @@ export function syncSettings(env = process.env) {
     retryIntervalMs: number('SYNC_RETRY_INTERVAL_SECONDS', 60) * 1000,
     maxAttempts: Math.floor(number('SYNC_MAX_ATTEMPTS', 20)),
     timeoutMs: number('SYNC_TIMEOUT_SECONDS', 5) * 1000,
+    // EB16: SMS (the AUDIT queue) is a receiver with its own switch, OFF by default: nothing leaves CCMS for SMS until
+    // SMS_SYNC_ENABLED=true. Its rows wait as PENDING meanwhile.
+    enabledConsumers: String(env.SMS_SYNC_ENABLED ?? '').toLowerCase() === 'true' ? ['FMS', 'AUDIT'] : ['FMS'],
   };
 }
 

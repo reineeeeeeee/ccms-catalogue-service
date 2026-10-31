@@ -230,6 +230,7 @@ describe('CC018 pushing to FMS and Audit', () => {
     Object.assign(process.env, {
       FMS_URL: `${fmsUrl}/calendar`,
       AUDIT_URL: `${auditUrl}/calendar`,
+      SMS_SYNC_ENABLED: 'true',
       SERVICE_KEY,
       SYNC_RETRY_INTERVAL_SECONDS: '0.01',
       SYNC_MAX_ATTEMPTS: '50',
@@ -252,7 +253,29 @@ describe('CC018 pushing to FMS and Audit', () => {
       assert.equal((await rowOf('FMS')).status, 'SENT');
       assert.equal(fms.state.received.length, 1);
     } finally {
-      for (const name of ['FMS_URL', 'AUDIT_URL', 'SYNC_RETRY_INTERVAL_SECONDS', 'SYNC_MAX_ATTEMPTS']) delete process.env[name];
+      for (const name of ['FMS_URL', 'AUDIT_URL', 'SMS_SYNC_ENABLED', 'SYNC_RETRY_INTERVAL_SECONDS', 'SYNC_MAX_ATTEMPTS']) delete process.env[name];
+    }
+  });
+
+  it('EB16: SMS (the Audit queue) is switched off by default: nothing is sent to it and its rows wait as PENDING', async () => {
+    Object.assign(process.env, { FMS_URL: `${fmsUrl}/calendar`, AUDIT_URL: `${auditUrl}/calendar`, SERVICE_KEY });
+    delete process.env.SMS_SYNC_ENABLED;
+    try {
+      assert.deepEqual(syncSettings().enabledConsumers, ['FMS']);
+      assert.equal((await save()).status, 201);
+      assert.deepEqual(await runCalendarSync(), { skipped: false, sent: 1, failed: 0 });
+      assert.equal(audit.state.received.length, 0, 'nothing reached SMS');
+      const waiting = await rowOf('AUDIT');
+      assert.equal(waiting.status, 'PENDING');
+      assert.equal(waiting.attempts, 0);
+      // Switched on, the waiting row goes out unchanged.
+      process.env.SMS_SYNC_ENABLED = 'true';
+      assert.deepEqual(syncSettings().enabledConsumers, ['FMS', 'AUDIT']);
+      assert.deepEqual(await runCalendarSync(), { skipped: false, sent: 1, failed: 0 });
+      assert.equal(audit.state.received.length, 1);
+      assert.equal(audit.state.received[0].body.sync_id, waiting.sync_id);
+    } finally {
+      for (const name of ['FMS_URL', 'AUDIT_URL', 'SMS_SYNC_ENABLED']) delete process.env[name];
     }
   });
 
