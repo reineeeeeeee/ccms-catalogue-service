@@ -97,3 +97,14 @@ Tell QA first: setup changes default behaviour that TC4-OPS-010, TC4-TXN-020 and
 ## 6. Readiness (EB15)
 
 `npm run readiness` prints PASS / FAIL / INFO per check and exits 1 on any FAIL. It is read-only (constraint probes are rolled back). INFO lines (terms, inactive offices, tombstone count) need a person to read them.
+
+## 7. EB17 — Term snapshot for SMS (built against a stand-in; SMS names NOT confirmed)
+
+Nothing leaves CCMS while `SMS_SYNC_ENABLED` is off. Everything SMS-specific is in `src/lib/calendar/sms-snapshot.js` and marked PROPOSED.
+- A snapshot is the full state of one term: every live entry that falls in the term's dates, with `type`, `appliesTo`, `interval` (part-day suspensions carry start and end) and `effect`. Entries that were withdrawn are simply absent. Part-day entries with no end time are listed under `skipped`.
+- A new snapshot is queued in the same transaction as every added, corrected or withdrawn entry, for each term the entry falls in. A newer snapshot marks any undelivered older one of that term `SUPERSEDED`, so SMS never gets an older snapshot after a newer one.
+- `syncId` is the sync row's ID and does not change on a retry.
+- The reply is stored in `sync_log.reply`. PROPOSED reply: `{ status: "SUCCESS" | "FAILED", termId, applied: {...}, reason }`. A `FAILED` reply is retried like any failed push and its reason is kept in `last_error`.
+- Open with SMS: exact field and type names (`SMS_TYPE_MAP`), how a withdrawn entry should be shown (question 1), and the term code (EB18). Until EB18, the term name is used as a TEST term code.
+- The per-entry SMS messages of EB16 are still queued as before. Decide with SMS whether they want both.
+- Existing databases: run `npm run db:sync` once. It adds `sync_log.reply` and replaces the `sync_log_status_ck` check so it allows `SUPERSEDED`.
