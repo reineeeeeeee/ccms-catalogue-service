@@ -5,11 +5,12 @@ import { SyncLog } from '../entities/index.js';
  * Sends due SyncLog rows (PENDING or FAILED, with attempts left) to FMS_URL / AUDIT_URL with the
  * shared service key. Success marks the row SENT; a failure marks it FAILED and schedules the next
  * try after retryIntervalMs, until maxAttempts. A failed push never touches the saved change.
- * Re-sending is safe: the payload carries its sync_id.
+ * Re-sending is safe: the payload is stored once and sent again unchanged (a calendar message keeps its messageId).
+ * enabledConsumers (EB16): rows of a receiver that is switched off are not touched and not sent; they wait as PENDING.
  */
 export async function dispatchSyncLogs(
   dataSource,
-  { urls, serviceKey, fetchImpl = fetch, retryIntervalMs = 60_000, maxAttempts = 20, batchSize = 50, timeoutMs = 5000, leaseMs = 60_000, now = () => new Date() },
+  { urls, serviceKey, fetchImpl = fetch, retryIntervalMs = 60_000, maxAttempts = 20, batchSize = 50, timeoutMs = 5000, leaseMs = 60_000, now = () => new Date(), enabledConsumers = ['FMS', 'AUDIT'] },
 ) {
   const repo = dataSource.getRepository(SyncLog);
   // Claim the due rows atomically (SKIP LOCKED) and push their next attempt forward by a lease, so two
@@ -19,10 +20,11 @@ export async function dispatchSyncLogs(
      WHERE sync_id IN (
        SELECT sync_id FROM sync_log
        WHERE status IN ('PENDING', 'FAILED') AND attempts < $1 AND next_attempt_at <= $2
+         AND consumer_system = ANY($5::text[])
        ORDER BY created_at ASC LIMIT $4
        FOR UPDATE SKIP LOCKED)
      RETURNING sync_id, consumer_system, payload, created_at`,
-    [maxAttempts, now(), new Date(now().getTime() + leaseMs), batchSize],
+    [maxAttempts, now(), new Date(now().getTime() + leaseMs), batchSize, enabledConsumers],
   );
   // TypeORM returns [rows, count] for UPDATE ... RETURNING.
   const claimedRows = Array.isArray(claimed[0]) ? claimed[0] : claimed;
