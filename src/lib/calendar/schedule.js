@@ -100,7 +100,10 @@ export async function updateSchedule(dataSource, actor, body, { ipAddress } = {}
       entityType: 'working_hours',
       entityId: 'campus',
       data: { items: after },
-      consumers: ['FMS', 'AUDIT'],
+      // EB1 (fix list F13, Decision I31): weekly office hours stay inside CCMS. FMS never receives them,
+      // so a change of office hours can never be mistaken for a class suspension. Only the AUDIT queue
+      // (the legacy name of the SMS queue) keeps this event.
+      consumers: ['AUDIT'],
     });
     return after;
   });

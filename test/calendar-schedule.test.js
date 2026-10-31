@@ -152,14 +152,14 @@ describe('working hours (CC014)', () => {
     assert.equal((await env.ds.query('SELECT 1 FROM sync_log')).length, 0);
   });
 
-  it('a change queues one FMS row and one Audit row', async () => {
+  it('EB1: a change queues one Audit row and no FMS row (weekly hours stay inside CCMS)', async () => {
     await env.ds.query('DELETE FROM sync_log');
     assert.equal((await put(CHARTER_DAYS)).status, 200);
     const rows = await env.ds.query('SELECT consumer_system, event_type, status FROM sync_log ORDER BY consumer_system');
-    assert.deepEqual(rows, [
-      { consumer_system: 'AUDIT', event_type: 'WORKING_HOURS_UPDATED', status: 'PENDING' },
-      { consumer_system: 'FMS', event_type: 'WORKING_HOURS_UPDATED', status: 'PENDING' },
-    ]);
+    assert.deepEqual(rows, [{ consumer_system: 'AUDIT', event_type: 'WORKING_HOURS_UPDATED', status: 'PENDING' }]);
+    // EB1 AC2: the audit entry still records the before and after hours.
+    const [event] = await env.ds.query(`SELECT payload FROM audit_outbox WHERE payload->>'action' = 'WORKING_HOURS_UPDATED' ORDER BY created_at DESC LIMIT 1`);
+    assert.ok(Array.isArray(event.payload.before_value.items) && Array.isArray(event.payload.after_value.items));
   });
 
   it('the database itself refuses a bad schedule row', async () => {
