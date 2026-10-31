@@ -10,6 +10,7 @@
   "scripts": {
     "readiness": "node --env-file-if-exists=.env.local scripts/readiness-report.js",
     "migrate:sprint4": "node --env-file-if-exists=.env.local scripts/migrate-sprint4-critical.js",
+    "freeze:offices": "node --env-file-if-exists=.env.local scripts/freeze-offices.js",
     "setup:pup": "node --env-file-if-exists=.env.local scripts/setup-pup.js",
     "predev": "npm run db:bootstrap",
     "db:bootstrap": "node --env-file-if-exists=.env.local scripts/bootstrap.js",
