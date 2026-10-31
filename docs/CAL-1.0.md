@@ -91,7 +91,8 @@ PROPOSAL for FMS: default page size 100, maximum 500; the reply is `{ schemaVers
 Tell QA first: setup changes default behaviour that TC4-OPS-010, TC4-TXN-020 and TC4-CAL-012 test. Either let QA test the default state first, or keep a database copy.
 1. `npm run setup:pup -- --actor <super-admin-account-id>` (sets institution PUP and turns class/office suspensions on).
 2. Confirm the settings read back (`GET /catalogue/settings`).
-3. `npm run readiness -- --offices > offices.csv` gives active offices as ID, code, name for FMS.
+3. `npm run readiness -- --offices > offices.csv` gives active offices as ID, code, name for FMS. Save one export BEFORE the PUP- re-coding; afterwards `npm run readiness -- --baseline offices-before.csv` fails if an office ID is gone or a saved code now belongs to a different ID, and lists re-coded offices as INFO.
+   Audit log append-only is NOT checked here: the audit log lives in the Logs service (Core only keeps an outbox), so that check belongs to the Logs service.
 
 ## 6. Readiness (EB15)
 
