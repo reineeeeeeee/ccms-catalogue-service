@@ -434,3 +434,7 @@ Needs internet access to `date.nager.at`. **The development sandbox cannot reach
 ### Calendar tests
 
 `npm test` runs everything: the engine suite with fixed expected values for CC017 AC1-AC15 and the TT1 extras (same non-working day = 0, before opening to after closing = the full window, a span across a year end), a minute-by-minute cross-check, the CC014-CC018 acceptance criteria, the office-boundary suite (`runBoundarySuite`) and the TT2 end-to-end runs against the mocks. The engine suite and the engine endpoints then run again with `TZ=UTC` and `TZ=America/Los_Angeles` (`scripts/test-engine-tz.mjs`; files `test/calendar-*.test.js` and `test/calendar-engine/`), so any dependence on the server clock fails CI. The engine itself (`src/lib/engine/`) is a pure module: the schedule and the exceptions are injected, it does no I/O and never reads the clock.
+
+## Calendar message cal-1.0 and readiness
+
+Calendar pushes to FMS use the cal-1.0 envelope (revisions, tombstones, explicit `appliesTo`, part-day end time); FMS can also pull `GET /api/declarations`. Details, the sample message, the migration plan and the EB2 steps are in `docs/CAL-1.0.md`. `npm run readiness` checks the data FMS depends on (read-only); `npm run readiness -- --offices` lists active offices as CSV.
