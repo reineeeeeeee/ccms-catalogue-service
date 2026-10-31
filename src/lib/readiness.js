@@ -80,6 +80,22 @@ export async function officeBaseline(ds, baseline) {
   ];
 }
 
+/** EB15: the office list given to FMS is frozen (see migrateOfficeFreeze). Read-only: the probes are rolled back. */
+async function freeze(ds) {
+  const frozen = await ds.query('SELECT office_id, office_code FROM office_list_freeze');
+  const checks = [result('offices.frozen_count', 'Offices in the frozen list sent to FMS', 'INFO', frozen.length ? `${frozen.length} frozen` : 'not frozen yet')];
+  const missing = await ds.query('SELECT f.office_id, f.office_code FROM office_list_freeze f LEFT JOIN offices o ON o.office_id = f.office_id WHERE o.office_id IS NULL');
+  checks.push(result('offices.frozen_exist', 'Every frozen office ID still exists', ok(missing), list(missing, (m) => `${m.office_id} (${m.office_code})`)));
+  const trigger = (await ds.query("SELECT 1 FROM pg_trigger WHERE tgname = 'offices_frozen_guard'")).length > 0;
+  checks.push(result('constraints.frozen_guard', 'Frozen office IDs are protected by a trigger', trigger ? 'PASS' : 'FAIL'));
+  if (frozen.length) {
+    const target = frozen[0].office_id;
+    checks.push(result('probe.frozen_id_change', 'Database refuses to change a frozen office ID', (await expectRejected(ds, 'UPDATE offices SET office_id = gen_random_uuid() WHERE office_id = $1', [target])) ? 'PASS' : 'FAIL'));
+    checks.push(result('probe.frozen_delete', 'Database refuses to delete a frozen office', (await expectRejected(ds, 'DELETE FROM offices WHERE office_id = $1', [target])) ? 'PASS' : 'FAIL'));
+  }
+  return checks;
+}
+
 async function calendar(ds) {
   const checks = [];
   const bad = await ds.query(
@@ -134,7 +150,7 @@ async function constraints(ds) {
 }
 
 export async function runReadiness(ds, { baseline } = {}) {
-  return [...(await offices(ds)), ...(baseline ? await officeBaseline(ds, baseline) : []), ...(await calendar(ds)), ...(await constraints(ds))];
+  return [...(await offices(ds)), ...(baseline ? await officeBaseline(ds, baseline) : []), ...(await freeze(ds)), ...(await calendar(ds)), ...(await constraints(ds))];
 }
 
 export const readinessFailed = (checks) => checks.some((c) => c.status === 'FAIL');

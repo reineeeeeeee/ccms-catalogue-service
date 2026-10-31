@@ -50,6 +50,7 @@ export async function migrateSprint4Core(dataSource) {
        (applies_to IN ('CLASSES','BOTH') AND class_mode IS NOT NULL AND class_mode IN ('SUSPENDED','ONLINE'))))`);
     await migrateCalendarCal10(manager);
     await migrateMachineKeys(manager);
+    await migrateOfficeFreeze(manager);
   });
 }
 
@@ -114,4 +115,38 @@ export async function migrateMachineKeys(manager) {
   await addCheck(manager, 'machine_keys', 'machine_keys_caller_ck', "CHECK (caller IN ('FMS', 'SMS'))");
   await addCheck(manager, 'machine_keys', 'machine_keys_environment_ck', "CHECK (environment IN ('development', 'test', 'staging', 'production'))");
   await addCheck(manager, 'machine_keys', 'machine_keys_scope_ck', "CHECK (scope IN ('read-calendar'))");
+}
+
+/**
+ * EB15: the office list sent to FMS is frozen. Once an office is in office_list_freeze its ID can never change and the
+ * office can never be deleted (offices are deactivated instead). The freeze list itself is append-only. The database
+ * enforces this, not only the screen.
+ */
+export async function migrateOfficeFreeze(manager) {
+  await manager.query(`CREATE TABLE IF NOT EXISTS office_list_freeze (
+    office_id uuid PRIMARY KEY, office_code text NOT NULL,
+    frozen_at timestamptz NOT NULL DEFAULT now(), frozen_by text)`);
+  await manager.query(`CREATE OR REPLACE FUNCTION ccms_frozen_office_guard() RETURNS trigger LANGUAGE plpgsql AS $$
+    BEGIN
+      IF EXISTS (SELECT 1 FROM office_list_freeze WHERE office_id = OLD.office_id) THEN
+        IF TG_OP = 'DELETE' THEN
+          RAISE EXCEPTION 'A frozen office cannot be deleted: deactivate it instead' USING ERRCODE = '23514';
+        END IF;
+        IF NEW.office_id IS DISTINCT FROM OLD.office_id THEN
+          RAISE EXCEPTION 'The ID of a frozen office cannot change' USING ERRCODE = '23514';
+        END IF;
+      END IF;
+      IF TG_OP = 'DELETE' THEN RETURN OLD; END IF;
+      RETURN NEW;
+    END $$`);
+  // The offices table may not exist yet on a very old schema; the trigger is added on the next sync, when it does.
+  const [officesTable] = await manager.query("SELECT to_regclass('public.offices') AS name");
+  if (officesTable.name) {
+    await manager.query('DROP TRIGGER IF EXISTS offices_frozen_guard ON offices');
+    await manager.query('CREATE TRIGGER offices_frozen_guard BEFORE UPDATE OR DELETE ON offices FOR EACH ROW EXECUTE FUNCTION ccms_frozen_office_guard()');
+  }
+  await manager.query(`CREATE OR REPLACE FUNCTION ccms_freeze_list_append_only() RETURNS trigger LANGUAGE plpgsql AS $$
+    BEGIN RAISE EXCEPTION 'The office freeze list is append-only' USING ERRCODE = '23514'; END $$`);
+  await manager.query('DROP TRIGGER IF EXISTS office_list_freeze_append_only ON office_list_freeze');
+  await manager.query('CREATE TRIGGER office_list_freeze_append_only BEFORE UPDATE OR DELETE ON office_list_freeze FOR EACH ROW EXECUTE FUNCTION ccms_freeze_list_append_only()');
 }

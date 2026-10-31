@@ -108,3 +108,11 @@ Nothing leaves CCMS while `SMS_SYNC_ENABLED` is off. Everything SMS-specific is 
 - Open with SMS: exact field and type names (`SMS_TYPE_MAP`), how a withdrawn entry should be shown (question 1), and the term code (EB18). Until EB18, the term name is used as a TEST term code.
 - The per-entry SMS messages of EB16 are still queued as before. Decide with SMS whether they want both.
 - Existing databases: run `npm run db:sync` once. It adds `sync_log.reply` and replaces the `sync_log_status_ck` check so it allows `SUPERSEDED`.
+
+## 8. EB15 — Freezing the office list sent to FMS
+
+`npm run freeze:offices -- --actor <super-admin-account-id>` records the active offices as sent to FMS. Run it at the moment the list is sent (after PUP setup and the PUP- re-code). It refuses until the institution is set up and every active office has the institution prefix (no CAMP- code), and when there is no active office.
+- From then on the database refuses to change the ID of, or delete, a frozen office (a rename and a deactivation are still allowed). The frozen list is append-only: it cannot be undone from the application.
+- Running it again only freezes offices added since the last run.
+- `npm run readiness` shows how many offices are frozen, that each frozen ID still exists, and probes the two refusals (rolled back).
+- Existing databases: `npm run db:sync` (or `npm run migrate:sprint4`) creates the `office_list_freeze` table and the triggers.
