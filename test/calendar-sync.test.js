@@ -104,13 +104,12 @@ describe('CC018 pushing to FMS and Audit', () => {
     assert.deepEqual(summary, [
       'TERM_ADDED:AUDIT',
       'WORKING_HOURS_UPDATED:AUDIT',
-      'WORKING_HOURS_UPDATED:FMS',
     ]);
     await dispatch();
     assert.equal(audit.state.received.length, 2);
-    assert.equal(fms.state.received.length, 1);
+    assert.equal(fms.state.received.length, 0, 'FMS never receives the weekly office hours');
     assert.equal(audit.state.received.find((p) => p.body.event_type === 'TERM_ADDED').body.data.term.term_name, 'T1');
-    assert.equal(fms.state.received[0].body.data.items.length, 7);
+    assert.equal(audit.state.received.find((p) => p.body.event_type === 'WORKING_HOURS_UPDATED').body.data.items.length, 7);
   });
 
   it('AC2: a mock Audit acknowledgment sets ACKNOWLEDGED with last_synced_at, and the status shows when Audit last synced', async () => {
