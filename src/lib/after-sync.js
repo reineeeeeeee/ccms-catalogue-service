@@ -149,11 +149,17 @@ async function calendarRules(dataSource) {
     "EXCLUDE USING gist (daterange(start_date, end_date, '[]') WITH &&)",
   );
   await addConstraint(dataSource, 'sync_log', 'sync_log_consumer_ck', "CHECK (consumer_system IN ('FMS', 'AUDIT'))");
+  // EB17 adds SUPERSEDED (a newer term snapshot replaced an undelivered one). A database that already has the older
+  // check keeps its name, so the old check is replaced once; a database that already has the new one is left alone.
+  const [oldStatusCheck] = await dataSource.query(
+    "SELECT 1 FROM pg_constraint WHERE conname = 'sync_log_status_ck' AND pg_get_constraintdef(oid) NOT LIKE '%SUPERSEDED%'",
+  );
+  if (oldStatusCheck) await dataSource.query('ALTER TABLE sync_log DROP CONSTRAINT sync_log_status_ck');
   await addConstraint(
     dataSource,
     'sync_log',
     'sync_log_status_ck',
-    "CHECK (status IN ('PENDING', 'SENT', 'ACKNOWLEDGED', 'FAILED'))",
+    "CHECK (status IN ('PENDING', 'SENT', 'ACKNOWLEDGED', 'FAILED', 'SUPERSEDED'))",
   );
 
   // The schedule always has seven rows: seed Mon-Fri 08:00-17:00 working, Sat/Sun non-working.
